@@ -22,16 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ...
-      - name: Checkout repository
       - uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v1
 
       # run any `bun` or `bunx` command
       - name: Install Dependencies
-      - run: bun install
+        run: bun install
       - name: Build
-      - run: bun run build
+        run: bun run build
 
   deploy:
     needs: build
