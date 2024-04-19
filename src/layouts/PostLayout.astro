@@ -1,0 +1,42 @@
+---
+import { Icon } from 'astro-icon/components';
+import Footer from '../components/Footer/Footer.astro';
+import Navbar from '../components/Navbar/Navbar.astro';
+import GlobalStyleLayout from './GlobalStyleLayout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Terria's Website" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Teuria Website</title>
+	</head>
+	<body class="text-white h-full">
+		<Navbar/>
+    <div class="flex mr-24 ml-24 mt-20 ">
+      <a href="/posts" class="duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
+        <Icon class="w-8 h-8" name="ph:arrow-square-left-fill"/>
+        <p>
+          Back
+        </p>
+      </a>
+
+    </div>
+    <div class="m-32 mt-4">
+      <h2 class="font-bold text-2xl text-gray-400">{frontmatter.date}</h2>
+      <h1 class="font-bold text-4xl">{frontmatter.title}</h1>
+      <p class="text-gray-400">{frontmatter.description}</p>
+      <div class="mt-4 min-h-screen">
+        <slot />
+      </div>
+    </div>
+		<Footer/>
+	</body>
+</html>
+<GlobalStyleLayout/>

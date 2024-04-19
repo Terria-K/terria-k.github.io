@@ -1,0 +1,25 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    title: string,
+    description: string,
+    date: string,
+    url: string | undefined
+}
+
+const prop = Astro.props;
+---
+
+<a href={prop.url} class="bg-gray-800 rounded-lg p-4">
+  <div class="flex gap-4 flex-col md:flex-row">
+    <div class="max-md:hidden w-20 min-h-16 bg-gray-900 rounded-xl p-3 flex justify-center items-center">
+      <Icon class="w-16 h-16" name="ph:info-light"/>
+    </div>
+    <div class="bg-gray-900 rounded-r-xl max-md:rounded-xl p-3">
+      <h2 class="text-gray-500">{prop.date}</h2>
+      <h1 class="text-2xl font-bold">{prop.title}</h1>
+      <p>{prop.description}</p>
+    </div>
+  </div>
+</a>
