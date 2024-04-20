@@ -6,10 +6,17 @@ const posts = await Astro.glob('../posts/*.md');
 ---
 
 <Layout>
-<div class="text-white flex flex-col items-center mt-40 mr-8 ml-8 md:mr-32 md:ml-32 gap-3">
-  {
-    posts.reverse().map(x => <BlogPost date={x.frontmatter.date} title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>)
-  }
-</div>
+  <main class="flex justify-center">
+    <ul class="text-white px-4 py-8 max-w-[80rem] mx-auto gap-3 space-y-12">
+      {
+        posts.reverse().map(x => 
+        <li class="list-none">
+          <BlogPost date={x.frontmatter.date} title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
+        </li>
+        )
+      }
+    </ul>
+  </main>
+
 
 </Layout>

@@ -11,11 +11,11 @@ const { frontmatter } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Terria's Website" />
+		<meta name="description" content={frontmatter.description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Teuria Website</title>
+		<title>Terria's Blog</title>
 	</head>
 	<body class="text-white h-full">
 		<Navbar/>
