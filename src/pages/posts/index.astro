@@ -1,18 +1,43 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import BlogPost from "../../components/Blog/BlogPost.astro";
+const fs = await import("path");
 
 const posts = await Astro.glob('../posts/*.md');
+const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
+
+const dateTexts = new Map<number, string>()
+dateTexts.set(0, "January");
+dateTexts.set(1, "February");
+dateTexts.set(2, "March");
+dateTexts.set(3, "April");
+dateTexts.set(4, "May");
+dateTexts.set(5, "June");
+dateTexts.set(6, "July");
+dateTexts.set(7, "August");
+dateTexts.set(8, "September");
+dateTexts.set(9, "October");
+dateTexts.set(10, "November");
+dateTexts.set(11, "December");
 ---
 
 <Layout>
-  <main class="flex justify-center">
-    <ul class="text-white px-4 py-8 max-w-[80rem] mx-auto gap-3 space-y-12">
+  <main class="flex-auto">
+    <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12">
       {
-        posts.reverse().map(x => 
-        <li class="list-none">
-          <BlogPost date={x.frontmatter.date} title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
-        </li>
+        posts.reverse().sort((x, y) => {
+          // @ts-ignore
+          return (new Date(x.frontmatter.date) + new Date(y.frontmatter.date)) as number;
+        }).map(x => {
+          const date = new Date(x.frontmatter.date);
+          const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
+
+          return <li class="list-none">
+            <BlogPost images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} date={dateString} 
+            title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
+          </li>
+        }
+
         )
       }
     </ul>

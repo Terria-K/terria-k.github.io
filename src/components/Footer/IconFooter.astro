@@ -9,6 +9,6 @@ interface Props {
 const prop = Astro.props;
 ---
 
-<a href={prop.link}>
+<a href={prop.link} aria-label={prop.icon}>
   <Icon class="w-8 h-8" name=`simple-icons:${prop.icon}`/>
 </a>

@@ -1,19 +1,31 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
+    images: Record<string, () => Promise<{default: ImageMetadata}>>
     title: string,
     description: string,
     date: string,
-    url: string | undefined
+    url: string | undefined,
+    image: string
 }
 
+type ImageRecord = Record<string, () => Promise<{default: ImageMetadata}>> | undefined;
+
 const prop = Astro.props;
+const image: ImageRecord = prop.images[prop.image] as unknown as ImageRecord;
 ---
 
-<a href={prop.url} class="bg-gray-800 w-full rounded-lg p-4 lg:grid-cols-2 items-center grid group">
-    <img class="w-96 h-80 object-cover" src="/arts/Sayonara.png"/>
-    <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-2">
-      <h2 class="text-gray-500">{prop.date}</h2>
-      <h1 class="text-4xl font-bold mt-2">{prop.title}</h1>
-      <p class="mt-4">{prop.description}</p>
-    </div>
+<a href={prop.url} class="w-full rounded-lg p-4 lg:grid-cols-2 items-center grid group">
+  {
+    (image
+      ? <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={prop.images[prop.image]()}/>
+      : <img class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src="/src/assets/blogs/placeholder.webp"/>
+    )
+  }
+  <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-2">
+    <h2 class="text-gray-500">{prop.date}</h2>
+    <h1 class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mt-2">{prop.title}</h1>
+    <p class="text-xl md:text-base lg:text-lg mt-4">{prop.description}</p>
+  </div>
 </a>
