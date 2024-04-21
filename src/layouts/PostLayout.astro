@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer.astro';
 import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
 import { Image } from 'astro:assets';
+import Tag from "../components/Blog/Tag.astro";
 const fs = await import("path");
 
 const { frontmatter } = Astro.props;
@@ -37,14 +38,15 @@ const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".we
       </a>
     </div>
 
-    <div class="mx-auto max-w-[60rem] px-10 grid gap-4 bg-gray-800">
-      <h2 class="font-bold text-xl md:text-2xl text-gray-400 pt-6">{dateString}</h2>
+    <div class="mx-auto max-w-[60rem] px-10 grid gap-4 bg-gray-800 py-8">
+      <Tag tag={frontmatter.tags}/>
+      <h2 class="font-bold text-xl md:text-2xl text-gray-400">{dateString}</h2>
       <h1 class="text-2xl md:text-4xl">{frontmatter.title}</h1>
       <div class="flex justify-center">
         {image
-          ? <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={image()}/>
+          ? <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={image()} loading="eager"/>
           : <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={placeholderImage}
-            width="1024" height="640"/>
+            width="1024" height="640" loading="eager"/>
         }
       </div>
       

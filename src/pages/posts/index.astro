@@ -15,14 +15,14 @@ const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/
       {
         posts.reverse().sort((x, y) => {
           // @ts-ignore
-          return (new Date(x.frontmatter.date) + new Date(y.frontmatter.date)) as number;
+          return (new Date(y.frontmatter.date) - new Date(x.frontmatter.date));
         }).map((x, i) => {
           const date = new Date(x.frontmatter.date);
           const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
 
           return <li class="list-none">
-            <BlogPost shouldLazy={i > 1} images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} date={dateString} 
-            title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
+            <BlogPost tag={x.frontmatter.tags} shouldLazy={i > 1} images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} 
+              date={dateString} title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
           </li>
         }
 
@@ -30,6 +30,4 @@ const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/
       }
     </ul>
   </main>
-
-
 </Layout>

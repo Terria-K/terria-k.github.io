@@ -1,0 +1,23 @@
+---
+interface Props {
+    tag: string | string[]
+}
+
+const prop = Astro.props;
+---
+
+<div class="flex flex-row gap-2">
+  {
+    prop.tag 
+      ? (typeof prop.tag == "string")
+        ? <div class="flex">
+            <a class="bg-slate-500 px-2 rounded-full" href={`/tags/${prop.tag}`}>{prop.tag}</a>
+          </div>
+        : prop.tag.map(element => 
+          <div class="flex">
+            <a class="bg-slate-500 px-2 rounded-full" href={`/tags/${element}`}>{element}</a>
+          </div>
+        )
+      : null
+  }
+</div>

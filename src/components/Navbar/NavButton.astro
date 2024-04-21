@@ -6,4 +6,8 @@ interface Props {
 const { link } = Astro.props;
 ---
 
-<button class="font-bold select-none duration-300 hover:text-cyan-400"><a href={link}><slot/></a></button>
+<a class="flex justify-center" href={link}>
+  <button class="font-bold select-none duration-300 hover:text-cyan-400">
+    <slot/>
+  </button>
+</a>

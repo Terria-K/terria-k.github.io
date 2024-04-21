@@ -1,6 +1,7 @@
 ---
 layout: "../../layouts/PostLayout.astro"
 title: State of FortRise
-description: I will talk about the state of FortRise, and an update with it. 
+description: A blog that tells what the current state of FortRise, and some updates coming to it. 
 date: 04/22/24
+tags: [FortRise, Modding]
 ---

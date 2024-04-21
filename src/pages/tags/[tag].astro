@@ -1,0 +1,62 @@
+---
+import type { MarkdownInstance } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { dateTexts } from "../../utils/date";
+import BlogPost from "../../components/Blog/BlogPost.astro";
+import { Icon } from "astro-icon/components";
+
+const fs = await import("path");
+const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
+
+export async function getStaticPaths() {
+  const allPosts: MarkdownInstance<Record<string, any>>[] = await Astro.glob("../posts/*.md");
+
+  const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).filter(x => x).flat())];
+  console.log(uniqueTags);
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) => { 
+      if (!post.frontmatter.tags)
+        return false;
+      return post.frontmatter.tags.includes(tag)
+    });
+    return {
+      params: { tag },
+      props: { posts: filteredPosts }
+    }
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout>
+  <main class="flex-auto">
+    <div class="bg-midnight-blue py-4">
+      <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center text-white">
+        <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
+        <p>
+          {tag}'s Posts
+        </p>
+      </a>
+    </div>
+    <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12">
+      {
+        posts.reverse().sort((x, y) => {
+          // @ts-ignore
+          return (new Date(y.frontmatter.date) + new Date(x.frontmatter.date));
+        }).map((x, i) => {
+          const date = new Date(x.frontmatter.date);
+          const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
+
+          return <li class="list-none">
+            <BlogPost tag={x.frontmatter.tags} shouldLazy={i > 1} images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} date={dateString} 
+            title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
+          </li>
+        }
+        )
+      }
+    </ul>
+  </main>
+</Layout>
