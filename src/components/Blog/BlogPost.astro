@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import placeholderImage from "../../assets/blogs/placeholder.webp";
+import { Image } from "astro:assets"; import placeholderImage from "../../assets/blogs/placeholder.webp";
 
 interface Props {
     images: Record<string, () => Promise<{default: ImageMetadata}>>
@@ -28,8 +27,8 @@ const image: ImageRecord = prop.images[prop.image] as unknown as ImageRecord;
     )
   }
   <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-2">
-    <h2 class="text-gray-500">{prop.date}</h2>
-    <h1 class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mt-2">{prop.title}</h1>
+    <h2 class="font-bold text-gray-500">{prop.date}</h2>
+    <h1 class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl mt-2">{prop.title}</h1>
     <p class="text-xl md:text-base lg:text-lg mt-4">{prop.description}</p>
   </div>
 </a>

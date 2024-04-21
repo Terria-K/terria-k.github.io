@@ -21,7 +21,7 @@ and portfolio.
 <br/>
 And that's by far the purpose of this website, it is exactly just a portfolio and a personal blogs for me as well. I will be posting more blogs as
 time goes on and share my programming stories to you all. If you want to ask for a commision, you can directly contact me on Discord or email me at: 
-`terria@skiff.com` and I'll answer you if I am available to do your request. Don't have a higher expectation for me for now, and you can pay me how much
+<span class="font-bold">terria@skiff.com</span> and I'll answer you if I am available to do your request. Don't have a higher expectation for me for now, and you can pay me how much
 you want to pay me for the commision.
 
 <br/>

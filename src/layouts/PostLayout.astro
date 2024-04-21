@@ -1,10 +1,19 @@
 ---
+import { dateTexts } from "../utils/date";
+import placeholderImage from "../assets/blogs/placeholder.webp";
 import { Icon } from 'astro-icon/components';
 import Footer from '../components/Footer/Footer.astro';
 import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
+import { Image } from 'astro:assets';
+const fs = await import("path");
 
 const { frontmatter } = Astro.props;
+
+const date = new Date(frontmatter.date);
+const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
+const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
+const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp"];
 ---
 
 <!doctype html>
@@ -19,20 +28,27 @@ const { frontmatter } = Astro.props;
 	</head>
 	<body class="text-white h-full">
 		<Navbar/>
-    <div class="flex ml-4 mr-4 mt-7 md:mr-24 md:ml-24 md:mt-20">
-      <a href="/posts" class="duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
-        <Icon class="w-8 h-8" name="ph:arrow-square-left-fill"/>
+    <div class="bg-midnight-blue py-4">
+      <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
+        <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
         <p>
-          Back
+          Blogs
         </p>
       </a>
-
     </div>
-    <div class="m-6 md:m-32 lg:m-32 xl:m-96 md:mt-4 lg:mt-4 xl:mt-4 mb-0">
-      <h2 class="font-bold text-xl md:text-5xl text-gray-400">{frontmatter.date}</h2>
-      <h1 class="font-bold text-2xl md:text-6xl">{frontmatter.title}</h1>
-      <p class="md:text-2xl text-gray-400 mt-4">{frontmatter.description}</p>
-      <div class="md:text-xl mt-4 min-h-screen md:min-h-[50vh] mb-4">
+
+    <div class="mx-auto max-w-[60rem] px-10 grid gap-4 bg-gray-800">
+      <h2 class="font-bold text-xl md:text-2xl text-gray-400 pt-6">{dateString}</h2>
+      <h1 class="text-2xl md:text-4xl">{frontmatter.title}</h1>
+      <div class="flex justify-center">
+        {image
+          ? <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={image()}/>
+          : <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={placeholderImage}
+            width="1024" height="640"/>
+        }
+      </div>
+      
+      <div class="md:text-lg mt-4 min-h-screen md:min-h-[50vh] mb-4">
         <slot />
       </div>
     </div>

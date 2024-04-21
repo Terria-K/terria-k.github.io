@@ -1,4 +1,5 @@
 ---
+import { dateTexts } from "../../utils/date";
 import Layout from "../../layouts/Layout.astro";
 import BlogPost from "../../components/Blog/BlogPost.astro";
 const fs = await import("path");
@@ -6,19 +7,6 @@ const fs = await import("path");
 const posts = await Astro.glob('../posts/*.md');
 const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
 
-const dateTexts = new Map<number, string>()
-dateTexts.set(0, "January");
-dateTexts.set(1, "February");
-dateTexts.set(2, "March");
-dateTexts.set(3, "April");
-dateTexts.set(4, "May");
-dateTexts.set(5, "June");
-dateTexts.set(6, "July");
-dateTexts.set(7, "August");
-dateTexts.set(8, "September");
-dateTexts.set(9, "October");
-dateTexts.set(10, "November");
-dateTexts.set(11, "December");
 ---
 
 <Layout>
