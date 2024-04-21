@@ -7,7 +7,8 @@ interface Props {
     description: string,
     date: string,
     url: string | undefined,
-    image: string
+    image: string,
+    shouldLazy: boolean
 }
 
 type ImageRecord = Record<string, () => Promise<{default: ImageMetadata}>> | undefined;
@@ -19,8 +20,9 @@ const image: ImageRecord = prop.images[prop.image] as unknown as ImageRecord;
 <a href={prop.url} class="w-full rounded-lg p-4 lg:grid-cols-2 items-center grid group">
   {
     (image
-      ? <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={prop.images[prop.image]()}/>
-      : <img class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src="/src/assets/blogs/placeholder.webp"/>
+      ? <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={prop.images[prop.image]()} loading={prop.shouldLazy ? "lazy" : "eager"}/>
+      : <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src="/src/assets/blogs/placeholder.webp" 
+        width="1024" height="640" loading={prop.shouldLazy ? "lazy" : "eager"}/>
     )
   }
   <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-2">

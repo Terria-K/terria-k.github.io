@@ -28,12 +28,12 @@ dateTexts.set(11, "December");
         posts.reverse().sort((x, y) => {
           // @ts-ignore
           return (new Date(x.frontmatter.date) + new Date(y.frontmatter.date)) as number;
-        }).map(x => {
+        }).map((x, i) => {
           const date = new Date(x.frontmatter.date);
           const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
 
           return <li class="list-none">
-            <BlogPost images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} date={dateString} 
+            <BlogPost shouldLazy={i > 1} images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} date={dateString} 
             title={x.frontmatter.title} description={x.frontmatter.description} url={x.url}/>
           </li>
         }
