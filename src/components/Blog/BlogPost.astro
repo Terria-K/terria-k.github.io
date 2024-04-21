@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import placeholderImage from "../../assets/blogs/placeholder.webp";
 
 interface Props {
     images: Record<string, () => Promise<{default: ImageMetadata}>>
@@ -15,13 +16,14 @@ type ImageRecord = Record<string, () => Promise<{default: ImageMetadata}>> | und
 
 const prop = Astro.props;
 const image: ImageRecord = prop.images[prop.image] as unknown as ImageRecord;
+
 ---
 
 <a href={prop.url} class="w-full rounded-lg p-4 lg:grid-cols-2 items-center grid group">
   {
     (image
       ? <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={prop.images[prop.image]()} loading={prop.shouldLazy ? "lazy" : "eager"}/>
-      : <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src="/src/assets/blogs/placeholder.webp" 
+      : <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={placeholderImage}
         width="1024" height="640" loading={prop.shouldLazy ? "lazy" : "eager"}/>
     )
   }
