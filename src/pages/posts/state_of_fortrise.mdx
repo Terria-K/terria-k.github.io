@@ -1,0 +1,56 @@
+---
+layout: "../../layouts/PostLayout.astro"
+title: State of FortRise
+description: A blog that tells what the current state of FortRise, and some updates coming to it. 
+date: 04/22/24
+tags: [FortRise, Modding]
+---
+
+import Link from "../../components/Markdown/Link.astro";
+import Header from "../../components/Markdown/Header.astro";
+export const components = { a: Link, h1: Header }
+
+As you may know, FortRise has stayed on 4.7 for quite a long time now. As myself maintaining this project, I feel burnt out on the features that I had to add,
+bugs that I had to resolve, and cross-platform and version compatibility issues. I am maintaining this project since April 26, 2023 and it is almost been a year
+that FortRise will now be a 1 year old mod loader and I am really happy about it. Thanks to the community for getting along with this project and helping it grow
+to be the second? mod loader in TowerFall and it all just started with just making a simple Dark World mod that allows importing a custom level made by a user 
+and it separate from the vanilla level. 
+
+# Inspiration
+The mod loader itself is *heavily*-inspired from the mod loader called Everest which is a mod loader from [Celeste](https://github.com/EverestAPI/Everest). 
+The project structure is almost the same, and some of it functionality like the Relinker and virtual filesystem stuff. It also uses a same framework called 
+[MonoMod](https://github.com/MonoMod/MonoMod), in which we use it for patching the game, and also hooking via RuntimeDetour and HookGen. I plan FortRise to be 
+its own different thing, but it will need to be in FortRise 5.0 for it to happen.
+
+# Thoughts and Issues
+So, today I want to share about my thoughts while maintaining this project. First of all, I love y'all for accepting me and the project as a community despite
+my clumsiness on how I maintain it. Second, I do love maintaining this project, even though, I am tired of doing it so, maybe due to school projects that I am
+dealing with and probably an in real life problem, but I still keep doing this for as long as I could until eventually this project could be replaced 
+by something else. Now, I want to address most of the issue that everyone had in the project and will fix soon. First, the installation process. I get why people
+do not like the current way of installing the mod loader and I do know the reason. The launcher or called Pyrgos did not really got the intended UI-friendly approach
+of doing it. It is due to because of I keep trying it to be a multi-instance launcher in which the user may be confused on what to do, and most users do not use
+multi-instance TowerFall anyway. I will fix this by providing a launcher that is just straight to the point and does not add anything to it. User is still need to
+select the installer, but it is guided in a way that they could just do it in two clicks. Second, The modding api is confusing in other cases and a lot of 
+deprecated stuff. I sadly could not fix this today or anytime soon, however all of this will be fix in FortRise 5 and the api will be cleaner once again when that
+version does reached. It is too late to change stuff now, and I do not want to break a compability between old mods. Finally, the mod content system where we still
+rely on the hacky `Content/Mod` system that is pretty unreliable, yet it still well known to others. I want all mods, and even content mods to be just a mod that
+mimics the way how vanilla TowerFall load its content. This is basically most mod loader do but not in the case of FortRise as of yet, but I am trying to migrate
+most mod such as Adventure mod, and [ArcherLoader](https://github.com/RedDude/ArcherLoader) by RedDude.
+
+<br/>
+All this issues that I said here is non-exhaustive, tell me more if you have other issue with FortRise besides on what I said here.
+
+# Conclusion
+FortRise has mean a lot to me, it is my first big project that I made with some inspiration from other mod loader. It is not possible to made this without everyone
+in the community that participates to make mods, or everyone that is playing with those mods. This is the first community that accepts what I made for this community
+and I decided to continue maintaining this project for as long as I like or will be replaced by other mod loader. I, to be honest want my mod loader to be replaced
+since I did make a lot of mistakes while creating this project, and the latter will may improve this further on. This project is made with purpose of helping the
+community going forward with mods and the newcomers may enjoy this game as well. 
+
+<br/>
+And for that, FortRise is not dead yet, I am still maintaining it as long as I can maintain it, and thank you everyone for the support! I love y'all!
+
+# Join the Official TowerFall Discord Server
+<a href="https://discord.gg/m25mWsSv8P">
+ <img alt="TowerFall" src="https://discordapp.com/api/guilds/248961953656078337/embed.png?style=banner2" />
+</a>

@@ -1,5 +1,5 @@
 ---
-import { dateTexts } from "../utils/date";
+import { stringToDateString } from "../utils/date";
 import placeholderImage from "../assets/blogs/placeholder.webp";
 import { Icon } from 'astro-icon/components';
 import Footer from '../components/Footer/Footer.astro';
@@ -11,8 +11,7 @@ const fs = await import("path");
 
 const { frontmatter } = Astro.props;
 
-const date = new Date(frontmatter.date);
-const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
+const dateString = stringToDateString(frontmatter.date);
 const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
 const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp"];
 ---

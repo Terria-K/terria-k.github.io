@@ -1,7 +1,7 @@
 ---
 import type { MarkdownInstance } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import { dateTexts } from "../../utils/date";
+import { dateTexts, stringToDateString } from "../../utils/date";
 import BlogPost from "../../components/Blog/BlogPost.astro";
 import { Icon } from "astro-icon/components";
 
@@ -9,7 +9,7 @@ const fs = await import("path");
 const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
 
 export async function getStaticPaths() {
-  const allPosts: MarkdownInstance<Record<string, any>>[] = await Astro.glob("../posts/*.md");
+  const allPosts: MarkdownInstance<Record<string, any>>[] = await Astro.glob("../posts/*.{md,mdx}");
 
   const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).filter(x => x).flat())];
   console.log(uniqueTags);
@@ -47,8 +47,7 @@ const { posts } = Astro.props;
           // @ts-ignore
           return (new Date(y.frontmatter.date) + new Date(x.frontmatter.date));
         }).map((x, i) => {
-          const date = new Date(x.frontmatter.date);
-          const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
+          const dateString = stringToDateString(x.frontmatter.date);
 
           return <li class="list-none">
             <BlogPost tag={x.frontmatter.tags} shouldLazy={i > 1} images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} date={dateString} 

@@ -1,10 +1,10 @@
 ---
-import { dateTexts } from "../../utils/date";
+import { dateTexts, stringToDateString } from "../../utils/date";
 import Layout from "../../layouts/Layout.astro";
 import BlogPost from "../../components/Blog/BlogPost.astro";
 const fs = await import("path");
 
-const posts = await Astro.glob('../posts/*.md');
+const posts = await Astro.glob('../posts/*.{md,mdx}');
 const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
 
 ---
@@ -17,8 +17,7 @@ const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/
           // @ts-ignore
           return (new Date(y.frontmatter.date) - new Date(x.frontmatter.date));
         }).map((x, i) => {
-          const date = new Date(x.frontmatter.date);
-          const dateString = `${dateTexts.get(date.getUTCMonth())} ${date.getDate()}, ${date.getUTCFullYear()}`
+          const dateString = stringToDateString(x.frontmatter.date);
 
           return <li class="list-none">
             <BlogPost tag={x.frontmatter.tags} shouldLazy={i > 1} images={images} image={"/src/assets/blogs/" + fs.basename(x.url!) + ".webp"} 
