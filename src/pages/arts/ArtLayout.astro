@@ -1,5 +1,5 @@
 ---
-import Picture from "astro/components/Picture.astro"
+import Image from "astro/components/Image.astro";
 import YearButton from "../../components/Arts/YearButton.astro"
 import Layout from "../../layouts/Layout.astro"
 
@@ -25,9 +25,9 @@ const prop = Astro.props;
     </div>
     <div class="w-full grid gap-2 grid-cols-1 mx-40 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
     {
-      prop.pictures.reverse().map(x => {
+      prop.pictures?.reverse().map(x => {
         // @ts-ignore
-        return <Picture src={x} format="webp" alt="RelentlessNight"/>
+        return <Image src={x} format="webp" alt="ArtForm"/>
       })
     }
     </div> 
