@@ -1,15 +1,15 @@
 ---
 import type { MarkdownInstance } from "astro";
-import Layout from "../../layouts/Layout.astro";
-import { dateTexts, stringToDateString } from "../../utils/date";
-import BlogPost from "../../components/Blog/BlogPost.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { stringToDateString } from "../../../utils/date";
+import BlogPost from "../../../components/Blog/BlogPost.astro";
 import { Icon } from "astro-icon/components";
 
 const fs = await import("path");
 const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
 
 export async function getStaticPaths() {
-  const allPosts: MarkdownInstance<Record<string, any>>[] = await Astro.glob("../posts/*.{md,mdx}");
+  const allPosts: MarkdownInstance<Record<string, any>>[] = await Astro.glob("../*.{md,mdx}");
 
   const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).filter(x => x).flat())];
   console.log(uniqueTags);

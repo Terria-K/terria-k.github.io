@@ -11,11 +11,11 @@ const prop = Astro.props;
     prop.tag 
       ? (typeof prop.tag == "string")
         ? <div class="flex">
-            <a class="bg-slate-500 px-2 rounded-full" href={`/tags/${prop.tag}`}>{prop.tag}</a>
+            <a class="bg-slate-500 px-2 rounded-full" href={`/posts/tags/${prop.tag}`}>{prop.tag}</a>
           </div>
         : prop.tag.map(element => 
           <div class="flex">
-            <a class="bg-slate-500 px-2 rounded-full" href={`/tags/${element}`}>{element}</a>
+            <a class="bg-slate-500 px-2 rounded-full" href={`/posts/tags/${element}`}>{element}</a>
           </div>
         )
       : null
