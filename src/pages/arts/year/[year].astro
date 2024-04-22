@@ -1,5 +1,5 @@
 ---
-import ArtLayout from "../ArtLayout.astro";
+import ArtLayout from "../../../layouts/ArtLayout.astro";
 
 export async function getStaticPaths() {
   const pictures: Record<string, any>[] = await Astro.glob("/src/assets/arts/**/*.png").then(x => x.map(x => x.default));
@@ -21,4 +21,4 @@ const { year } = Astro.params;
 const { pictures } = Astro.props;
 ---
 
-<ArtLayout {pictures}/>
+<ArtLayout {year} {pictures}/>

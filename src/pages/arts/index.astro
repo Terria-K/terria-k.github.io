@@ -1,7 +1,7 @@
 ---
-import ArtLayout from './ArtLayout.astro';
+import ArtLayout from '../../layouts/ArtLayout.astro';
 
 const pictures: Record<string, any>[] = await Astro.glob("/src/assets/arts/**/*.png").then(x => x.map(x => x.default));
 ---
 
-<ArtLayout {pictures}/>
+<ArtLayout year="All" {pictures}/>
