@@ -1,0 +1,11 @@
+---
+interface Props {
+  year: number,
+}
+
+const prop = Astro.props;
+---
+
+<a href=`/arts/year/${prop.year}` class="w-full">
+  <button class="w-full hover:bg-midnight-light duration-300 py-4 rounded-lg font-bold text-3xl">{prop.year}</button>
+</a>
