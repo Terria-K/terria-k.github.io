@@ -29,10 +29,10 @@ const prop = Astro.props;
     <div class="w-full flex justify-center">
       <div class="gap-2 grid-cols-1 flex flex-wrap justify-center">
         {
-          prop.pictures.reverse().map(x => {
-
+          prop.pictures.reverse().map((x, i) => {
+            const loadType = i > 11 ? "lazy" : "eager";
             // @ts-ignore
-            return <div class="max-w-80 h-30"> <Image src={x} format="webp" alt="ArtForm" loading="eager"/></div>
+            return <div class="max-w-80 h-30"> <Image src={x} format="webp" alt="ArtForm" loading={loadType}/></div>
           })
         }
       </div> 
