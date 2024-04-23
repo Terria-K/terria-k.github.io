@@ -13,7 +13,7 @@ const prop = Astro.props;
 
 <Layout>
   <div class="mx-auto max-w-[96rem] px-10 py-10 space-y-4 text-white gap-10">
-    <div class="bg-midnight rounded-lg flex gap-4 justify-evenly">
+    <div class="bg-midnight rounded-lg flex flex-col md:flex-row gap-4 justify-evenly overflow-x-auto">
       <a href="/arts" class="w-full">
         <button class=`w-full hover:bg-midnight-light duration-300 py-4 rounded-lg font-bold text-3xl ${prop.year === "All" ? "bg-midnight-light" : ""}`>
           All
@@ -26,14 +26,18 @@ const prop = Astro.props;
       <YearButton year={2020} selected={prop.year === "2020"}/>
       <YearButton year={2019} selected={prop.year === "2019"}/>
     </div>
-    <div class="w-full grid gap-2 grid-cols-1 mx-40 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
-      {
-        prop.pictures.reverse().map(x => {
-          // @ts-ignore
-          return <Image src={x} format="webp" alt="ArtForm" loading="eager"/>
-        })
-      }
-    </div> 
+    <div class="w-full flex justify-center">
+      <div class="gap-2 grid-cols-1 flex flex-wrap justify-center">
+        {
+          prop.pictures.reverse().map(x => {
+
+            // @ts-ignore
+            return <div class="max-w-80 h-30"> <Image src={x} format="webp" alt="ArtForm" loading="eager"/></div>
+          })
+        }
+      </div> 
+    </div>
+
   </div>
 </Layout>
 
