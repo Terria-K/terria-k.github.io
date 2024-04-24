@@ -1,0 +1,1 @@
+This folder contains all of Terria's art, but due to reason, it is not pushed to github.
