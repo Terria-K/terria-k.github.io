@@ -15,13 +15,11 @@ const pictures: Record<string, any>[] = await Astro.glob("/src/assets/webp_arts/
           ? pictures.map(x => <div class="max-w-80 h-100"> <Image src={x} format="webp" alt="ArtForm" loading="lazy"/></div>) 
           : null
       }
-      <div class="max-w-80 h-100">
-        <a href="/arts" class="w-80 h-80 bg-midnight hover:bg-midnight-light duration-300 flex flex-col items-center justify-center 
-          text-4xl font-bold select-none cursor-pointer">
-          <Icon name="ph:cards"/>
-          <p>More Arts</p>
-        </a>
-      </div>
+      <a href="/arts" class="w-80 h-100 bg-midnight hover:bg-midnight-light duration-300 flex flex-col items-center justify-center 
+        text-4xl font-bold select-none cursor-pointer py-8 rounded-md">
+        <Icon name="ph:cards"/>
+        <p>More Arts</p>
+      </a>
     </div>
   </div>
 <div/>
