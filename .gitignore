@@ -4,7 +4,7 @@ dist/
 # generated types
 .astro/
 
-assets/arts/**/*
+/src/assets/arts/**/*
 # dependencies
 node_modules/
 
