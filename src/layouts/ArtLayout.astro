@@ -2,6 +2,7 @@
 import YearButton from "../components/Arts/YearButton.astro"
 import Image from "astro/components/Image.astro";
 import Layout from "./Layout.astro"
+import ViewTransitions from "astro/components/ViewTransitions.astro";
 
 interface Props {
   year: string,
@@ -12,6 +13,7 @@ const prop = Astro.props;
 ---
 
 <Layout>
+  <ViewTransitions/>
   <div class="mx-auto max-w-[96rem] px-10 py-10 space-y-4 text-white gap-10">
     <div class="bg-midnight rounded-lg flex flex-col md:flex-row gap-4 justify-evenly overflow-x-auto">
       <a href="/arts" class="w-full">
