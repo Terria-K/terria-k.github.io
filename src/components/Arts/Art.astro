@@ -1,8 +1,27 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+const pictures: Record<string, any>[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default).reverse().slice(0, 7));
+---
+
 <div class="w-full text-white">
   <div class="bg-gray-800 rounded-lg p-4 gap-4 flex flex-col">
     <p class="text-center font-bold text-3xl select-none">Artworks</p>
     <div class="bg-gray-900 rounded-lg p-4 justify-center flex-wrap flex gap-3">
-
+      {
+        pictures 
+        //@ts-ignore
+          ? pictures.map(x => <div class="max-w-80 h-100"> <Image src={x} format="webp" alt="ArtForm" loading="lazy"/></div>) 
+          : null
+      }
+      <div class="max-w-80 h-100">
+        <a href="/arts" class="w-80 h-80 bg-midnight hover:bg-midnight-light duration-300 flex flex-col items-center justify-center 
+          text-4xl font-bold select-none cursor-pointer">
+          <Icon name="ph:cards"/>
+          <p>More Arts</p>
+        </a>
+      </div>
     </div>
   </div>
 <div/>
