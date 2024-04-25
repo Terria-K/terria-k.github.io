@@ -4,9 +4,11 @@ import Image from "astro/components/Image.astro";
 import Layout from "./Layout.astro"
 import ViewTransitions from "astro/components/ViewTransitions.astro";
 
+import fs from 'path';
+
 interface Props {
   year: string,
-  pictures: Record<string, any>[]
+  pictures: ImageMetadata[]
 }
 
 const prop = Astro.props;
@@ -33,8 +35,9 @@ const prop = Astro.props;
         {
           prop.pictures.reverse().map((x, i) => {
             const loadType = i > 11 ? "lazy" : "eager";
-            // @ts-ignore
-            return <div class="max-w-80 h-30"> <Image src={x} format="webp" alt="ArtForm" loading={loadType}/></div>
+            return <div class="max-w-80 h-30"> 
+                <Image src={x} alt={fs.basename(x.src).split('.')[0]} format="webp" loading={loadType}/>
+              </div>
           })
         }
       </div> 

@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --config astro.config.dev.ts",
     "start": "astro dev",
     "build": "astro check && astro build --config astro.config.build.ts",
     "preview": "astro preview",
