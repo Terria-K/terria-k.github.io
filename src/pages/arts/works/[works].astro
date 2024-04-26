@@ -1,0 +1,83 @@
+---
+import fs from 'path';
+import { sha256 } from '../../../utils/sha256';
+import { Image } from 'astro:assets';
+import { stringToDateString } from '../../../utils/date';
+import type { MDXInstance } from 'astro';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+import ArtPreviewLayout from '../../../layouts/ArtPreviewLayout.astro';
+
+export async function getStaticPaths() {
+  const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+
+  const artworkMds: Record<string, MDXInstance<Record<string, any>>[]> = {
+    // "2024": await Astro.glob("/src/artwork/2024/*.md"),
+    "2023": await Astro.glob("/src/artwork/2023/*.mdx"),
+    // "2022": await Astro.glob("/src/artwork/2022/*.md"),
+    // "2021": await Astro.glob("/src/artwork/2021/*.md"),
+    // "2020": await Astro.glob("/src/artwork/2020/*.md"),
+    // "2019": await Astro.glob("/src/artwork/2019/*.md"),
+  };
+
+  const paths = [];
+
+  for (let picture of pictures) {
+    const baseName = fs.basename(picture.src);
+    const dateName = baseName.split('.')[0];
+    let name = dateName.substring(11).replaceAll("_", " ");
+    const date = new Date(dateName.substring(0, 10));
+    const works = await sha256(dateName);
+    const year = baseName.split("-")[2].substring(0, 4);
+    let content: AstroComponentFactory | undefined;
+    let description = "";
+
+    const mds = artworkMds[year];
+    if (mds !== undefined) {
+      mds.filter(x => fs.basename(x.file).split('.')[0] != name)
+        .forEach(x => {
+          if (x.frontmatter.name) {
+            name = x.frontmatter.name;
+          }
+
+          if (x.frontmatter.description) {
+            description = x.frontmatter.description;
+          }
+
+          content = x.Content;
+        });
+    }
+
+    paths.push({
+      params: { works },
+      props: { picture, name, date, works, Content: content, description, year }
+    })
+  }
+
+  return paths;
+}
+
+const { works } = Astro.params;
+const { picture, name, date, Content, description } = Astro.props;
+---
+
+<ArtPreviewLayout title={name} content="Hello" imageSrc={picture.src}>
+  <div class="flex w-full justify-center items-center">
+    <div class="grid gap-6 md:grid-cols-3 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md">
+      <div class="md:col-span-2 max-w-[57rem]">
+        <Image src={picture} alt=""/>
+      </div>
+      <div class="text-white">
+        <p class="md:mt-10 font-bold text-2xl lg:text-3xl">{name}</p>
+        <p class="text-gray-400 text-2xl lg:text-lg">{stringToDateString(date.toString())}</p>
+        <p class="py-4 text-gray-300 text-xl lg:text-lg">{description}</p>
+        <p class="text-2xl lg:text-lg">
+          {
+            Content 
+            ? <Content/>
+            : null
+          }
+        </p>
+      </div>
+    </div>
+  </div>
+</ArtPreviewLayout>

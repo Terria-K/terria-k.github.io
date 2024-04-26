@@ -5,6 +5,7 @@ import Layout from "./Layout.astro"
 import ViewTransitions from "astro/components/ViewTransitions.astro";
 
 import fs from 'path';
+import { sha256 } from "../utils/sha256";
 
 interface Props {
   year: string,
@@ -33,11 +34,12 @@ const prop = Astro.props;
     <div class="w-full flex justify-center">
       <div class="gap-2 grid-cols-1 flex flex-wrap justify-center">
         {
-          prop.pictures.reverse().map((x, i) => {
+          prop.pictures.reverse().map(async (x, i) => {
             const loadType = i > 11 ? "lazy" : "eager";
-            return <div class="max-w-80 h-30"> 
-                <Image src={x} alt={fs.basename(x.src).split('.')[0]} format="webp" loading={loadType}/>
-              </div>
+            const artworkName = await sha256(fs.basename(x.src).split('.')[0]);
+            return <a href={`/arts/works/${artworkName}`} class="max-w-80 h-30 cursor-pointer"> 
+                <Image src={x} alt={artworkName} format="webp" loading={loadType}/>
+              </a>
           })
         }
       </div> 
