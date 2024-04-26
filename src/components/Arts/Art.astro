@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
 import fs from 'path';
+import { sha256 } from "../../utils/sha256";
 
 const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default).reverse().slice(0, 7));
 ---
@@ -13,7 +14,12 @@ const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.w
     <div class="bg-gray-900 rounded-lg p-4 justify-center flex-wrap flex gap-3 h-[800px] overflow-auto md:h-auto no-scrollbar">
       {
         pictures 
-          ? pictures.map(x => <div class="max-w-80 h-100"> <Image src={x} format="webp" alt={fs.basename(x.src).split('.')[0]} loading="lazy"/></div>) 
+          ? pictures.map(async x => {
+            const artworkName = await sha256(fs.basename(x.src).split('.')[0]);
+            return <a href={`/arts/works/${artworkName}`} class="max-w-80 h-100"> 
+                <Image src={x} format="webp" alt={fs.basename(x.src).split('.')[0]} loading="lazy"/>
+              </a>
+          }) 
           : null
       }
       <a href="/arts" class="w-80 h-100 bg-midnight hover:bg-midnight-light duration-300 flex flex-col items-center justify-center 
