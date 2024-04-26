@@ -14,7 +14,7 @@ export async function getStaticPaths() {
     // "2024": await Astro.glob("/src/artwork/2024/*.md"),
     "2023": await Astro.glob("/src/artwork/2023/*.mdx"),
     // "2022": await Astro.glob("/src/artwork/2022/*.md"),
-    // "2021": await Astro.glob("/src/artwork/2021/*.md"),
+    "2021": await Astro.glob("/src/artwork/2021/*.mdx"),
     // "2020": await Astro.glob("/src/artwork/2020/*.md"),
     // "2019": await Astro.glob("/src/artwork/2019/*.md"),
   };
@@ -33,7 +33,9 @@ export async function getStaticPaths() {
 
     const mds = artworkMds[year];
     if (mds !== undefined) {
-      mds.filter(x => fs.basename(x.file).split('.')[0] != name)
+      mds.filter(x => {
+        return fs.basename(x.file).split('.')[0].replaceAll("_", " ") === name
+      })
         .forEach(x => {
           if (x.frontmatter.name) {
             name = x.frontmatter.name;
@@ -62,15 +64,14 @@ const { picture, name, date, Content, description } = Astro.props;
 
 <ArtPreviewLayout title={name} content={description} imageSrc={picture.src}>
   <div class="flex w-full justify-center items-center">
-    <div class="grid gap-6 md:grid-cols-3 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md">
-      <div class="md:col-span-2 max-w-[57rem]">
+    <div class="grid gap-6 md:grid-cols-2 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md">
+      <div class="max-w-[57rem]">
         <Image src={picture} alt=""/>
       </div>
       <div class="text-white">
         <p class="md:mt-10 font-bold text-2xl lg:text-3xl">{name}</p>
         <p class="text-gray-400 text-2xl lg:text-lg">{stringToDateString(date.toString())}</p>
-        <p class="py-4 text-gray-300 text-xl lg:text-lg">{description}</p>
-        <p class="text-2xl lg:text-lg">
+        <p class="py-4 text-gray-300 text-2xl lg:text-lg">{description}</p>
           {
             Content 
             ? <Content/>
