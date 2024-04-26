@@ -16,9 +16,9 @@ const prop = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Hello" />
+		<meta name="description" content={prop.content} />
 		<meta name="viewport" content="width=device-width" />
-        <meta name="image" content={prop.imageSrc}/>
+        <meta name="og:image" content={prop.imageSrc}/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{`Teuria's Website - ${prop.title}`}</title>
