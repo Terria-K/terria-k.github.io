@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Footer from '../components/Footer/Footer.astro';
 import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
@@ -31,6 +32,12 @@ const prop = Astro.props;
         <meta name="twitter:image" content={prop.imageSrc}/>
         <meta name="twitter:card" content="summary_large_image"/>
 		<Navbar/>
+		<div class="bg-midnight-blue py-4">
+		<a href="/arts" class="text-white px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
+			<Icon class="w-8 h-8" name="ph:arrow-left-light"/>
+			<p>Artworks</p>
+		</a>
+		</div>
         <div class="min-h-screen">
         <slot />
         </div>
