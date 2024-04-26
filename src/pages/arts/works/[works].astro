@@ -1,4 +1,6 @@
 ---
+import Link from "../../../components/Markdown/Link.astro";
+import Header from "../../../components/Markdown/Header.astro";
 import fs from 'path';
 import { sha256 } from '../../../utils/sha256';
 import { Image } from 'astro:assets';
@@ -58,6 +60,8 @@ export async function getStaticPaths() {
   return paths;
 }
 
+
+export const components = { a: Link, h1: Header }
 const { picture, name, date, Content, description } = Astro.props;
 ---
 
@@ -73,7 +77,7 @@ const { picture, name, date, Content, description } = Astro.props;
         <p class="py-4 text-gray-300 text-2xl lg:text-lg">{description}</p>
           {
             Content 
-            ? <Content/>
+            ? <Content {components}/>
             : null
           }
         </p>
