@@ -25,10 +25,14 @@ const prop = Astro.props;
 		<title>{`Teuria's Website - ${prop.title}`}</title>
 	</head>
 	<body>
+        <meta name="twitter:title" content={prop.title}/>
+        <meta name="twitter:description" content={prop.content}/>
+        <meta name="twitter:image" content={prop.imageSrc}/>
+        <meta name="twitter:card" content="summary_large_image"/>
 		<Navbar/>
-    <div class="min-h-screen">
-      <slot />
-    </div>
+        <div class="min-h-screen">
+        <slot />
+        </div>
 		<Footer/>
 	</body>
 </html>
