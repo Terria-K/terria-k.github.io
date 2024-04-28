@@ -13,7 +13,7 @@ export async function getStaticPaths() {
   const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
 
   const artworkMds: Record<string, MDXInstance<Record<string, any>>[]> = {
-    // "2024": await Astro.glob("/src/artwork/2024/*.md"),
+    "2024": await Astro.glob("/src/artwork/2024/*.mdx"),
     "2023": await Astro.glob("/src/artwork/2023/*.mdx"),
     // "2022": await Astro.glob("/src/artwork/2022/*.md"),
     "2021": await Astro.glob("/src/artwork/2021/*.mdx"),
