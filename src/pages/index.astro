@@ -5,26 +5,53 @@ import Art from '../components/Arts/Art.astro';
 ---
 
 <Layout>
-  <div class="py-20 w-full bg-midnight-blue flex justify-center text-white">
+  <div class="py-60 w-full bg-hero flex justify-center text-white">
     <div class="grid gap-6">
       <p class="text-center font-bold text-4xl">
-        Welcome to Teuria!
+        Welcome, I am Teuria!
       </p>
       <div class="max-w-[25rem] mx-auto grid gap-4">
         <p class="px-10">
-          This is Terria's website for showcasing their arts, website, and developed games. It will also contain work in progress or preview stuff.
+          This is Teuria's website for showcasing their arts, website, and developed games. It will also contain work in progress or preview stuff.
           There are also blogs that will be posted in the blog here.
         </p>
-        <button class="mx-20 font-bold bg-slate-600 rounded-lg h-14 text-2xl duration-300 hover:bg-slate-400">About Me</button>
+        <div class="mx-10 grid lg:grid-cols-2 gap-2">
+          <button class="font-bold bg-slate-600 rounded-lg h-14 text-2xl duration-300 hover:bg-slate-400">Commission</button>
+          <a href="#about-me" class="grid items-center text-center text-2xl font-bold bg-slate-600 rounded-lg h-14 duration-300 hover:bg-slate-400">
+            About Me
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <header class="mx-auto max-w-[96rem] px-10 space-y-4">
-    <div class="py-8" id="#about-me">
-      <a href="#about-me" class="text-white font-bold text-4xl">About Me</a>
+  <header class="mx-auto max-w-[96rem] px-5 lg:px-10 space-y-4 pb-4">
+    <div class="py-20 text-white max-w-[40rem]" id="about-me">
+      <a href="#about-me" class="font-bold text-4xl">About Me</a>
+      <p class="text-xl">Hello, I am Teuria! also known as Terria. I am 19 years old and first year college, and 
+        I make arts and games whenever I feel like it.
+        I am known as a programmer, specifically C# and has huge project such as FortRise, a mod loader for TowerFall.
+        But also, I have a lot of experiences in arts and I do had a lot of them. I am pretty much improving my skills 
+        overtime and you can see it by yourself. 
+      </p>
     </div>
     <Skills/>
     <Art/>
   </header>
 </Layout>
+
+<style>
+  .bg-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../assets/webp_arts/2023/12-31-2023|Relentless_Night.png.webp");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 768px) {
+    .bg-hero {
+      background-attachment: fixed;   
+      background-position: 0% 150%;
+    }
+  }
+</style>
