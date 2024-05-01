@@ -25,7 +25,10 @@ const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".we
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Terria's Blog</title>
+    <meta name="og:title" content={`Teuria's Blog - ${frontmatter.title}`} />       
+    <meta name="og:description" content={frontmatter.description} />
+    <meta name="og:image" content={"/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp"}/>
+		<title>{`Teuria's Blog - ${frontmatter.title}`}</title>
 	</head>
 	<body class="text-white h-full">
 		<Navbar/>
