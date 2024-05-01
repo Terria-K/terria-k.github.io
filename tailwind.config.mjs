@@ -11,7 +11,7 @@ export default {
 				"midnight-blue": "#201d36"
 			},
 			fontFamily: {
-				slab: ['Roboto Slab'],
+				slab: ['Roboto Slab Variable'],
 				sans: ['Fira Sans'],
 				cantarell: ['Cantarell']
 			}
