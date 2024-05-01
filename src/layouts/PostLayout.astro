@@ -27,7 +27,7 @@ const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".we
 		<meta name="generator" content={Astro.generator} />
     <meta property="og:title" content={`Teuria's Blog - ${frontmatter.title}`} />       
     <meta property="og:description" content={frontmatter.description} />
-    <meta property="og:image" content={"/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp"}/>
+    <meta property="og:image" content={`/src/assets/blogs/${fs.basename(frontmatter.url!)}.webp`}/>
 		<title>{`Teuria's Blog - ${frontmatter.title}`}</title>
 	</head>
 	<body class="text-white h-full">
