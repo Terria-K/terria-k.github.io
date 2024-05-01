@@ -16,7 +16,7 @@ const dateString = stringToDateString(frontmatter.date);
 const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
 const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp"];
 
-const imageURL = new URL("/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp", Astro.site);
+const imageSrc = (await image()).default.src;
 ---
 
 <!doctype html>
@@ -29,7 +29,7 @@ const imageURL = new URL("/src/assets/blogs/" + fs.basename(frontmatter.url!) + 
 		<meta name="generator" content={Astro.generator} />
     <meta property="og:title" content={`Teuria's Blog - ${frontmatter.title}`} />       
     <meta property="og:description" content={frontmatter.description} />
-    <meta property="og:image" content={imageURL}/>
+    <meta property="og:image" content={imageSrc}/>
 		<title>{`Teuria's Blog - ${frontmatter.title}`}</title>
 	</head>
 	<body class="text-white h-full">
