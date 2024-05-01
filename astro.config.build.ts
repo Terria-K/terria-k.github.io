@@ -1,12 +1,9 @@
 import { defineConfig, sharpImageService } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import icon from 'astro-icon'
-import mdx from '@astrojs/mdx';
+import { teuriaIntegrations } from './astro.config.all';
 
-// https://astro.build/config
 export default defineConfig({
     site: "https://terria-k.github.io",
-    integrations: [tailwind(), icon(), mdx()],
+    integrations: teuriaIntegrations(),
     image: {
         service: sharpImageService()
     }
