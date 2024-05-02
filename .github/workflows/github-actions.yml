@@ -16,6 +16,9 @@ permissions:
   pages: write
   id-token: write
 
+# Environment variables available to all jobs and steps in this workflow
+env:
+  SPICA: ${{ secrets.SPICA }}
   
 jobs:
   build:
@@ -24,6 +27,11 @@ jobs:
       # ...
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
+
+      - name: Create ENV file
+        run |
+          touch .env
+          echo SPICA=${{ secrets.SPICA }} >> .env
 
       - name: Install, build, and upload your site
         uses: withastro/action@v2
