@@ -1,4 +1,4 @@
-import { createSignal, type Component, type JSX } from "solid-js";
+import { $, Slot, component$, useSignal, useStore, sync$ } from "@builder.io/qwik"
 
 type FormField = {
   platform: string,
@@ -13,12 +13,12 @@ type FormProp = {
 }
 
 
-const Form: Component<FormProp> = (prop) => {
-  const [platform, setPlatform] = createSignal("Email");
-  const [response, setResponse] = createSignal<string|undefined>(undefined);
-  const [responseColor, setResponseColor] = createSignal("text-red-500");
-  const [form, setForm] = createSignal<FormField>({
-    platform: platform(),
+const Form = component$((prop: FormProp) => {
+  const platform = useSignal("Email");
+  const response = useSignal<string|undefined>(undefined);
+  const responseColor = useSignal("text-red-500");
+  let form = useStore<FormField>({
+    platform: platform.value,
     contactname: "",
     title: "",
     description: "",
@@ -27,27 +27,19 @@ const Form: Component<FormProp> = (prop) => {
 
 
   function updateFormField(formName: string) {
-    return (e: Event) => {
-      const inputElement = e.currentTarget as HTMLInputElement;
+    return $((e: Event) => {
       //@ts-ignore
-      setForm({
-        ...form(),
-        [formName]: inputElement.value
-      });
-    }
+      form[formName] = e.target.value!;
+    })
   }
 
-  function onPlatformChange(event: Event & { currentTarget: HTMLSelectElement; target: HTMLSelectElement; }) {
-    setPlatform(event.target.value);
-    setForm({
-      ...form(),
-      platform: event.target.value
-    });
-  }
+  const onPlatformChange$ = $(function onPlatformChange(event: Event & { currentTarget: HTMLSelectElement; target: HTMLSelectElement; }) {
+    platform.value = event.target.value;
+    form.platform = event.target.value;
+  })
 
-  async function onSubmit(e: Event) {
-    e.preventDefault();
-    const formParam = form();
+  const onSubmit$ = $(async function onSubmit(e: Event) {
+    const formParam = form;
 
     const platform = formParam.platform;
 
@@ -57,20 +49,20 @@ const Form: Component<FormProp> = (prop) => {
     let reference = formParam.reference;
 
     if (contactName === "") {
-      setResponse("Please provide your contact name.");
-      setResponseColor("text-red-500");
+      response.value = "Please provide your contact name.";
+      responseColor.value = "text-red-500";
       return;
     }
 
     if (title === "") {
-      setResponse("Please provide the title of the art.");
-      setResponseColor("text-red-500");
+      response.value = "Please provide the title of the art.";
+      responseColor.value = "text-red-500";
       return;
     }
 
     if (description === "") {
-      setResponse("Please provide the details of the art.");
-      setResponseColor("text-red-500");
+      response.value = "Please provide the details of the art.";
+      responseColor.value = "text-red-500";
       return;
     }
     
@@ -114,43 +106,43 @@ const Form: Component<FormProp> = (prop) => {
     });
 
     if (res.ok) {
-      setResponseColor("text-green-500")
-      setResponse("Your order has been sent!");
+      response.value = "Your order has been sent!";
+      responseColor.value = "text-green-500";
     } else {
-      setResponseColor("text-red-500")
-      setResponse("Something went wrong with sending your order. Please try again later.");
+      response.value = "Something went wrong with sending your order. Please try again later.";
+      responseColor.value = "text-green-500";
     }
-  }
+  })
 
 
   return (
-  <form class="grid gap-4" onSubmit={onSubmit}>
+  <form class="grid gap-4" onSubmit$={[sync$((event: Event) => event.preventDefault()), onSubmit$]}>
     <p class="text-white font-bold text-2xl">Contact</p>
     <Label>
       Platform: *
       <select name="platform" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" 
-        onChange={onPlatformChange} value={platform()}>
+        onChange$={onPlatformChange$} value={platform.value}>
         <option class="bg-midnight-light" value="Email">Email</option>
         <option class="bg-midnight-light" value="Discord">Discord</option>
       </select>
     </Label>
     <Label>
-      {platform()}: *
-      <Input name="contactname" type="text" onChange={updateFormField("contactname")} value={form().contactname} />
+      {platform.value}: *
+      <Input name="contactname" type="text" onChange={updateFormField("contactname")} value={form.contactname} />
     </Label>
     <p class="text-white font-bold text-2xl">Request</p>
     <Label>
       Art Title: *
-      <Input name="title" type="text" onChange={updateFormField("title")} value={form().title}/>
+      <Input name="title" type="text" onChange={updateFormField("title")} value={form.title}/>
     </Label>
     <Label>
       Details: *
-      <textarea onChange={updateFormField("description")} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="description" rows="5" cols="30" value={form().description}></textarea>
+      <textarea onChange$={updateFormField("description")} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="description" rows={5} cols={30} value={form.description}></textarea>
     </Label>
     <Label>
       References or Idea:
       <p class="text-gray-500 text-sm">You can put a links for references or idea to have a clear idea of what you want.</p>
-      <textarea onChange={updateFormField("reference")} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="reference" rows="2" cols="30" value={form().reference}></textarea>
+      <textarea onChange$={updateFormField("reference")} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="reference" rows={2} cols={30} value={form.reference}></textarea>
     </Label>
     <p class="text-gray-300 text-lg">
       Prices of each art is minimum of $5 and you can go beyond that if you want to support me more as an artist. <br/>
@@ -160,22 +152,24 @@ const Form: Component<FormProp> = (prop) => {
       <input class="hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" type="submit" value="Order"/>
     </div>
     {
-      response() ? <p class={`${responseColor()}`}>{response()}</p> : null
+      response.value ? <p class={`${responseColor.value}`}>{response.value}</p> : null
     }
   </form>)
-}
+});
 
-const Label: Component<{children?: JSX.Element }> = (prop) => {
-  return <label class="flex flex-col text-white">{prop.children}</label>
-}
+const Label = component$(() => {
+  return (<label class="flex flex-col text-white">
+    <Slot/>
+  </label>)
+});
 
-const Input: Component<{
+const Input = component$((prop: {
   type: string,
   name?: string,
   value?: string,
   onChange: (e: Event) => void
-}> = (prop) => {
-  return <input name={prop.name} onChange={prop.onChange} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" type={prop.type} value={prop.value}/>
-}
+}) => {
+  return <input name={prop.name} onChange$={prop.onChange} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" type={prop.type} value={prop.value}/>
+});
 
 export default Form;
