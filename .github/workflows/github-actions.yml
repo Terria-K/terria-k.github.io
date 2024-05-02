@@ -29,7 +29,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
 
       - name: Create ENV file
-        run |
+        run: |
           touch .env
           echo SPICA=${{ secrets.SPICA }} >> .env
 
