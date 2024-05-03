@@ -1,5 +1,5 @@
 ---
-import Form from "../components/Commission/Form.tsx";
+import CommisionForm from "../components/Commission/CommisionForm.tsx";
 import Layout from "../layouts/Layout.astro";
 
 const url = import.meta.env.SPICA;
@@ -8,6 +8,6 @@ const url = import.meta.env.SPICA;
 
 <Layout>
   <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
-    <Form client:load {url}/>
+    <CommisionForm client:load {url}/>
   </div>
 </Layout>
