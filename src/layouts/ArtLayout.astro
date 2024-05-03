@@ -30,51 +30,21 @@ const prop = Astro.props;
       <YearButton year={2019} selected={prop.year === "2019"}/>
     </div>
     <div class="w-full flex justify-center">
-      <div class="gap-2 grid-cols-1 flex flex-wrap justify-center">
-        <ul class="gallery">
-          {
-            prop.pictures.reverse().map(async (x, i) => {
-              const loadType = i > 17 ? "lazy" : "eager";
-              const artworkName = await sha256(fs.basename(x.src).split('.')[0]);
-              return (
-                <li>
-                  <a href={`/arts/works/${artworkName}`}> 
-                    <Image src={x} alt={artworkName} format="webp" loading={loadType}/>
-                  </a>
-                </li>
-              )
-            })
-          }
-        </ul>
-
-      </div> 
+      <ul class="flex flex-wrap gap-2 justify-center">
+        {
+          prop.pictures.reverse().map(async (x, i) => {
+            const loadType = i > 17 ? "lazy" : "eager";
+            const artworkName = await sha256(fs.basename(x.src).split('.')[0]);
+            return (
+              <li class="list-none h-[300px] cursor-pointer relative">
+                <a href={`/arts/works/${artworkName}`}> 
+                  <Image class="object-cover w-full h-full align-middle rounded" src={x} alt={artworkName} format="webp" loading={loadType}/>
+                </a>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
-
   </div>
 </Layout>
-<style>
-  li {
-    list-style: none;
-  }
-
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .gallery > li{
-    height: 300px;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .gallery li a img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    vertical-align: middle;
-    border-radius: 5px;
-  }
-</style>
