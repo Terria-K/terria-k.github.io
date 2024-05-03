@@ -26,8 +26,8 @@ const Form: Component<FormProp> = (prop) => {
     description: "",
     reference: "",
     size: "Landscape",
-    width: 0,
-    height: 0
+    width: 512,
+    height: 512
   })
 
 
@@ -187,9 +187,9 @@ const Form: Component<FormProp> = (prop) => {
       <Show when={form().size === "Custom"}>
         <p class="text-gray-400">Please fill up the width and height for the size of the art. (pixel)</p>
         <p>Width: <span class="text-red-400">*</span></p>
-        <Input name="width" type="number" onChange={updateFormField("width")} value="0"/>
+        <Input name="width" type="number" onChange={updateFormField("width")} value={form().width.toString()}/>
         <p>Height: <span class="text-red-400">*</span></p>
-        <Input name="height" type="number" onChange={updateFormField("height")} value="0"/>
+        <Input name="height" type="number" onChange={updateFormField("height")} value={form().height.toString()}/>
       </Show>
     </Label>
     <Label>
