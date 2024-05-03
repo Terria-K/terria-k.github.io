@@ -14,11 +14,10 @@ type FormProp = {
 
 
 const Form: Component<FormProp> = (prop) => {
-  const [platform, setPlatform] = createSignal("Email");
   const [response, setResponse] = createSignal<string|undefined>(undefined);
   const [responseColor, setResponseColor] = createSignal("text-red-500");
   const [form, setForm] = createSignal<FormField>({
-    platform: platform(),
+    platform: "Email",
     contactname: "",
     title: "",
     description: "",
@@ -38,7 +37,6 @@ const Form: Component<FormProp> = (prop) => {
   }
 
   function onPlatformChange(event: Event & { currentTarget: HTMLSelectElement; target: HTMLSelectElement; }) {
-    setPlatform(event.target.value);
     setForm({
       ...form(),
       platform: event.target.value
@@ -125,15 +123,15 @@ const Form: Component<FormProp> = (prop) => {
     <Label>
       Platform: *
       <select name="platform" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" 
-        onChange={onPlatformChange} value={platform()}>
+        onChange={onPlatformChange} value={form().platform}>
         <option class="bg-midnight-light" value="Email">Email</option>
         <option class="bg-midnight-light" value="Discord">Discord</option>
       </select>
     </Label>
     <Label>
-      {platform()}: *
+      {form().platform}: *
       <Input name="contactname" type="text" onChange={updateFormField("contactname")} value={form().contactname} />
-      {platform() === "Discord"
+      {form().platform === "Discord"
           ? <p class="text-gray-400">If you're on Discord, please make yourself available for me to able to contact you, or join in my Discord Server in the icon below.</p>
           : null
       }
