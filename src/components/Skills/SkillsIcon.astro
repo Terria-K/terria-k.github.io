@@ -2,11 +2,43 @@
 import { Icon } from "astro-icon/components"
 
 interface Props {
-  name: string
+  name: string,
+  iconName: string,
 }
 
 const prop: Props = Astro.props;
 
 ---
 
-<Icon class="w-12 h-12 md:w-16 md:h-16" name=`skill-icons:${prop.name}`/>
+<span data-tooltip={prop.name}>
+  <Icon class="w-12 h-12 md:w-16 md:h-16" name=`skill-icons:${prop.iconName}`/>
+</span>
+
+<style>
+  [data-tooltip] {
+    position: relative;
+    border-bottom: 1px dashed #000;
+  }
+
+  [data-tooltip]::after {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    content: attr(data-tooltip);
+    left: 0;
+    top: calc(30% + 10px);
+    border-radius: 3px;
+    box-shadow: 0 0 5px 2px rgba(51, 51, 51, 0.6);
+    background-color: rgb(49, 49, 49);
+    z-index: 10;
+    padding: 8px;
+    transform: translateY(-20px);
+    transition: all 150ms cubic-bezier(.25, .8, .25, 1);
+  }
+
+  [data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+    transition-duration: 300ms;
+  }
+</style>
