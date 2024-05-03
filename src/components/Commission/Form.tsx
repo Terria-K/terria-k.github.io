@@ -51,10 +51,10 @@ const Form: Component<FormProp> = (prop) => {
 
     const platform = formParam.platform;
 
-    const contactName = formParam.contactname;
-    const title = formParam.title;
-    const description = formParam.description;
-    let reference = formParam.reference;
+    const contactName = formParam.contactname.trim();
+    const title = formParam.title.trim();
+    const description = formParam.description.trim();
+    const reference = formParam.reference.trim();
 
     if (contactName === "") {
       setResponse("Please provide your contact name.");
@@ -72,10 +72,6 @@ const Form: Component<FormProp> = (prop) => {
       setResponse("Please provide the details of the art.");
       setResponseColor("text-red-500");
       return;
-    }
-    
-    if (!reference) {
-      reference = "";
     }
 
     const json = {
@@ -137,6 +133,10 @@ const Form: Component<FormProp> = (prop) => {
     <Label>
       {platform()}: *
       <Input name="contactname" type="text" onChange={updateFormField("contactname")} value={form().contactname} />
+      {platform() === "Discord"
+          ? <p class="text-gray-400">If you're on Discord, please make yourself available for me to able to contact you, or join in my Discord Server in the icon below.</p>
+          : null
+      }
     </Label>
     <p class="text-white font-bold text-2xl">Request</p>
     <Label>
