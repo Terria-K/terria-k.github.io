@@ -9,18 +9,18 @@ const gamesCollection = defineCollection({
   })
 });
 
-export type GamesCollection = {
-  id: string;
-  slug: string;
-  body: string;
-  collection: "games";
-  data: {
-    title: string,
-    description: string,
-    image: ImageMetadata
-  }
-} & { render(): Render[".md"]};
+const postsCollection = defineCollection({
+  type: 'content',
+  schema: ({image}) => z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.string(),
+    tags: z.array(z.string()).optional(),
+    image: image()
+  })
+})
 
 export const collections = {
+  'posts': postsCollection,
   'games': gamesCollection
 };

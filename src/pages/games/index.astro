@@ -3,9 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 
 import GamesPost from '../../components/Games/GamesPost.astro';
 import { getCollection } from 'astro:content';
-import type { GamesCollection } from "../../content/config.ts";
 
-const games = await getCollection("games") as GamesCollection[];
+const games = await getCollection("games");
 ---
 
 <Layout>

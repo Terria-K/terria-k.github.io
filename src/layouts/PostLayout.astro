@@ -1,65 +1,34 @@
 ---
-import { stringToDateString } from "../utils/date";
-import placeholderImage from "../assets/blogs/placeholder.webp";
-import { Icon } from 'astro-icon/components';
 import Footer from '../components/Footer/Footer.astro';
 import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
-import { Image } from 'astro:assets';
-import Tag from "../components/Blog/Tag.astro";
 
-const fs = await import("path");
+interface Props {
+  description: string,
+  title: string,
+  image: string 
+}
 
-const { frontmatter } = Astro.props;
-
-const dateString = stringToDateString(frontmatter.date);
-const images = import.meta.glob<{ default: ImageMetadata; }>(`/src/assets/blogs/*.{png,webp}`);
-const image = images["/src/assets/blogs/" + fs.basename(frontmatter.url!) + ".webp"];
-
-const imageSrc = (await image()).default.src;
+const props = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={frontmatter.description} />
+		<meta name="description" content={props.description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-    <meta property="og:title" content={`Teuria's Blog - ${frontmatter.title}`} />       
-    <meta property="og:description" content={frontmatter.description} />
-    <meta property="og:image" content={imageSrc}/>
-		<title>{`Teuria's Blog - ${frontmatter.title}`}</title>
+    <meta property="og:title" content={`Teuria's Blog - ${props.title}`} />       
+    <meta property="og:description" content={props.description} />
+    <meta property="og:image" content={props.image}/>
+		<title>{`Teuria's Blog - ${props.title}`}</title>
 	</head>
 
 	<body class="text-white h-full">
 		<Navbar/>
-    <div class="bg-midnight-blue py-4">
-      <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
-        <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
-        <p>
-          Blogs
-        </p>
-      </a>
-    </div>
-
-    <div class="mx-auto max-w-[60rem] px-10 grid gap-4 bg-gray-800 py-8">
-      <Tag tag={frontmatter.tags}/>
-      <h2 class="font-bold text-xl md:text-2xl text-gray-400">{dateString}</h2>
-      <h1 class="text-2xl md:text-4xl">{frontmatter.title}</h1>
-      <div class="flex justify-center">
-        {image
-          ? <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={image()} loading="eager"/>
-          : <Image class="rounded-2xl object-cover" alt=`blog-post-${frontmatter.title}` src={placeholderImage}
-            width="1024" height="640" loading="eager"/>
-        }
-      </div>
-      
-      <div class="md:text-lg mt-4 min-h-screen md:min-h-[50vh] mb-4 font-sans">
-        <slot />
-      </div>
-    </div>
+      <slot/>
 		<Footer/>
 	</body>
 

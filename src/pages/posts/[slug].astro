@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from 'astro/components/Image.astro';
+import Tag from '../../components/Blog/Tag.astro';
+import PostLayout from "../../layouts/PostLayout.astro";
+import { getCollection } from 'astro:content';
+import { stringToDateString } from '../../utils/date';
+
+export async function getStaticPaths() {
+  const blogCollections = await getCollection("posts");
+
+  return blogCollections.map(entry => {
+    return {
+      params: {slug: entry.slug},
+      props: {
+        entry
+      }
+    }
+  });
+}
+
+import Link from "../../components/Markdown/Link.astro";
+import Header from "../../components/Markdown/Header.astro";
+
+export const components = { a: Link, h1: Header }
+
+const { entry } = Astro.props;
+const { Content } = await entry.render()
+---
+
+<PostLayout title={entry.data.title} description={entry.data.description} image={entry.data.image.src}>
+  <div class="bg-midnight-blue py-4">
+    <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
+      <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
+      <p>
+        Blogs
+      </p>
+    </a>
+  </div>
+
+  <div class="mx-auto max-w-[60rem] px-10 grid gap-4 bg-gray-800 py-8">
+    {
+      entry.data.tags ? <Tag tag={entry.data.tags}/> : null
+    }
+    <h2 class="font-bold text-xl md:text-2xl text-gray-400">{stringToDateString(entry.data.date)}</h2>
+    <h1 class="text-2xl md:text-4xl">{entry.data.title}</h1>
+    <div class="flex justify-center">
+      <Image class="rounded-2xl object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
+    </div>
+    
+    <div class="md:text-lg mt-4 min-h-screen md:min-h-[50vh] mb-4 font-sans">
+      <Content {components}/>
+    </div>
+  </div>
+</PostLayout>

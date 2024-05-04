@@ -3,38 +3,35 @@ import { Image } from "astro:assets"; import placeholderImage from "../../assets
 import Tag from "./Tag.astro";
 
 interface Props {
-    images: Record<string, () => Promise<{default: ImageMetadata}>>
     title: string,
     description: string,
     date: string,
     url: string | undefined,
-    image: string,
-    tag: string,
+    image: ImageMetadata,
+    tag: string[] | undefined,
     shouldLazy: boolean
 }
 
-type ImageRecord = Record<string, () => Promise<{default: ImageMetadata}>> | undefined;
-
 const prop = Astro.props;
-const image: ImageRecord = prop.images[prop.image] as unknown as ImageRecord;
-
 ---
 <div class="w-full rounded-lg p-4 lg:grid-cols-2 items-center grid group font-slab">
-  <a href={prop.url}>
+  <a href={`posts/${prop.url}`}>
     {
-      (image
-        ? <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={prop.images[prop.image]()} loading={prop.shouldLazy ? "lazy" : "eager"}/>
-        : <Image class="rounded-2xl object-cover" alt=`blog-post-${prop.title}` src={placeholderImage}
+      (prop.image
+        ? <Image class="rounded-2xl object-cover" alt={`blog-post-${prop.title}`} src={prop.image} loading={prop.shouldLazy ? "lazy" : "eager"}/>
+        : <Image class="rounded-2xl object-cover" alt={`blog-post-${prop.title}`} src={placeholderImage}
           width="1024" height="640" loading={prop.shouldLazy ? "lazy" : "eager"}/>
       )
     }
   </a>
 
   <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-2">
-    <Tag tag={prop.tag}/>
+    {
+      prop.tag ? <Tag tag={prop.tag}/> : null
+    }
 
     <h2 class="font-bold text-gray-500">{prop.date}</h2>
-    <a href={prop.url} class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl mt-2">{prop.title}</a>
+    <a href={`posts/${prop.url}`} class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl mt-2">{prop.title}</a>
     <p class="text-xl md:text-base lg:text-lg mt-4">{prop.description}</p>
   </div>
 </div>
