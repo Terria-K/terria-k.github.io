@@ -1,9 +1,21 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+import GamesPost from '../../components/Games/GamesPost.astro';
+import { getCollection } from 'astro:content';
+import type { GamesCollection } from "../../content/config.ts";
+
+const games = await getCollection("games") as GamesCollection[];
 ---
 
 <Layout>
-  <p class="text-white">Work In Progress</p>
+  <div class="mx-auto max-w-[80rem] text-white py-12 space-y-4">
+    <ul class="grid md:gap-4">
+      {
+        games.map(x => <GamesPost name={x.data.title} description={x.data.description} image={x.data.image} slug={x.slug}/>)
+      }
+    </ul>
+  </div>
 </Layout>
 
 

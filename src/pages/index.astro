@@ -41,20 +41,20 @@ import Art from '../components/Arts/Art.astro';
     <Skills/>
     <Art/>
   </header>
-</Layout>
 
-<style>
-  .bg-hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../assets/webp_arts/2023/12-31-2023|Relentless_Night.png.webp");
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
-
-  @media (min-width: 768px) {
+  <style>
     .bg-hero {
-      background-attachment: fixed;   
-      background-position: 0% 150%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../assets/webp_arts/2023/12-31-2023|Relentless_Night.png.webp");
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
     }
-  }
-</style>
+
+    @media (min-width: 768px) {
+      .bg-hero {
+        background-attachment: fixed;   
+        background-position: 0% 150%;
+      }
+    }
+  </style>
+</Layout>

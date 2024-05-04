@@ -25,6 +25,7 @@ const prop = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{`Teuria's Website - ${prop.title}`}</title>
 	</head>
+	<GlobalStyleLayout/>
 	<body>
         <meta name="theme_color" content="#01f1fe"/>
         <meta name="twitter:title" content={prop.title}/>
@@ -44,4 +45,3 @@ const prop = Astro.props;
 		<Footer/>
 	</body>
 </html>
-<GlobalStyleLayout/>

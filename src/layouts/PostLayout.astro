@@ -32,6 +32,7 @@ const imageSrc = (await image()).default.src;
     <meta property="og:image" content={imageSrc}/>
 		<title>{`Teuria's Blog - ${frontmatter.title}`}</title>
 	</head>
+
 	<body class="text-white h-full">
 		<Navbar/>
     <div class="bg-midnight-blue py-4">
@@ -61,5 +62,6 @@ const imageSrc = (await image()).default.src;
     </div>
 		<Footer/>
 	</body>
+
+  <GlobalStyleLayout/>
 </html>
-<GlobalStyleLayout/>

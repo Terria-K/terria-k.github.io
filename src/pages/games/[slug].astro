@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import type { GamesCollection } from '../../content/config';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const gamesCollection = await getCollection("games") as GamesCollection[];
+
+  return gamesCollection.map(x => {
+    return {
+      params: { slug: x.slug }
+    }
+  })
+}
+---
+
+<Layout>
+
+</Layout>
