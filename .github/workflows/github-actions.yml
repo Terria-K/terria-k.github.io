@@ -19,7 +19,8 @@ permissions:
 # Environment variables available to all jobs and steps in this workflow
 env:
   SPICA: ${{ secrets.SPICA }}
-  
+  DISABLED: ${{ secrets.DISABLED }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,7 +32,7 @@ jobs:
       - name: Create ENV file
         run: |
           touch .env
-          echo SPICA=${{ secrets.SPICA }} >> .env
+          echo SPICA=${{ secrets.SPICA }}\nDISABLED=${{ secrets.DISABLED }} >> .env
 
       - name: Install, build, and upload your site
         uses: withastro/action@v2

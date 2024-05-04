@@ -12,7 +12,8 @@ type FormField = {
 }
 
 type FormProp = {
-  url: string
+  url: string,
+  disabled: boolean
 }
 
 
@@ -202,7 +203,9 @@ const Form: Component<FormProp> = (prop) => {
       You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
     </p>
     <div>
-      <input class="hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" type="submit" value="Order"/>
+      <input disabled={prop.disabled} class="disabled:bg-gray-500 hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
+        type="submit" 
+        value={prop.disabled ? "Closed" : "Order"}/>
     </div>
 
     <Show when={response()}>
