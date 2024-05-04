@@ -15,7 +15,7 @@ interface Props {
 const prop = Astro.props;
 ---
 <div class="w-full rounded-lg p-4 lg:grid-cols-2 items-center grid group font-slab">
-  <a href={`posts/${prop.url}`}>
+  <a href={`/posts/${prop.url}`}>
     {
       (prop.image
         ? <Image class="rounded-2xl object-cover" alt={`blog-post-${prop.title}`} src={prop.image} loading={prop.shouldLazy ? "lazy" : "eager"}/>
@@ -31,7 +31,7 @@ const prop = Astro.props;
     }
 
     <h2 class="font-bold text-gray-500">{prop.date}</h2>
-    <a href={`posts/${prop.url}`} class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl mt-2">{prop.title}</a>
+    <a href={`/posts/${prop.url}`} class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl mt-2">{prop.title}</a>
     <p class="text-xl md:text-base lg:text-lg mt-4">{prop.description}</p>
   </div>
 </div>
