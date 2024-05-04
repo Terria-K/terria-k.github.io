@@ -1,4 +1,4 @@
-import { defineCollection, z, type Render } from "astro:content";
+import { defineCollection, z } from "astro:content";
 
 const gamesCollection = defineCollection({
   type: 'content',
@@ -18,7 +18,7 @@ const postsCollection = defineCollection({
     tags: z.array(z.string()).optional(),
     image: image()
   })
-})
+});
 
 export const collections = {
   'posts': postsCollection,

@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import GamesPost from '../../components/Games/GamesPost.astro';
 import { getCollection } from 'astro:content';
 
-const games = await getCollection("games");
+const games = await getCollection("games") as any[];
 ---
 
 <Layout>
