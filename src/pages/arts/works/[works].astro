@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   const artworkMds: Record<string, MDXInstance<Record<string, any>>[]> = {
     "2024": await Astro.glob("/src/artwork/2024/*.mdx"),
     "2023": await Astro.glob("/src/artwork/2023/*.mdx"),
-    // "2022": await Astro.glob("/src/artwork/2022/*.md"),
+    "2022": await Astro.glob("/src/artwork/2022/*.mdx"),
     "2021": await Astro.glob("/src/artwork/2021/*.mdx"),
     // "2020": await Astro.glob("/src/artwork/2020/*.md"),
     // "2019": await Astro.glob("/src/artwork/2019/*.md"),
