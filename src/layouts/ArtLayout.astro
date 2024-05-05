@@ -2,9 +2,7 @@
 import YearButton from "../components/Arts/YearButton.astro"
 import Image from "astro/components/Image.astro";
 import Layout from "./Layout.astro"
-
 import fs from 'path';
-import { sha256 } from "../utils/sha256";
 
 interface Props {
   year: string,
@@ -34,10 +32,12 @@ const prop = Astro.props;
         {
           prop.pictures.reverse().map(async (x, i) => {
             const loadType = i > 17 ? "lazy" : "eager";
-            const artworkName = await sha256(fs.basename(x.src).split('.')[0]);
+            const baseName = fs.basename(x.src);
+            const artworkName = baseName.split('.')[0].substring(11).replaceAll("_", " ");
+            const year = baseName.split("-")[2].substring(0, 4);
             return (
               <li class="list-none h-[300px] cursor-pointer relative">
-                <a href={`/arts/works/${artworkName}`}> 
+                <a href={`/arts/${year}/${artworkName}`}> 
                   <Image class="object-cover w-full h-full align-middle rounded" src={x} alt={artworkName} format="webp" loading={loadType}/>
                 </a>
               </li>

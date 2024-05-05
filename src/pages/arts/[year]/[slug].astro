@@ -2,9 +2,7 @@
 import Link from "../../../components/Markdown/Link.astro";
 import Header from "../../../components/Markdown/Header.astro";
 import fs from 'path';
-import { sha256 } from '../../../utils/sha256';
 import { Image } from 'astro:assets';
-import { stringToDateString } from '../../../utils/date';
 import type { MDXInstance } from 'astro';
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import ArtPreviewLayout from '../../../layouts/ArtPreviewLayout.astro';
@@ -29,7 +27,7 @@ export async function getStaticPaths() {
     const dateName = baseName.split('.')[0];
     let name = dateName.substring(11).replaceAll("_", " ");
     const date = new Date(dateName.substring(0, 10));
-    const works = await sha256(dateName);
+    const slug = name;
     const year = baseName.split("-")[2].substring(0, 4);
     let content: AstroComponentFactory | undefined;
     let description = "";
@@ -53,8 +51,8 @@ export async function getStaticPaths() {
     }
 
     paths.push({
-      params: { works },
-      props: { picture, name, date, works, Content: content, description, year }
+      params: { year, slug },
+      props: { picture, name, date, works: slug, Content: content, description, year: year }
     })
   }
 

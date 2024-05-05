@@ -1,5 +1,5 @@
 ---
-import ArtLayout from "../../../layouts/ArtLayout.astro";
+import ArtLayout from "../../layouts/ArtLayout.astro";
 
 export async function getStaticPaths() {
   const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));

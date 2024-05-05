@@ -7,6 +7,6 @@ interface Props {
 const prop = Astro.props;
 ---
 
-<a href=`/arts/year/${prop.year}` class="w-full">
+<a href=`/arts/${prop.year}` class="w-full">
   <button class=`w-full hover:bg-midnight-light duration-300 py-4 rounded-lg font-bold text-3xl ${prop.selected ? "bg-midnight-light" : ""}`>{prop.year}</button>
 </a>
