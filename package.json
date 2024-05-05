@@ -17,7 +17,7 @@
     "@fontsource-variable/roboto-slab": "^5.0.20",
     "@fontsource/cantarell": "^5.0.13",
     "@fontsource/fira-sans": "^5.0.20",
-    "astro": "^4.6.2",
+    "astro": "^4.7.1",
     "astro-icon": "^1.1.0",
     "astro-meta-tags": "^0.2.2",
     "sharp": "^0.33.3",

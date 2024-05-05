@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("posts") as any[];
+  const allPosts = await getCollection("posts");
 
   const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x => x).flat())];
 
