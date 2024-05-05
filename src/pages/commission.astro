@@ -4,17 +4,11 @@ import Layout from "../layouts/Layout.astro";
 
 const url = import.meta.env.SPICA;
 const disabled: string = import.meta.env.DISABLED ?? "false";
-
-function stringToBoolean(boolean: string) {
-  if (boolean === "true")
-    return true;
-  return false;
-}
 ---
 
 
 <Layout>
   <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
-    <CommisionForm client:load {url} disabled={stringToBoolean(disabled)}/>
+    <CommisionForm client:load {url} disabled={disabled === "true" ? true : false}/>
   </div>
 </Layout>
