@@ -45,10 +45,8 @@ const { posts } = Astro.props;
           // @ts-ignore
           return (new Date(y.data.date) + new Date(x.data.date));
         }).map((x, i) => {
-          const dateString = stringToDateString(x.data.date);
-
           return <li class="list-none">
-            <BlogPost tag={x.data.tags} shouldLazy={i > 1} image={x.data.image} date={dateString} 
+            <BlogPost tag={x.data.tags} shouldLazy={i > 1} image={x.data.image} date={x.data.date} 
             title={x.data.title} description={x.data.description} url={x.slug}/>
           </li>
         }

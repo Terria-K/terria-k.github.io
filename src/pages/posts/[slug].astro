@@ -21,6 +21,7 @@ export async function getStaticPaths() {
 
 import Link from "../../components/Markdown/Link.astro";
 import Header from "../../components/Markdown/Header.astro";
+import FormattedDate from '../../components/FormattedDate.astro';
 
 export const components = { a: Link, h1: Header }
 
@@ -42,7 +43,9 @@ const { Content } = await entry.render()
     {
       entry.data.tags ? <Tag tag={entry.data.tags}/> : null
     }
-    <h2 class="font-bold text-xl md:text-2xl text-gray-400">{stringToDateString(entry.data.date)}</h2>
+    <h2 class="font-bold text-xl md:text-2xl text-gray-400">
+      <FormattedDate date={entry.data.date}/>
+    </h2>
     <h1 class="text-2xl md:text-4xl">{entry.data.title}</h1>
     <div class="flex justify-center">
       <Image class="rounded-2xl object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>

@@ -8,6 +8,7 @@ import { stringToDateString } from '../../../utils/date';
 import type { MDXInstance } from 'astro';
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import ArtPreviewLayout from '../../../layouts/ArtPreviewLayout.astro';
+import FormattedDate from "../../../components/FormattedDate.astro";
 
 export async function getStaticPaths() {
   const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
@@ -73,7 +74,9 @@ const { picture, name, date, Content, description } = Astro.props;
       </div>
       <div class="text-white">
         <p class="md:mt-10 font-bold text-2xl lg:text-3xl">{name}</p>
-        <p class="text-gray-400 text-2xl lg:text-lg">{stringToDateString(date.toString())}</p>
+        <p class="text-gray-400 text-2xl lg:text-lg">
+          <FormattedDate {date}/>
+        </p>
         <p class="py-4 text-gray-300 text-2xl lg:text-lg">{description}</p>
           {
             Content 

@@ -32,7 +32,8 @@ jobs:
       - name: Create ENV file
         run: |
           touch .env
-          echo SPICA=${{ secrets.SPICA }}\nDISABLED=${{ secrets.DISABLED }} >> .env
+          echo SPICA=${{ secrets.SPICA }} >> .env
+          echo DISABLED=${{ secrets.DISABLED }} >> .env
 
       - name: Install, build, and upload your site
         uses: withastro/action@v2

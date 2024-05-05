@@ -1,11 +1,12 @@
 ---
 import { Image } from "astro:assets"; import placeholderImage from "../../assets/blogs/placeholder.webp";
 import Tag from "./Tag.astro";
+import FormattedDate from "../FormattedDate.astro";
 
 interface Props {
     title: string,
     description: string,
-    date: string,
+    date: Date,
     url: string | undefined,
     image: ImageMetadata,
     tag: string[] | undefined,
@@ -30,7 +31,10 @@ const prop = Astro.props;
       prop.tag ? <Tag tag={prop.tag}/> : null
     }
 
-    <h2 class="font-bold text-gray-500">{prop.date}</h2>
+    <h2 class="font-bold text-gray-500">
+      <FormattedDate date={prop.date}/>
+    </h2>
+
     <a href={`/posts/${prop.url}`} class="text-4xl md:text-2xl lg:text-3xl xl:text-4xl mt-2">{prop.title}</a>
     <p class="text-xl md:text-base lg:text-lg mt-4">{prop.description}</p>
   </div>

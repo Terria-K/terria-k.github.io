@@ -1,7 +1,7 @@
 ---
 title: The creation of my first personal website
 description: A first blog that talks about the creation of this website. It is my first time doing this kind of thing.
-date: 04/20/24
+date: 2024-04-20
 image: /src/assets/blogs/creation_of_website.webp
 ---
 
