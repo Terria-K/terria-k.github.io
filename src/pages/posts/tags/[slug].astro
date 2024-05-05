@@ -1,6 +1,5 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import { stringToDateString } from "../../../utils/date";
 import BlogPost from "../../../components/Blog/BlogPost.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
@@ -10,22 +9,22 @@ export async function getStaticPaths() {
 
   const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x => x).flat())];
 
-  return uniqueTags.map((tag) => {
+  return uniqueTags.map((slug) => {
     const filteredPosts = allPosts.filter((post) => { 
       if (!post.data.tags)
         return false;
-      if (!tag)
+      if (!slug)
         return false;
-      return post.data.tags.includes(tag);
+      return post.data.tags.includes(slug);
     });
     return {
-      params: { tag },
+      params: { slug },
       props: { posts: filteredPosts }
     }
   });
 }
 
-const { tag } = Astro.params;
+const { slug: tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
@@ -35,7 +34,7 @@ const { posts } = Astro.props;
       <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center text-white">
         <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
         <p>
-          {tag}'s Posts
+          {tag} Posts
         </p>
       </a>
     </div>
