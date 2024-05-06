@@ -58,7 +58,11 @@ const Form: Component<FormProp> = (prop) => {
     const height = formParam.height;
 
     if (contactName === "") {
-      setResponse("Please provide your contact name.");
+      if (platform === "Discord") {
+        setResponse("Please provide your Discord username or your Discord ID.");
+      } else {
+        setResponse("Please provide your contact email.");
+      }
       setResponseColor("text-red-500");
       return;
     }
