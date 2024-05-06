@@ -15,8 +15,10 @@ const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.w
       {
         pictures 
           ? pictures.map(async x => {
-            const artworkName = await sha256(fs.basename(x.src).split('.')[0]);
-            return <a href={`/arts/works/${artworkName}`} class="max-w-80 h-100"> 
+            const baseName = fs.basename(x.src);
+            const artworkName = baseName.split('.')[0].substring(11).replaceAll("_", " ");
+            const year = baseName.split("-")[2].substring(0, 4);
+            return <a href={`/arts/${year}/${artworkName}`} class="max-w-80 h-100"> 
                 <Image src={x} format="webp" alt={fs.basename(x.src).split('.')[0]} loading="lazy"/>
               </a>
           }) 
