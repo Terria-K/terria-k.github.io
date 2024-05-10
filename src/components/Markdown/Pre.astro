@@ -8,15 +8,15 @@ type Language = {
 
 const customIcon = new Map<string, Language>([
   ["html", {
-    icon: "tabler:brand-html5",
+    icon: "vscode-icons:file-type-html",
     name: "HTML"
   }],
   ["css", {
-    icon: "tabler:brand-css",
+    icon: "vscode-icons:file-type-css",
     name: "CSS"
   }],
   ["javascript", {
-    icon: "tabler:brand-javascript",
+    icon: "vscode-icons:file-type-js",
     name: "JavaScript"
   }],
 ]);
@@ -33,7 +33,7 @@ const dataLanguage: string = props['data-language'];
         <Icon name={`${customIcon.get(dataLanguage)?.icon}`}/>
         <>{customIcon.get(dataLanguage)?.name}</>
                                    :
-        <Icon name={`tabler:${dataLanguage}`}/>
+        <Icon name={`vscode-icons:file-type-${dataLanguage}`}/>
         <>{dataLanguage.toUpperCase()}</>
     }
   </p>
