@@ -1,0 +1,43 @@
+---
+import { Icon } from "astro-icon/components";
+
+type Language = {
+  icon: string,
+  name: string
+};
+
+const customIcon = new Map<string, Language>([
+  ["html", {
+    icon: "tabler:brand-html5",
+    name: "HTML"
+  }],
+  ["css", {
+    icon: "tabler:brand-css",
+    name: "CSS"
+  }],
+  ["javascript", {
+    icon: "tabler:brand-javascript",
+    name: "JavaScript"
+  }],
+]);
+
+const props = Astro.props;
+
+const dataLanguage: string = props['data-language'];
+---
+
+<div class="px-2 py-2 pb-4 bg-midnight my-4 min-w-0">
+  <p class="flex gap-2 items-center text-2xl">
+    {
+      customIcon.has(dataLanguage) ? 
+        <Icon name={`${customIcon.get(dataLanguage)?.icon}`}/>
+        <>{customIcon.get(dataLanguage)?.name}</>
+                                   :
+        <Icon name={`tabler:${dataLanguage}`}/>
+        <>{dataLanguage.toUpperCase()}</>
+    }
+  </p>
+  <div class="px-2 overflow-x-auto w-full">
+    <pre class="overflow-x-auto text-sm md:text-md" {...props}><slot/></pre>
+  </div>
+</div>

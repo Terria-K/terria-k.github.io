@@ -20,9 +20,11 @@ export async function getStaticPaths() {
 
 import Link from "../../components/Markdown/Link.astro";
 import Header from "../../components/Markdown/Header.astro";
+import Code from "../../components/Markdown/Code.astro";
+import Pre from "../../components/Markdown/Pre.astro";
 import FormattedDate from '../../components/FormattedDate.astro';
 
-export const components = { a: Link, h1: Header }
+export const components = { a: Link, h1: Header, code: Code, pre: Pre }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render()
@@ -38,20 +40,19 @@ const { Content } = await entry.render()
     </a>
   </div>
 
-  <div class="mx-auto max-w-[60rem] px-10 grid gap-4 bg-gray-800 py-8">
+  <div class="md:text-lg mx-auto w-[70rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 bg-gray-800 py-8 font-sans">
+
     {
       entry.data.tags ? <Tag tag={entry.data.tags}/> : null
     }
-    <h2 class="font-bold text-xl md:text-2xl text-gray-400">
+    <h2 class="font-bold text-xl md:text-2xl text-gray-400 font-cantarell">
       <FormattedDate date={entry.data.date}/>
     </h2>
-    <h1 class="text-2xl md:text-4xl">{entry.data.title}</h1>
+    <h1 class="text-2xl md:text-4xl font-cantarell">{entry.data.title}</h1>
     <div class="flex justify-center">
       <Image class="rounded-2xl object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
     </div>
     
-    <div class="md:text-lg mt-4 min-h-screen md:min-h-[50vh] mb-4 font-sans">
-      <Content {components}/>
-    </div>
+    <Content {components}/>
   </div>
 </PostLayout>

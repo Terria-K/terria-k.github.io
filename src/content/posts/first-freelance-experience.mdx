@@ -1,0 +1,186 @@
+---
+title: First Freelance Experience
+description: It's fun, yet it can be tiring. Why would I even use vanilla?
+date: 2024-05-10
+image: /src/assets/blogs/first-freelance-experience.webp
+---
+
+As a "web" developer, it is fun to make static website where you don't need to change a lot of states and it is less stress to work with.
+And this makes it more fun with frameworks at all like React, Svelte, Astro, etc.. I love using framework and I cannot seem to let go with at least
+one of them whenever I want to create a website. It is just make things easy and composable. I don't need to repeat myself doing the same thing,
+over and over again in one html page per page. Goodness, I don't want to experience it anymore. But what if I am about to experience it again?
+Well, I actually did with one project request that I assume it requires to be vanilla but not really.
+
+Before I tell you about what happen, let talk about how did I get there in the first place.
+
+# How did I get there?
+Yesterday, I got a dm from one of my classmate in school. Well, I ignore it for a second because I am doing my laundry for my upcoming trip somewhere
+else. After that, I go back to it and he's asking something I didn't know, because he just said, "Hey Terria, I have a question?". So I answer it and wait
+for reply. And then my friend dm me something about a project work. He asked me if I wanted to do some project work which will pay you if you do it.
+So, I think for a second and think if I have something to do in this week, but then, my classmate said about the project as well, which it seems like
+they tell my friend about it, so my friend can tell me about it. My friend said that they already had a html, so I assume I will just do the functionality
+of the website, and my friend answers "Yes".
+
+# The Project
+So back to my classmate and they talk about the project that I will going to work with and they gave me a simple design in **Canva**. "It seems simple enough",
+as I said who have no idea what about to come next. The project is simple, it is like a trading app that looks like a dating app where you trade items in it,
+and get a match from other who also wants to trade with you. The project is in prototype, so any hardcoded functionality is fine. So, the project deadline is around 2 days left 
+and I need to create the before the deadline. Well sure, in the **Canva**, there's only 6 slides, with the 3 slides being duplicated with different 
+elements because it suppose to be in one page anyway. So the framework of choice I use, is.... **None**, as in no framework at all. **HTML, CSS and Javascript** only, 
+because I assume that they probably need the file, so I just decide that, I guess? And this is the dumbest decision I've made so far in this project.
+
+# Project Begins
+So, the project begins, and here I am absolutely finishing the Login page so quickly, because this is the most simplest page to work anyway. 
+![login](/src/assets/blogs/first-freelance-experience/login.webp)
+And not even an hour and I created the homepage pretty quickly too. 
+![homepage](/src/assets/blogs/first-freelance-experience/homepage.webp)
+But then I noticed, one of the member in the project is adding new slides in **Canva** which adds more
+pages and functionality needed for website and now I am in fear. Because I am not using framework, so the pain of duplicating elements are about to come. 
+But I did not complain at all and proceeds to continue and do other page.
+
+# The duplication begins
+Well, here we are, the code duplication now begins. I shouldn't have decided to not use a framework and might just deploy it to my website.
+The website has a navigation bar, which should exists every pages, except for the login page eventually. The navigation bar has a dialog to it with three unique
+items that being a trade request, an inbox, and more options. 
+
+So, what was the code looks like then?
+
+```html
+<nav class="shadow-xl p-2">
+  <div class="flex gap-4 justify-between">
+    <a href="./index.html" class="w-20">
+      <img src="../assets/bartree.png"/>
+    </a>
+    <div class="flex gap-4 items-center select-none">
+      <button id="btn-tradelist">
+        <img class="w-8 h-8" src="../assets/trade.png"/>
+      </button>
+      <button id="btn-mail">
+        <img class="w-8 h-8" src="../assets/mail.png"/>
+      </button>
+      <button id="btn-option">
+        <img class="w-8 h-8" src="../assets/cog.png"/>
+      </button>
+    </div>
+  </div>
+</nav>
+```
+
+It doesn't really not that bad right? It seems doable to copy it every pages. Also, notice that I am using [Tailwind](https://tailwindcss.com/), I am just actually using the CDN of it
+which discourage by [Tailwind](https://tailwindcss.com/) itself but I don't care, I just can't do CSS anymore without it.
+So, let's try adding the dialog for more options.
+
+```html
+<div class="hidden" id="trade-dialog">
+  <div class="bg-white p-4 rounded-xl shadow-xl">
+    <p class="text-2xl text-center font-bold">Trade Request</p>
+    <ul class="flex flex-col gap-2">
+      <li id="blender" class="flex items-center justify-between gap-2">
+        <div class="flex gap-2">
+          <div class="w-8 h-8 bg-gray-500 rounded-full"></div>
+          <div class="flex flex-col">
+            <p>Sewing Machine</p>
+            <p class="text-gray-600">Trading for Blender</p>
+          </div>
+        </div>
+
+        <div class="flex gap-2">
+          <button id="btn-blender-remove" class="cursor-pointer w-8 h-8 bg-red-500 rounded-full"></button>
+          <div id="btn-blender-add" class="cursor-pointer w-8 h-8 bg-green-500 rounded-full"></div>
+        </div>
+      </li>
+      <!-- This <li> item repeates 3 times -->
+    </ul>
+  </div>
+</div>
+
+<div class="hidden" id="mail-dialog">
+  <div class="bg-white p-5 rounded-xl max-h-[30rem] overflow-auto shadow-xl">
+    <p class="text-green-600 mb-4 font-bold text-lg">Recent Matches</p>
+      <ul class="flex flex-col gap-2">
+        <li class="border-2 border-black rounded-full px-2 py-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-cyan-400 rounded-full"></div>
+            Hello, is this still available?
+          </div>
+        </li>
+        <!-- This <li> item repeates 6 times -->
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+Wait, this is so long, will I ever do this on every page? That's what made me think why I did not used framework for this. In every page of the website
+this is what the navigation bar suppose to look like, and it should have a same functionality which might then should separate them into a component.
+But I don't use framework, what else am I suppose to use?
+
+One thing I did not know of is by creating a custom element via JavaScript, but its too late for me to know. So I ended up repeating myself everytime I want to
+create my page, which everytime that I had to create pages in this project, it makes me rest for a couple hours before doing it. 
+
+But then, I had to do JavaScript for this to work properly, here is what the JavaScript looks like
+
+```javascript
+document.getElementById("btn-option").addEventListener("click", onOptions);
+document.getElementById("btn-mail").addEventListener("click", onMail);
+document.getElementById("btn-tradelist").addEventListener("click", onTrade);
+
+const option = document.getElementById("option-dialog");
+const mail = document.getElementById("mail-dialog");
+const trade = document.getElementById("trade-dialog");
+
+function onMail(ev) {
+    if (mail.className === "z-20") {
+        mail.className = "hidden";
+    } else {
+        mail.className = "z-20";
+    }
+    option.className = "hidden";
+    trade.className = "hidden";
+}
+
+function onOptions(ev) {
+    if (option.className === "z-20") {
+        option.className = "hidden";
+    } else {
+        option.className = "z-20";
+    }
+    mail.className = "hidden";
+    trade.className = "hidden";
+}
+
+function onTrade(ev) {
+    if (trade.className === "z-20") {
+        trade.className = "hidden";
+    } else {
+        trade.className = "z-20";
+    }
+    mail.className = "hidden";
+    option.className = "hidden";
+}
+```
+
+Thankfully though, I can just link the JavaScript src with a `<script>` tag, so that I don't had to repeat myself doing the exact script, so this one is sorted
+out.
+
+But anyway, this is basically much painful than doing a "No Shipping JavaScript" challenge which is what the website is for but it eventually has broken for 
+commission page and will soon be a hamburger navigation bar for mobile. I can understand why the beginners do not want to commit web developer in day one,
+because this stuff can be daunting and they might not know that framework exists.
+
+This is just a navigation bar by the way, and if the client asks for more, I would just give up and not proceed to do the project.
+If you did not know, I did change that navigation bar overtime, and every time I change it, I had to go to all of the pages that has that navigation bar
+and updates them manually. That is frustating by it sound, and I change it most of the time because navigation bar has to be identical to most page that has it.
+I hope you understand the frustation and I am not the only one who experience this before, but I am probably not get used to it because I start web development
+with framework like React.
+
+So, I am not doing this again, but at least I got to experience how hard it is to do complex website without any frameworks.
+![homepage](/src/assets/blogs/first-freelance-experience/slides.webp)
+
+Yes, this is what the website looks like now, it is actually after you login into the page, you entered into the app which contains the painful navigation bar
+inside of it. The concept of the app is pretty interesting though but I am not really fond of it. 
+
+# Conclusion
+At the end, I successfully delivered the app for my client, and they were happy about it. This is the important part of my journey, they like it and I did
+success at the end. It does not need to be deployed as they were going to use it to showcase the prototype. But it is great to be deployed as well, so they can
+access it, even on mobile. So, I am not doing this again, and I am now starting to migrate this project with a framework to see how simple the code looks after
+that.
