@@ -5,6 +5,11 @@ date: 2024-05-10
 image: /src/assets/blogs/first-freelance-experience.webp
 ---
 
+import Image from "astro/components/Image.astro";
+import login from "/src/assets/blogs/first-freelance-experience/login.webp";
+import homepage from "/src/assets/blogs/first-freelance-experience/homepage.webp";
+import slides from "/src/assets/blogs/first-freelance-experience/slides.webp";
+
 As a "web" developer, it is fun to make static website where you don't need to change a lot of states and it is less stress to work with.
 And this makes it more fun with frameworks at all like React, Svelte, Astro, etc.. I love using framework and I cannot seem to let go with at least
 one of them whenever I want to create a website. It is just make things easy and composable. I don't need to repeat myself doing the same thing,
@@ -31,9 +36,9 @@ because I assume that they probably need the file, so I just decide that, I gues
 
 # Project Begins
 So, the project begins, and here I am absolutely finishing the Login page so quickly, because this is the most simplest page to work anyway. 
-![login](/src/assets/blogs/first-freelance-experience/login.webp)
+<Image src={login} alt="login"/>
 And not even an hour and I created the homepage pretty quickly too. 
-![homepage](/src/assets/blogs/first-freelance-experience/homepage.webp)
+<Image src={homepage} alt="homepage"/>
 But then I noticed, one of the member in the project is adding new slides in **Canva** which adds more
 pages and functionality needed for website and now I am in fear. Because I am not using framework, so the pain of duplicating elements are about to come. 
 But I did not complain at all and proceeds to continue and do other page.
@@ -174,7 +179,7 @@ I hope you understand the frustation and I am not the only one who experience th
 with framework like React.
 
 So, I am not doing this again, but at least I got to experience how hard it is to do complex website without any frameworks.
-![homepage](/src/assets/blogs/first-freelance-experience/slides.webp)
+<Image src={slides} alt="slides"/>
 
 Yes, this is what the website looks like now, it is actually after you login into the page, you entered into the app which contains the painful navigation bar
 inside of it. The concept of the app is pretty interesting though but I am not really fond of it. 
