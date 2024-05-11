@@ -17,7 +17,7 @@ const customIcon = new Map<string, Language>([
   }],
   ["javascript", {
     icon: "vscode-icons:file-type-js",
-    name: "JavaScript"
+    name: "JavaScript",
   }],
 ]);
 
@@ -27,17 +27,31 @@ const dataLanguage: string = props['data-language'];
 ---
 
 <div class="px-2 py-2 pb-4 bg-midnight my-4 min-w-0">
-  <p class="flex gap-2 items-center text-2xl">
+  <p class={`flex gap-2 items-center text-2xl `}>
     {
       customIcon.has(dataLanguage) ? 
         <Icon name={`${customIcon.get(dataLanguage)?.icon}`}/>
-        <>{customIcon.get(dataLanguage)?.name}</>
+        <span class={`text-${dataLanguage}`}>{customIcon.get(dataLanguage)?.name}</span>
                                    :
         <Icon name={`vscode-icons:file-type-${dataLanguage}`}/>
         <>{dataLanguage.toUpperCase()}</>
     }
   </p>
   <div class="px-2 overflow-x-auto w-full">
-    <pre class="overflow-x-auto text-sm md:text-md" {...props}><slot/></pre>
+    <pre class="overflow-x-auto text-sm lg:text-md" {...props}><slot/></pre>
   </div>
 </div>
+
+<style>
+  .text-html {
+    color: #E44F25
+  }
+
+  .text-css {
+    color: #32A6DA
+  }
+
+  .text-javascript {
+    color: #EDD719
+  }
+</style>
