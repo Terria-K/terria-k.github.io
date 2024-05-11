@@ -13,6 +13,6 @@ const { date } = Astro.props;
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    })
+    }).replace(",", "")
   }
 </time>
