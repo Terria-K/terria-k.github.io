@@ -15,33 +15,37 @@ const prop = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
- 		<meta name="og:title" content={`Teuria's Website - ${prop.title}`} />       
-		<meta name="og:description" content={prop.content} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="og:title" content={`Teuria's Website - ${prop.title}`} />       
+    <meta name="og:description" content={prop.content} />
     <meta name="og:image" content={prop.imageSrc}/>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{`Teuria's Website - ${prop.title}`}</title>
-	</head>
-	<GlobalStyleLayout/>
-	<body>
-        <meta name="theme_color" content="#01f1fe"/>
-        <meta name="twitter:title" content={prop.title}/>
-        <meta name="twitter:description" content={prop.content}/>
-        <meta name="twitter:image" content={prop.imageSrc}/>
-        <meta name="twitter:card" content="summary_large_image"/>
-		<Navbar/>
-		<div class="bg-midnight-blue py-4">
-		<a href="/arts" class="text-white px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
-			<Icon class="w-8 h-8" name="ph:arrow-left-light"/>
-			<p>Artworks</p>
-		</a>
-		</div>
-        <div class="min-h-screen font-sans">
-        <slot />
-        </div>
-		<Footer/>
-	</body>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{`Teuria's Website - ${prop.title}`}</title>
+  </head>
+
+  <GlobalStyleLayout/>
+
+  <body>
+    <meta name="theme_color" content="#01f1fe"/>
+    <meta name="twitter:title" content={prop.title}/>
+    <meta name="twitter:description" content={prop.content}/>
+    <meta name="twitter:image" content={prop.imageSrc}/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <Navbar/>
+
+    <div class="bg-midnight-blue py-4">
+      <a href="/arts" class="text-white px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
+          <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
+          <p>Artworks</p>
+      </a>
+    </div>
+    <div class="min-h-screen font-sans">
+      <slot />
+    </div>
+
+    <Footer/>
+  </body>
 </html>

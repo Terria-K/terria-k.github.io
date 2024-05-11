@@ -1,14 +1,18 @@
 ---
-import { Icon } from "astro-icon/components";
 import NavButton from "./NavButton.astro";
+import TeIcon from "../Svg/TeIcon.astro";
 ---
 
-<nav class="w-full bg-midnight text-white sticky top-0 z-20">
-  <div class="mx-auto max-w-[96rem] flex gap-4 font-cantarell">
-    <Icon name="ph:book-bold" class="w-12 h-12 p-3"/>
-    <NavButton link="/">Home</NavButton>
-    <NavButton link="/arts">Arts</NavButton>
-    <NavButton link="/games">Games</NavButton>
-    <NavButton link="/posts">Blogs</NavButton>
+<nav class="w-full bg-midnight text-white sticky top-0 z-20 px-2">
+  <div class="mx-auto max-w-[96rem] flex justify-between font-cantarell">
+    <a href="/" class="flex items-center gap-4 font-bold cursor-pointer">
+      <TeIcon class="w-12 h-12 p-1"/>
+      <p>TEURIA</p>
+    </a>
+    <div class="flex gap-4">
+      <NavButton link="/posts">Blogs</NavButton>
+      <NavButton link="/arts">Arts</NavButton>
+      <NavButton link="/games">Games</NavButton>
+    </div>
   </div>
 </nav>

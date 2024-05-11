@@ -4,17 +4,18 @@ import IconFooter from "./IconFooter.astro"
 import terria from "../../assets/Terria.png"
 ---
 
-<footer class="w-full bg-midnight text-white text-lg p-4">
-  <div class="mx-auto max-w-[80rem] justify-between flex">
-    <div class="flex gap-3 items-center">
-      <Image class="w-10 h-10 rounded-full" src={terria} alt="terria"/>
-      <p class="text-gray-400 select-none">Copyright &copy 2024 Terria Katsura</p>
-    </div>
+<footer class="w-full bg-midnight text-white text-lg p-4 pt-10 flex flex-col items-center justify-center gap-4 font-sans">
+  <div class="text-sm md:text-md">Find an issue with the website? <a href="https://github.com/Terria-K/terria-k.github.io/tree/master/src" class="text-cyan-400" target="_blank">Fix it on Github</a></div>
+  <div class="text-sm md:text-md text-gray-400 text-center">Want to contact me via email? <a href="mailto:terria@skiff.com" target="_blank" class="text-white font-bold">terria@skiff.com</a></div>
 
-    <div class="flex gap-3 items-center">
-      <IconFooter icon="discord" link="https://discord.gg/5sg7jVdhVW"/>
-      <IconFooter icon="github" link="https://github.com/Terria-K"/>
-      <IconFooter icon="youtube" link="https://www.youtube.com/@Terria-K/featured"/>
-    </div>
+  <div class="flex gap-3 items-center text-gray-400">
+    <IconFooter icon="discord" link="https://discord.gg/5sg7jVdhVW"/>
+    <IconFooter icon="github" link="https://github.com/Terria-K"/>
+    <IconFooter icon="youtube" link="https://www.youtube.com/@Terria-K/featured"/>
+  </div>
+
+  <div class="flex gap-3 items-center">
+    <Image class="w-10 h-10 rounded-full" src={terria} alt="terria"/>
+    <p class="text-gray-400 select-none text-sm">Copyright &copy 2024 Terria Katsura</p>
   </div>
 </footer>

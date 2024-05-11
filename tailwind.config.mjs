@@ -4,9 +4,9 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				"midnight": "#1f222b",
-				"midnight-light": "#33324b",
-				"midnight-blue": "#201d36"
+				"midnight": "var(--col-midnight)",
+				"midnight-light": "var(--col-midnight-light)",
+				"midnight-blue": "var(--col-midnight-blue)"
 			},
 			fontFamily: {
 				slab: ['Roboto Slab Variable'],

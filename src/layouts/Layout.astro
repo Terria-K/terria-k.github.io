@@ -6,20 +6,20 @@ import GlobalStyleLayout from './GlobalStyleLayout.astro';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="A Teuria's portfolio contains all of games and collection of arts that been made." />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Teuria Website</title>
-	</head>
-	<GlobalStyleLayout/>
-	<body>
-		<Navbar/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="A Teuria's portfolio contains all of games and collection of arts that been made." />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Teuria Website</title>
+  </head>
+  <GlobalStyleLayout/>
+  <body>
+    <Navbar/>
     <div class="min-h-screen">
       <slot />
     </div>
-		<Footer/>
-	</body>
+    <Footer/>
+  </body>
 </html>
