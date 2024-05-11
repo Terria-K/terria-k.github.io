@@ -3,7 +3,7 @@ import NavButton from "./NavButton.astro";
 import TeIcon from "../Svg/TeIcon.astro";
 ---
 
-<nav class="w-full bg-midnight text-white sticky top-0 z-20 px-2">
+<nav class="w-full text-white sticky top-0 z-20 px-2 shadow-xl">
   <div class="mx-auto max-w-[96rem] flex justify-between font-cantarell">
     <a href="/" class="flex items-center gap-4 font-bold cursor-pointer">
       <TeIcon class="w-12 h-12 p-1"/>
@@ -16,3 +16,9 @@ import TeIcon from "../Svg/TeIcon.astro";
     </div>
   </div>
 </nav>
+
+<style>
+  nav {
+    background: linear-gradient(70deg, var(--col-midnight), 75%, var(--col-midnight-light) 100%);
+  }
+</style>
