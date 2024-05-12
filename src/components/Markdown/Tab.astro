@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components';
+import fs from "path";
+
+interface Props {
+  filename: string
+}
+
+const props = Astro.props;
+
+const fileExt = fs.extname(props.filename).substring(1);
+let iconName = "";
+if (fileExt === "") {
+  iconName = "vscode-icons:default-file";
+} else {
+  iconName = "vscode-icons:file-type-" + fileExt;
+}
+
+---
+
+<div class="tab text-gray-400">
+  <Icon name={iconName}/>
+  {props.filename}
+</div>
+
+<style>
+  .tab {
+    width: fit-content;
+    gap: 4px;
+    background-color: var(--col-midnight);
+    position: relative;
+    z-index: 50;
+    bottom: -18px;
+    display: inline-flex;
+    align-items: center;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(55 65 81 / var(--tw-border-opacity));
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+  }
+</style>

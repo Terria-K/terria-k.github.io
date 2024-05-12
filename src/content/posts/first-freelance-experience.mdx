@@ -50,6 +50,7 @@ items that being a trade request, an inbox, and more options.
 
 So, what was the code looks like then?
 
+<Tab filename="slides/slides.html"/>
 ```html
 <nav class="shadow-xl p-2">
   <div class="flex gap-4 justify-between">
@@ -75,6 +76,7 @@ It doesn't really not that bad right? It seems doable to copy it every pages. Al
 which discourage by [Tailwind](https://tailwindcss.com/) itself but I don't care, I just can't do CSS anymore without it.
 So, let's try adding the dialog for more options.
 
+<Tab filename="slides/slides.html"/>
 ```html
 <div class="hidden" id="trade-dialog">
   <div class="bg-white p-4 rounded-xl shadow-xl">
@@ -125,6 +127,7 @@ create my page, which everytime that I had to create pages in this project, it m
 
 But then, I had to do JavaScript for this to work properly, here is what the JavaScript looks like
 
+<Tab filename="navbar.js"/>
 ```javascript
 document.getElementById("btn-option").addEventListener("click", onOptions);
 document.getElementById("btn-mail").addEventListener("click", onMail);
