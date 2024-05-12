@@ -10,9 +10,9 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x =
   <div class="md:text-lg mx-auto w-[80rem] max-[1000px]:w-full px-4 md:px-10 py-20 font-slab">
     <p class="text-center font-bold text-4xl pb-12">TAGS</p>
     {
-      uniqueTags.map(x => <span class="inline-block p-2">
+      uniqueTags.map(x => <span class="inline-block p-1 my-2 md:py-2 md:my-4">
       <a href={`/posts/tags/${x}`}>
-        <span class="hover:bg-midnight-light duration-300 bg-slate-500 rounded-sm p-4 text-3xl font-sans">
+        <span class="hover:bg-midnight-light duration-300 bg-slate-500 rounded-sm p-2 md:p-4 text-xl md:text-3xl font-sans">
           #{x!.toLowerCase()}
         </span>
       </a>
