@@ -203,7 +203,7 @@ const Form: Component<FormProp> = (prop) => {
       <textarea onChange={updateFormField("reference")} class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="reference" rows="2" cols="30" value={form().reference}></textarea>
     </Label>
     <p class="text-gray-300 text-lg">
-      Prices of each art is minimum of $5 and you can go beyond that if you want to support me more as an artist. <br/>
+      Prices of each art is minimum of $10 and you can go beyond that if you want to support me more as an artist. <br/>
       You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
     </p>
     <div>
