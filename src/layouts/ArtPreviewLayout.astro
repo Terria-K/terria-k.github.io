@@ -18,6 +18,7 @@ const prop = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={prop.content} />
     <meta name="og:title" content={`Teuria's Website - ${prop.title}`} />       
     <meta name="og:description" content={prop.content} />
     <meta name="og:image" content={prop.imageSrc}/>
