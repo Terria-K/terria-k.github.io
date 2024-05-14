@@ -18,18 +18,17 @@ if (fileExt === "") {
 
 ---
 
-<div class="tab text-gray-400">
+<div class="text-gray-400">
   <Icon name={iconName}/>
   {props.filename}
 </div>
 
 <style>
-  .tab {
+  div {
     width: fit-content;
     gap: 4px;
     background-color: var(--col-midnight);
     position: relative;
-    z-index: 50;
     bottom: -18px;
     display: inline-flex;
     align-items: center;
