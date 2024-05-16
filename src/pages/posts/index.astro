@@ -11,8 +11,7 @@ const posts = await getCollection("posts");
     <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12">
       {
         posts.reverse().sort((x, y) => {
-          // @ts-ignore
-          return (new Date(y.data.date) - new Date(x.data.date));
+          return (new Date(y.data.date).valueOf() - new Date(x.data.date).valueOf());
         }).map((x, i) => {
           return <li class="list-none">
             <BlogPost tag={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
