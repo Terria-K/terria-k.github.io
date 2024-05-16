@@ -2,23 +2,19 @@
 import Link from "../../../components/Markdown/Link.astro";
 import Header from "../../../components/Markdown/Header.astro";
 import fs from 'path';
-import { Image } from 'astro:assets';
-import type { MDXInstance } from 'astro';
-import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import ArtPreviewLayout from '../../../layouts/ArtPreviewLayout.astro';
 import FormattedDate from "../../../components/FormattedDate.astro";
+import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+  const arts = await getCollection("artworks");
 
-  const artworkMds: Record<string, MDXInstance<Record<string, any>>[]> = {
-    "2024": await Astro.glob("/src/artwork/2024/*.mdx"),
-    "2023": await Astro.glob("/src/artwork/2023/*.mdx"),
-    "2022": await Astro.glob("/src/artwork/2022/*.mdx"),
-    "2021": await Astro.glob("/src/artwork/2021/*.mdx"),
-    // "2020": await Astro.glob("/src/artwork/2020/*.md"),
-    // "2019": await Astro.glob("/src/artwork/2019/*.md"),
-  };
+  let artworkMds: Record<string, typeof arts[0]> = {};
+  arts.forEach(x => {
+    artworkMds[x.slug] = x;
+  });
 
   const paths = [];
 
@@ -29,30 +25,28 @@ export async function getStaticPaths() {
     const date = new Date(dateName.substring(0, 10));
     const slug = name;
     const year = baseName.split("-")[2].substring(0, 4);
-    let content: AstroComponentFactory | undefined;
+
+    let id = year + "/" + dateName.substring(11).toLowerCase();
+
+    let content: typeof arts[0]["render"] | undefined;
     let description = "";
 
-    const mds = artworkMds[year];
+    const mds = artworkMds[id];
     if (mds !== undefined) {
-      mds.filter(x => {
-        return fs.basename(x.file).split('.')[0].replaceAll("_", " ") === name
-      })
-        .forEach(x => {
-          if (x.frontmatter.name) {
-            name = x.frontmatter.name;
-          }
+      if (mds.data.name) {
+        name = mds.data.name;
+      }
 
-          if (x.frontmatter.description) {
-            description = x.frontmatter.description;
-          }
+      if (mds.data.description) {
+        description = mds.data.description;
+      }
 
-          content = x.Content;
-        });
+      content = mds.render;
     }
 
     paths.push({
       params: { year, slug },
-      props: { picture, name, date, works: slug, Content: content, description, year: year }
+      props: { picture, name, date, works: slug, content: content, description, year: year }
     })
   }
 
@@ -61,7 +55,9 @@ export async function getStaticPaths() {
 
 
 export const components = { a: Link, h1: Header }
-const { picture, name, date, Content, description } = Astro.props;
+const { picture, name, date, content, description } = Astro.props;
+
+const Content = (content ? await content() : undefined)?.Content;
 ---
 
 <ArtPreviewLayout title={name} content={description} imageSrc={picture.src}>

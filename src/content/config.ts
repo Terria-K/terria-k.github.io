@@ -20,6 +20,14 @@ const posts = defineCollection({
   })
 });
 
+const artworks = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string().optional(),
+    description: z.string().optional()
+  })
+})
+
 export const collections = {
-  games, posts
+  games, posts, artworks
 };
