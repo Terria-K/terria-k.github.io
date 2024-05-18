@@ -3,13 +3,12 @@ import CommisionForm from "../../components/Commission/CommisionForm.tsx";
 import Layout from "../../layouts/Layout.astro";
 export const prerender = false;
 
-const url = Astro.url.host;
 const disabled: string = import.meta.env.DISABLED ?? "false";
 ---
 
 
 <Layout>
   <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
-    <CommisionForm client:only="solid" {url} disabled={disabled === "true" ? true : false}/>
+    <CommisionForm client:only="solid" disabled={disabled === "true" ? true : false}/>
   </div>
 </Layout>

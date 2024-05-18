@@ -12,7 +12,6 @@ type FormField = {
 }
 
 type FormProp = {
-  url: string,
   disabled: boolean
 }
 
@@ -131,7 +130,7 @@ const Form: Component<FormProp> = (prop) => {
         ]
     }
 
-    const res = await fetch(prop.url + "/api/request", {
+    const res = await fetch("/api/request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(json)
