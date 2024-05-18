@@ -4,7 +4,6 @@ export const prerender = false;
 
 
 export const POST: APIRoute = async ({ request }) => {
-    console.log(import.meta.env.SPICA);
     const json = await request.json();
     const url = "https://discord.com/api/webhooks/" + import.meta.env.SPICA;
 

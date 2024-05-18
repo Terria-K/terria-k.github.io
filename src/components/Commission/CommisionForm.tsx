@@ -1,4 +1,4 @@
-import { Show, createSignal, type Component, type JSX } from "solid-js";
+import { Show, createEffect, createSignal, type Component, type JSX } from "solid-js";
 
 type FormField = {
   platform: string,
@@ -11,14 +11,11 @@ type FormField = {
   height: number
 }
 
-type FormProp = {
-  disabled: boolean
-}
 
-
-const Form: Component<FormProp> = (prop) => {
+const Form: Component = () => {
   const [response, setResponse] = createSignal<string|undefined>(undefined);
   const [responseColor, setResponseColor] = createSignal("text-red-500");
+  const [enabled, setEnabled] = createSignal(false);
   const [form, setForm] = createSignal<FormField>({
     platform: "Email",
     contactname: "",
@@ -145,6 +142,15 @@ const Form: Component<FormProp> = (prop) => {
     }
   }
 
+  createEffect(async () => {
+    const result = await fetch("/api/open");
+    if (result.ok) {
+      const isDisabled = await result.text();
+      setEnabled(isDisabled === "false");
+      return;
+    } 
+  });
+
 
   return (
   <form class="grid gap-4" onSubmit={onSubmit}>
@@ -202,9 +208,9 @@ const Form: Component<FormProp> = (prop) => {
       You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
     </p>
     <div>
-      <input disabled={prop.disabled} class="disabled:bg-gray-500 hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
+      <input disabled={!enabled()} class="disabled:bg-gray-500 hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
         type="submit" 
-        value={prop.disabled ? "Closed" : "Order"}/>
+        value={!enabled() ? "Closed" : "Order"}/>
     </div>
 
     <Show when={response()}>
