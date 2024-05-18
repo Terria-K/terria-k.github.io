@@ -41,17 +41,16 @@ const Form: Component = () => {
 
   async function onSubmit(e: Event) {
     e.preventDefault();
-    const formParam = form();
+    const formData = new FormData(e.target as HTMLFormElement);
 
-    const platform = formParam.platform;
+    const platform = (formData.get("platform")?.valueOf() as string).trim();
 
-    const contactName = formParam.contactname.trim();
-    const title = formParam.title.trim();
-    const description = formParam.description.trim();
-    const reference = formParam.reference.trim();
-    const size = formParam.size.trim();
-    const width = formParam.width;
-    const height = formParam.height;
+    const contactName = (formData.get("contactname")?.valueOf() as string).trim();
+    const title = (formData.get("title")?.valueOf() as string).trim();
+    const description = (formData.get("description")?.valueOf() as string).trim();
+    const size = (formData.get("size")?.valueOf() as string).trim();
+    const width = formData.get("width")?.valueOf() as number
+    const height = formData.get("height")?.valueOf() as number
 
     if (contactName === "") {
       if (platform === "Discord") {
@@ -98,44 +97,20 @@ const Form: Component = () => {
       }
     }
 
-    const json = {
-        "username": "Commission Receiver",
-        "avatar_url": "https://i.imgur.com/4M34hi2.png",
-        "content": "Commision Up!",
-        "embeds": [
-            {
-              "title": title,
-              "description": description,
-              "fields": [{
-                  "name": "Requested By",
-                  "value": contactName
-                },
-                {
-                  "name": "Platform",
-                  "value": platform
-                },
-                {
-                  "name": "Art Size",
-                  "value": size === "Custom" ? `${+width}x${+height}` : size
-                },
-                {
-                  "name": "Reference Links",
-                  "value": reference
-                },
-              ],
-            }
-        ]
-    }
-
     const res = await fetch("/api/request", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(json)
+      body: formData
     })
 
     if (res.ok) {
-      setResponseColor("text-green-500")
-      setResponse("Your order has been sent!");
+      const json = await res.json();
+      if (json.success) {
+        setResponseColor("text-green-500")
+      } else {
+        setResponseColor("text-red-500")
+      }
+
+      setResponse(json.message);
     } else {
       setResponseColor("text-red-500")
       setResponse("Something went wrong with sending your order. Please try again later.");
