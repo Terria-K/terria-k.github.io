@@ -19,7 +19,6 @@
     "@fontsource/cantarell": "^5.0.13",
     "@fontsource/fira-sans": "^5.0.20",
     "@playform/inline": "^0.0.2",
-    "@vercel/blob": "^0.23.2",
     "astro": "^4.7.1",
     "astro-icon": "^1.1.0",
     "astro-meta-tags": "^0.2.2",

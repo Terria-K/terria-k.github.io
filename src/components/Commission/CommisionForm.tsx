@@ -1,5 +1,4 @@
 import { Show, createSignal, type Component, type JSX } from "solid-js";
-import { put } from "@vercel/blob";
 
 type FormField = {
   platform: string,
@@ -13,7 +12,7 @@ type FormField = {
 }
 
 type FormProp = {
-  url: string,
+  url: URL,
   disabled: boolean
 }
 
@@ -132,7 +131,7 @@ const Form: Component<FormProp> = (prop) => {
         ]
     }
 
-    const res = await fetch("/api/request", {
+    const res = await fetch(prop.url + "/api/request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(json)
