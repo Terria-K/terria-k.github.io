@@ -1,4 +1,5 @@
 import { Show, createSignal, type Component, type JSX } from "solid-js";
+import { put } from "@vercel/blob";
 
 type FormField = {
   platform: string,
@@ -131,23 +132,45 @@ const Form: Component<FormProp> = (prop) => {
         ]
     }
 
-    const url = "https://discord.com/api/webhooks/" + prop.url
+    const res = await fetch("/api/request", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(json)
+    })
 
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify(json)
-    });
+    // const { url: ur } = await put('articles/blob.txt', 'Hello World!', { access: 'public' });
+    // console.log(ur);
 
-    if (res.ok) {
-      setResponseColor("text-green-500")
-      setResponse("Your order has been sent!");
-    } else {
-      setResponseColor("text-red-500")
-      setResponse("Something went wrong with sending your order. Please try again later.");
-    }
+
+    // const out = await put('articles/blob.txt', `
+    //   Title: ${title}
+    //   Requested By: ${contactName}
+    //   Platform: ${platform}
+    //   Art Size: ${size === "Custom" ? `${+width}x${+height}` : size}
+    //   Reference Links: ${reference}
+
+    //   Details: "${description}"
+    // `);
+
+    // console.log(out);
+
+    // const url = "https://discord.com/api/webhooks/" + prop.url
+
+    // const res = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //         'Content-Type': "application/json"
+    //     },
+    //     body: JSON.stringify(json)
+    // });
+
+    // if (res.ok) {
+    //   setResponseColor("text-green-500")
+    //   setResponse("Your order has been sent!");
+    // } else {
+    //   setResponseColor("text-red-500")
+    //   setResponse("Something went wrong with sending your order. Please try again later.");
+    // }
   }
 
 
