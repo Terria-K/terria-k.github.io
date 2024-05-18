@@ -136,32 +136,6 @@ const Form: Component<FormProp> = (prop) => {
       body: JSON.stringify(json)
     })
 
-    // const { url: ur } = await put('articles/blob.txt', 'Hello World!', { access: 'public' });
-    // console.log(ur);
-
-
-    // const out = await put('articles/blob.txt', `
-    //   Title: ${title}
-    //   Requested By: ${contactName}
-    //   Platform: ${platform}
-    //   Art Size: ${size === "Custom" ? `${+width}x${+height}` : size}
-    //   Reference Links: ${reference}
-
-    //   Details: "${description}"
-    // `);
-
-    // console.log(out);
-
-    // const url = "https://discord.com/api/webhooks/" + prop.url
-
-    // const res = await fetch(url, {
-    //     method: "POST",
-    //     headers: {
-    //         'Content-Type': "application/json"
-    //     },
-    //     body: JSON.stringify(json)
-    // });
-
     if (res.ok) {
       setResponseColor("text-green-500")
       setResponse("Your order has been sent!");
