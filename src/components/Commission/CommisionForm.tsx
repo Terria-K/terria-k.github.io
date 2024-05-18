@@ -145,8 +145,8 @@ const Form: Component = () => {
   createEffect(async () => {
     const result = await fetch("/api/open");
     if (result.ok) {
-      const isDisabled = await result.text();
-      setEnabled(isDisabled === "false");
+      const isDisabled = await result.json();
+      setEnabled(!isDisabled.r);
       return;
     } 
   });

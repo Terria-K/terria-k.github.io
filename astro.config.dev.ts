@@ -10,7 +10,7 @@ export default defineConfig({
     },
     vite: {
         define: {
-            "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`
+            "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`,
         }
     },
     adapter: vercel()
