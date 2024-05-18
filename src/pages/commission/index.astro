@@ -1,9 +1,9 @@
 ---
-import CommisionForm from "../components/Commission/CommisionForm.tsx";
-import Layout from "../layouts/Layout.astro";
+import CommisionForm from "../../components/Commission/CommisionForm.tsx";
+import Layout from "../../layouts/Layout.astro";
 export const prerender = false;
 
-const url = Astro.url;
+const url = Astro.url.host;
 const disabled: string = import.meta.env.DISABLED ?? "false";
 ---
 

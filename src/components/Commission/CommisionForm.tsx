@@ -12,7 +12,7 @@ type FormField = {
 }
 
 type FormProp = {
-  url: URL,
+  url: string,
   disabled: boolean
 }
 
@@ -163,13 +163,13 @@ const Form: Component<FormProp> = (prop) => {
     //     body: JSON.stringify(json)
     // });
 
-    // if (res.ok) {
-    //   setResponseColor("text-green-500")
-    //   setResponse("Your order has been sent!");
-    // } else {
-    //   setResponseColor("text-red-500")
-    //   setResponse("Something went wrong with sending your order. Please try again later.");
-    // }
+    if (res.ok) {
+      setResponseColor("text-green-500")
+      setResponse("Your order has been sent!");
+    } else {
+      setResponseColor("text-red-500")
+      setResponse("Something went wrong with sending your order. Please try again later.");
+    }
   }
 
 
