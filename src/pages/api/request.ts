@@ -13,8 +13,39 @@ export const POST: APIRoute = async ({ request }) => {
     const description = (formData.get("description")?.valueOf() as string).trim();
     const reference = (formData.get("reference")?.valueOf() as string).trim();
     const size = (formData.get("size")?.valueOf() as string).trim();
-    const width = formData.get("width")?.valueOf() as number
-    const height = formData.get("height")?.valueOf() as number
+    const width = formData.get("width")?.valueOf() as number;
+    const height = formData.get("height")?.valueOf() as number;
+
+    if (contactName === "") {
+      if (platform === "Discord") {
+        return exit("Please provide your Discord username or your Discord ID.", false);
+      } 
+
+      return exit("Please provide your contact email.", false);
+    }
+
+    if (title === "") {
+      return exit("Please provide the title of the art.", false);
+    }
+
+    if (description === "") {
+      return exit("Please provide the details of the art.", false);
+    }
+
+    if (size === "Custom") {
+      if (width < 512) {
+        return exit("The width must be at minimum of 512 pixels", false);
+      }
+      if (height < 512) {
+        return exit("The height must be at minimum of 512 pixels", false);
+      }
+      if (width > 2500) {
+        return exit("The width must be at maximum of 2500 pixels", false);
+      }
+      if (height > 2500) {
+        return exit("The height must be at maximum of 2500 pixels", false);
+      }
+    }
 
     const json = {
         "username": "Commission Receiver",
@@ -67,5 +98,5 @@ function exit(message: string, success: boolean) {
         message: message,
         success: success
     };
-    return new Response(JSON.stringify(json));
+    return new Response(`<span class="${success ? "text-green-500" : "text-red-500"}">${message}</span>`);
 }

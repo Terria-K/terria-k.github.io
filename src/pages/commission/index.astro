@@ -5,7 +5,93 @@ import Layout from "../../layouts/Layout.astro";
 
 
 <Layout>
+  <script is:inline src="https://unpkg.com/htmx.org@1.9.12" slot="head"></script>
+
   <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
-    <CommisionForm client:only="solid" />
+    <form class="grid gap-4" hx-post="/api/request" hx-target="#result">
+      <p class="text-white font-bold text-2xl">Contact</p>
+
+      <label>
+        <p>Platform: <span class="text-red-400">*</span></p>
+
+        <select name="platform" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" value="Email">
+          <option class="bg-midnight-light" value="Email">Email</option>
+          <option class="bg-midnight-light" value="Discord">Discord</option>
+        </select>
+      </label>
+
+      <label>
+        <p>Name or Email: <span class="text-red-400">*</span></p>
+        <input name="contactname" type="text"/>
+        <p class="text-gray-400">If you're on Discord, please make yourself available for me to able to contact you, or join in my Discord Server in the icon below.</p>
+      </label>
+
+      <p class="text-white font-bold text-2xl">Request</p>
+
+      <label>
+        <p>Art Title: <span class="text-red-400">*</span></p>
+        <input name="title" type="text" />
+      </label>
+
+      <label>
+        <p>Details: <span class="text-red-400">*</span></p>
+        <textarea class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="description" rows="5" cols="30"></textarea>
+      </label>
+      <label class="size-mode">
+        <p>Size: <span class="text-red-400">*</span></p>
+        <p class="text-gray-400">Landscape mode is recommended as Teuria is a Landscape artist, but feel free to use whatever you want.</p>
+
+        <select name="size" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" value="Landscape">
+          <option class="bg-midnight-light" value="Landscape">Landscape</option>
+          <option class="bg-midnight-light" value="Portrait">Portrait</option>
+          <option class="bg-midnight-light" value="Custom">Custom</option>
+        </select>
+        <div class="hidden custom-size">
+          <p class="text-gray-400">Please fill up the width and height for the size of the art. (pixel)</p>
+          <p>Width: <span class="text-red-400">*</span></p>
+          <input name="width" type="number" value="512"/>
+          <p>Height: <span class="text-red-400">*</span></p>
+          <input name="height" type="number" value="512"/>
+        </div>
+      </label>
+
+      <label>
+        References or Idea:
+        <p class="text-gray-500 text-sm">You can put a links for references or idea to have a clear idea of what you want.</p>
+        <textarea class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="reference" rows="2" cols="30" value="Ref"></textarea>
+      </label>
+
+      <p class="text-gray-300 text-lg">
+        Prices of each art is minimum of $10 and you can go beyond that if you want to support me more as an artist. <br/>
+        You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
+      </p>
+      <div>
+        <p hx-get="/api/open" hx-target="this" hx-trigger="load">Loading...</p>
+
+      </div>
+      <p id="result"></p>
+    </form>
   </div>
 </Layout>
+
+<style>
+  label {
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+
+  input[type=text], input[type=number] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-radius: 0.25rem;
+    border-width: 2px;
+    border-color: var(--col-midnight-light);
+  }
+
+  .size-mode:has(option[value="Custom"]:checked) .custom-size {
+    display: block !important;
+  }
+</style>
