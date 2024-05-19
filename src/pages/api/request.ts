@@ -94,9 +94,5 @@ export const POST: APIRoute = async ({ request }) => {
 }
 
 function exit(message: string, success: boolean) {
-    const json = {
-        message: message,
-        success: success
-    };
     return new Response(`<span class="${success ? "text-green-500" : "text-red-500"}">${message}</span>`);
 }
