@@ -1,5 +1,4 @@
 ---
-import CommisionForm from "../../components/Commission/CommisionForm.tsx";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -46,6 +45,7 @@ import Layout from "../../layouts/Layout.astro";
           <option class="bg-midnight-light" value="Portrait">Portrait</option>
           <option class="bg-midnight-light" value="Custom">Custom</option>
         </select>
+
         <div class="hidden custom-size">
           <p class="text-gray-400">Please fill up the width and height for the size of the art. (pixel)</p>
           <p>Width: <span class="text-red-400">*</span></p>
@@ -65,8 +65,8 @@ import Layout from "../../layouts/Layout.astro";
         Prices of each art is minimum of $10 and you can go beyond that if you want to support me more as an artist. <br/>
         You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
       </p>
-      <div>
-        <p hx-get="/api/open" hx-target="this" hx-trigger="load">Loading...</p>
+      <div hx-get="/api/open" hx-target="this" hx-trigger="load">
+        <p>Loading...</p>
 
       </div>
       <p id="result"></p>
