@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -20,7 +21,8 @@ import Layout from "../../layouts/Layout.astro";
       </label>
 
       <label>
-        <p>Name or Email: <span class="text-red-400">*</span></p>
+        <p class="hidden discord">Discord: <span class="text-red-400">*</span></p>
+        <p class="hidden email">Email: <span class="text-red-400">*</span></p>
         <input name="contactname" type="text"/>
         <p class="text-gray-400">If you're on Discord, please make yourself available for me to able to contact you, or join in my Discord Server in the icon below.</p>
       </label>
@@ -66,8 +68,7 @@ import Layout from "../../layouts/Layout.astro";
         You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
       </p>
       <div hx-get="/api/open" hx-target="this" hx-trigger="load">
-        <p>Loading...</p>
-
+        <Icon class="w-16 h-16" name="svg-spinners:tadpole"/>
       </div>
       <p id="result"></p>
     </form>
@@ -93,5 +94,13 @@ import Layout from "../../layouts/Layout.astro";
 
   .size-mode:has(option[value="Custom"]:checked) .custom-size {
     display: block !important;
+  }
+
+  form:has(option[value="Discord"]:checked) .discord {
+    display: block;
+  }
+
+  form:has(option[value="Email"]:checked) .email {
+    display: block;
   }
 </style>
