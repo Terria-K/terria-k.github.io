@@ -11,5 +11,5 @@ export const GET: APIRoute = async ({ request }) => {
         <input ${isDisabled ? "disabled" : ""} 
             class="disabled:bg-gray-500 hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
             type="submit" 
-            value="${isDisabled ? "Closed" : "Open"}"/>`);
+            value="${isDisabled ? "Closed" : "Order"}"/>`);
 }
