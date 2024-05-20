@@ -48,7 +48,7 @@ import Layout from "../../layouts/Layout.astro";
           <option class="bg-midnight-light" value="Custom">Custom</option>
         </select>
 
-        <div class="hidden custom-size">
+        <div class="custom-size">
           <p class="text-gray-400">Please fill up the width and height for the size of the art. (pixel)</p>
           <p>Width: <span class="text-red-400">*</span></p>
           <input name="width" type="number" value="512"/>
@@ -92,8 +92,8 @@ import Layout from "../../layouts/Layout.astro";
     border-color: var(--col-midnight-light);
   }
 
-  .size-mode:has(option[value="Custom"]:checked) .custom-size {
-    display: block !important;
+  .size-mode:not(:has(option[value="Custom"]:checked)) .custom-size {
+    display: none;
   }
 
   form:has(option[value="Discord"]:checked) .discord {
