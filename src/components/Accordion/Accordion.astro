@@ -8,7 +8,7 @@ interface Props {
 const prop = Astro.props;
 ---
 
-<details>
+<details class="accordion">
   <summary class="flex justify-between items-center">
     {prop.title}
     <Icon class="select" name="ph:triangle-fill"/>
@@ -17,7 +17,7 @@ const prop = Astro.props;
 </details>
 
 <style>
-  details {
+  details.accordion {
     padding: 1em;
     background-color: var(--col-midnight-light);
     border-radius: 4px;
@@ -27,7 +27,7 @@ const prop = Astro.props;
     content: "";
   }
 
-  details[open] summary {
+  details[open].accordion summary {
     margin-bottom: 10px;
   }
 
@@ -44,7 +44,7 @@ const prop = Astro.props;
     transform: rotate(180deg);
   }
 
-  details[open] .select {
+  details[open].accordion .select {
     transform: rotate(360deg);
   }
 </style>
