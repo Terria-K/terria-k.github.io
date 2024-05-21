@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string
+}
+
+const prop = Astro.props;
+---
+
+<details>
+  <summary class="flex justify-between items-center">
+    {prop.title}
+    <Icon class="select" name="ph:triangle-fill"/>
+  </summary>
+  <slot/>
+</details>
+
+<style>
+  details {
+    padding: 1em;
+    background-color: var(--col-midnight-light);
+    border-radius: 4px;
+  }
+
+  summary::marker {
+    content: "";
+  }
+
+  details[open] summary {
+    margin-bottom: 10px;
+  }
+
+  summary {
+    outline: none;
+    user-select: none;
+    transition: margin 150ms ease-out;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .select {
+    transition: 300ms;
+    transform: rotate(180deg);
+  }
+
+  details[open] .select {
+    transform: rotate(360deg);
+  }
+</style>

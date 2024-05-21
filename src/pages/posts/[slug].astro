@@ -26,8 +26,9 @@ import Code from "../../components/Markdown/Code.astro";
 import Pre from "../../components/Markdown/Pre.astro";
 import FormattedDate from '../../components/FormattedDate.astro';
 import Tab from '../../components/Markdown/Tab.astro';
+import Accordion from '../../components/Accordion/Accordion.astro';
 
-export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab }
+export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render()
