@@ -3,6 +3,7 @@ export const prerender = true;
 
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 
 
 export async function getStaticPaths() {
@@ -10,12 +11,26 @@ export async function getStaticPaths() {
 
   return gamesCollection.map(x => {
     return {
-      params: { slug: x.slug }
+      params: { slug: x.slug },
+      props: {
+        title: x.data.title,
+        description: x.data.description,
+        image: x.data.image,
+        content: x.render
+      }
     }
   })
 }
+
+const { title, description, image, content } = Astro.props;
+const Content = (await content()).Content;
 ---
 
 <Layout>
-
+  <div class="md:text-lg mx-auto w-[70rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 bg-gray-800 py-8 font-sans text-md">
+    <h1 class="font-bold text-2xl">{title}</h1>
+    <Image src={image} alt={title.toLowerCase()}/>
+    <h2 class="text-gray-300">{description}</h2>
+    <Content/>
+  </div>
 </Layout>
