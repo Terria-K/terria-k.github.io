@@ -2,13 +2,14 @@
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-  title: string
+  title: string,
+  close?: boolean
 }
 
 const prop = Astro.props;
 ---
 
-<details open>
+<details open={!prop.close}>
   <summary class="flex justify-between items-center">
     {prop.title}
     <Icon class="select" name="ph:triangle-fill"/>

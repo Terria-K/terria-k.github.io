@@ -3,6 +3,7 @@ import YearButton from "../components/Arts/YearButton.astro"
 import Image from "astro/components/Image.astro";
 import Layout from "./Layout.astro"
 import fs from 'path';
+import Accordion from "../components/Accordion/Accordion.astro";
 
 interface Props {
   year: string,
@@ -14,9 +15,10 @@ const prop = Astro.props;
 
 <Layout>
   <div class="mx-auto max-w-[96rem] px-10 py-10 space-y-4 text-white gap-10">
+    <Accordion title="Year of Progress" close>
     <div class="bg-midnight rounded-lg flex flex-col md:flex-row gap-4 justify-evenly overflow-x-auto">
       <a href="/arts" class="w-full">
-        <button class=`w-full hover:bg-midnight-light duration-300 py-4 rounded-lg font-bold text-3xl ${prop.year === "All" ? "bg-midnight-light" : ""}`>
+        <button class=`w-full hover:bg-midnight-light duration-300 py-4 font-bold text-3xl ${prop.year === "All" ? "bg-midnight-light" : ""}`>
           All
         </button>
       </a>
@@ -27,6 +29,8 @@ const prop = Astro.props;
       <YearButton year={2020} selected={prop.year === "2020"}/>
       <YearButton year={2019} selected={prop.year === "2019"}/>
     </div>
+    </Accordion>
+
     <div class="w-full flex justify-center">
       <ul class="flex flex-wrap gap-2 justify-center">
         {
