@@ -7,9 +7,9 @@ interface Props {
     title: string,
     description: string,
     date: Date,
-    url: string | undefined,
+    url: string,
     image: ImageMetadata,
-    tag: string[] | undefined,
+    tags: string[] | undefined,
     shouldLazy: boolean
 }
 
@@ -26,10 +26,16 @@ const prop = Astro.props;
     }
   </a>
 
-  <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-2">
-    {
-      prop.tag ? <Tag tag={prop.tag}/> : null
-    }
+  <div class="w-full rounded-r-xl max-md:rounded-xl p-3 flex flex-col gap-1">
+    <div class="flex gap-2">
+      {
+        prop.tags 
+          ? prop.tags.map(x => 
+              <Tag tag={x}/>
+          )  
+          : null
+      }
+    </div>
 
     <h2 class="font-bold text-gray-400">
       <FormattedDate date={prop.date}/>

@@ -1,23 +1,15 @@
 ---
 interface Props {
-    tag: string | string[]
+    tag: string
 }
 
 const prop = Astro.props;
 ---
 
 <div class="flex flex-row gap-2 text-sm font-sans">
-  {
-    prop.tag 
-      ? (typeof prop.tag == "string")
-        ? <div class="flex">
-            <a class="hover:bg-midnight-light duration-300 bg-slate-500 px-2 py-1 rounded-full" href={`/posts/tags/${prop.tag}`}>#{prop.tag.toLowerCase()}</a>
-          </div>
-        : prop.tag.map(element => 
-          <div class="flex">
-            <a class="hover:bg-midnight-light duration-300 bg-slate-500 px-2 py-1 rounded-full" href={`/posts/tags/${element}`}>#{element.toLowerCase()}</a>
-          </div>
-        )
-      : null
-  }
+  <div class="flex">
+    <a class="hover:bg-midnight-light duration-300 bg-slate-500 px-2 py-1 rounded-full" href={`/posts/tags/${prop.tag}`}>
+      #{prop.tag}
+    </a>
+  </div>
 </div>

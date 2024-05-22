@@ -38,15 +38,15 @@ const { Content } = await entry.render()
   <div class="bg-midnight-blue py-4">
     <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
       <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
-      <p>
-        Blogs
-      </p>
+      <p>Blogs</p>
     </a>
   </div>
 
   <div class="md:text-lg mx-auto w-[70rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 bg-gray-800 py-8 font-sans">
     {
-      entry.data.tags ? <Tag tag={entry.data.tags}/> : null
+      entry.data.tags 
+        ? entry.data.tags.map(x => <Tag tag={x}/>)  
+        : null
     }
     <h2 class="font-bold text-xl md:text-2xl text-gray-400 font-cantarell">
       <FormattedDate date={entry.data.date}/>
