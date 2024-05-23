@@ -9,30 +9,30 @@ interface Props {
 const prop = Astro.props;
 ---
 
-<details open={!prop.close}>
-  <summary class="flex justify-between items-center">
+<details class="accordion" open={!prop.close}>
+  <summary class="accordion-summary flex justify-between items-center">
     {prop.title}
     <Icon class="select" name="ph:triangle-fill"/>
   </summary>
   <slot/>
 </details>
 
-<style>
-  details {
+<style is:inline>
+  details.accordion {
     padding: 1em;
     background-color: var(--col-midnight-light);
     border-radius: 4px;
   }
 
-  summary::marker {
+  .accordion-summary::marker {
     content: "";
   }
 
-  details[open] summary {
+  details.accordion[open] .accordion-summary {
     margin-bottom: 10px;
   }
 
-  summary {
+  .accordion-summary {
     outline: none;
     user-select: none;
     transition: margin 150ms ease-out;
@@ -45,7 +45,7 @@ const prop = Astro.props;
     transform: rotate(180deg);
   }
 
-  details[open] .select {
+  details.accordion[open] .select {
     transform: rotate(360deg);
   }
 </style>
