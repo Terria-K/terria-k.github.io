@@ -1,0 +1,23 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string
+}
+
+const props = Astro.props;
+---
+
+<details>
+  <summary class="cursor-pointer">
+    <span>
+      <span>
+        <Icon class="inline" name="ph:folder-fill"/> 
+      </span>
+      {props.title}
+    </span>
+  </summary>
+  <div class="mb-2 px-4 flex flex-col">
+    <slot/>
+  </div>
+</details>

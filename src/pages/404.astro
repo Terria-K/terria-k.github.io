@@ -1,0 +1,103 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const notFound: any = (await getCollection("404"))[0];
+const rendered = await notFound.render();
+
+import fs from "path";
+import Link from "../components/Markdown/Link.astro";
+import Header from "../components/Markdown/Header.astro";
+import Code from "../components/Markdown/Code.astro";
+import Pre from "../components/Markdown/Pre.astro";
+import Tab from '../components/Markdown/Tab.astro';
+import Accordion from '../components/Accordion/Accordion.astro';
+import CardPage from "../components/CardPage/CardPage.astro";
+import Filesystem from "../components/Filesystem/Filesystem.astro";
+
+export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
+const Content = rendered.Content;
+
+const blogs = await getCollection("posts");
+
+const slugs = blogs.map(x => x.slug);
+const uniqueTags = [...new Set(blogs.map((post) => post.data.tags).filter(x => x).flat())];
+
+const games = await getCollection("games");
+
+const gameSlugs = games.map(x => x.slug);
+type ArtMeta = {
+  name: string
+};
+
+const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+const artYears = ["2024", "2023", "2022", "2021", "2020", "2019"];
+const picturesByYear: Record<string, ArtMeta[]> = {};
+
+artYears.forEach(x => {
+  picturesByYear[x] = [];
+  pictures.forEach(picture => {
+    if (picture.src.includes(x)) {
+      const baseName = fs.basename(picture.src);
+      const dateName = baseName.split('.')[0];
+      let name = dateName.substring(11).replaceAll("_", " ");
+      picturesByYear[x].push({
+        name: name
+      });
+    }
+  })
+
+});
+---
+
+<Layout>
+  <header class="mx-auto max-w-[40rem] px-5 lg:px-10 space-y-4 pb-4">
+    <h2 class="text-4xl text-center font-bold py-8 font-cantarell">404 PAGE NOT FOUND!</h2>
+    <Content {components}/>
+    <h2 class="text-4xl text-center font-bold py-8 font-cantarell">This is the only pages that exists in this website.</h2>
+
+    <CardPage title="Home" description="The homepage of this website." icon="ph:house-fill" url="/"/>
+    <CardPage title="Arts" description="Contains a list of arts that Teuria drew." icon="ph:paint-brush-fill" url="/arts" hasDerivedPages>
+      <Filesystem title="arts">
+        <Link href="/arts">index</Link>
+        {
+          artYears.map(y => {
+            const pictures = picturesByYear[y];
+            return (
+              <Filesystem title={y}>
+                <Link href={"/arts/" + y}>index</Link>
+                {
+                  pictures.map(x => <Link href={`/arts/${y}/${x.name}`}>{x.name}</Link>)
+                }
+              </Filesystem>)
+          })
+        }
+      </Filesystem>
+    </CardPage>
+    <CardPage title="Blogs" description="Teuria's story sharing." icon="ph:newspaper-clipping-fill" url="/posts" hasDerivedPages>
+      <Filesystem title="posts">
+        <Link href="/posts">index</Link>
+        {
+          slugs.map(x => <Link href={"/posts/" + x}>{x}</Link>)
+        }
+        <Filesystem title="tags">
+          <Link href="/posts/tags">index</Link>
+          {
+            uniqueTags.map(x => <Link href={"/posts/tags/" + x}>{x}</Link>)
+          }
+        </Filesystem>
+      </Filesystem>
+
+    </CardPage>
+    <CardPage title="Games" description="Games that are developed by Teuria." icon="ph:game-controller-fill" url="/games" hasDerivedPages>
+      <Filesystem title="games">
+        <Link href="/games">index</Link>
+        {
+          gameSlugs.map(x => <Link href={"/games/" + x}>{x}</Link>)
+        }
+      </Filesystem>
+    </CardPage>
+    <CardPage title="Commission" description="A pay for request an art or website." icon="ph:money-wavy-fill" url="/commission"/>
+  </header>
+
+</Layout>
