@@ -1,0 +1,14 @@
+---
+interface Props {
+  when: unknown | boolean | undefined
+}
+
+async function render(props: Props) {
+  const isTruthy = props.when;
+
+  const renderSlot = isTruthy ? "default" : Object.hasOwn(Astro.slots, "else") ? "else" : "";
+  return await Astro.slots.render(renderSlot);
+}
+---
+
+<Fragment set:html={render(Astro.props)}/>

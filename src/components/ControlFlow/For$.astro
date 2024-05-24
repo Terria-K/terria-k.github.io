@@ -1,0 +1,20 @@
+---
+
+export interface Props<T> {
+  of: T[] | undefined,
+  children: ((item: T, i: number) => unknown);
+}
+
+async function *render<T>(props: Props<T>) {
+  if (props.of) {
+    let value = 0;
+    for (const o of props.of) {
+      const rendered = await Astro.slots.render("default", [o, value]);
+      yield rendered;
+      value++;
+    }
+  }
+}
+---
+
+<Fragment set:html={render(Astro.props)}/>
