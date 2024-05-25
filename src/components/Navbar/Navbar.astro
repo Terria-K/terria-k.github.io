@@ -1,8 +1,8 @@
 ---
 import NavButton from "./NavButton.astro";
 import TeIcon from "../Svg/TeIcon.astro";
-import NavBox from "./NavBox.astro";
-import NavBoxItem from "./NavBoxItem.astro";
+import NavBurger from "./NavBurger.astro";
+import NavBurgerItem from "./NavBurgerItem.astro";
 ---
 
 <nav class="w-full text-white sticky top-0 z-20 px-2 shadow-xl">
@@ -17,11 +17,11 @@ import NavBoxItem from "./NavBoxItem.astro";
       <NavButton link="/games">Games</NavButton>
     </div>
     <div class="flex md:hidden">
-      <NavBox title="More">
-        <NavBoxItem link="/posts">Blogs</NavBoxItem>
-        <NavBoxItem link="/arts">Arts</NavBoxItem>
-        <NavBoxItem link="/games">Games</NavBoxItem>
-      </NavBox>
+      <NavBurger>
+        <NavBurgerItem link="/posts">Blogs</NavBurgerItem>
+        <NavBurgerItem link="/arts">Arts</NavBurgerItem>
+        <NavBurgerItem link="/games">Games</NavBurgerItem>
+      </NavBurger>
     </div>
   </div>
 </nav>
