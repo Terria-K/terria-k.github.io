@@ -6,8 +6,8 @@ import Image from 'astro/components/Image.astro';
 import Tag from '../../components/Blog/Tag.astro';
 import PostLayout from "../../layouts/PostLayout.astro";
 import { getCollection } from 'astro:content';
-import If$ from "../../components/ControlFlow/If$.astro";
-import For$ from "../../components/ControlFlow/For$.astro";
+import If from "../../components/ControlFlow/If.astro";
+import For from "../../components/ControlFlow/For.astro";
 
 export async function getStaticPaths() {
   const blogCollections = await getCollection("posts");
@@ -46,13 +46,13 @@ const { Content } = await entry.render()
 
   <div class="md:text-lg mx-auto w-[70rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 bg-gray-800 py-8 font-sans">
 
-    <If$ when={entry.data.tags}>
+    <If when={entry.data.tags}>
       <span class="flex gap-2">
-        <For$ of={entry.data.tags}>
+        <For of={entry.data.tags}>
           {x => <Tag tag={x}/>}
-        </For$>
+        </For>
       </span>
-    </If$>
+    </If>
     
     <h2 class="font-bold text-xl md:text-2xl text-gray-400 font-cantarell">
       <FormattedDate date={entry.data.date}/>

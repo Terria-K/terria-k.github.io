@@ -14,7 +14,7 @@ import Tab from '../components/Markdown/Tab.astro';
 import Accordion from '../components/Accordion/Accordion.astro';
 import CardPage from "../components/CardPage/CardPage.astro";
 import Filesystem from "../components/Filesystem/Filesystem.astro";
-import For$ from "../components/ControlFlow/For$.astro";
+import For from "../components/ControlFlow/For.astro";
 
 export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
 const Content = rendered.Content;
@@ -61,31 +61,31 @@ artYears.forEach(x => {
     <CardPage title="Arts" description="Contains a list of arts that Teuria drew." icon="ph:paint-brush-fill" url="/arts" hasDerivedPages>
       <Filesystem title="arts">
         <Link href="/arts">index</Link>
-        <For$ of={artYears}>
+        <For of={artYears}>
           {(y) => {
             const pictures = picturesByYear[y];
             return (
               <Filesystem title={y}>
                 <Link href={"/arts/" + y}>index</Link>
-                <For$ of={pictures}>
+                <For of={pictures}>
                   {x => <Link href={`/arts/${y}/${x.name}`}>{x.name}</Link>}
-                </For$>
+                </For>
               </Filesystem>)
           }}
-        </For$>
+        </For>
       </Filesystem>
     </CardPage>
     <CardPage title="Blogs" description="Teuria's story sharing." icon="ph:newspaper-clipping-fill" url="/posts" hasDerivedPages>
       <Filesystem title="posts">
         <Link href="/posts">index</Link>
-        <For$ of={slugs}>
+        <For of={slugs}>
           {x => <Link href={"/posts/" + x}>{x}</Link>}
-        </For$>
+        </For>
         <Filesystem title="tags">
           <Link href="/posts/tags">index</Link>
-          <For$ of={uniqueTags}>
+          <For of={uniqueTags}>
             {x => <Link href={"/posts/tags/" + x}>{x}</Link>}
-          </For$>
+          </For>
         </Filesystem>
       </Filesystem>
 
@@ -93,9 +93,9 @@ artYears.forEach(x => {
     <CardPage title="Games" description="Games that are developed by Teuria." icon="ph:game-controller-fill" url="/games" hasDerivedPages>
       <Filesystem title="games">
         <Link href="/games">index</Link>
-        <For$ of={gameSlugs}>
+        <For of={gameSlugs}>
           {x => <Link href={"/games/" + x}>{x}</Link>}
-        </For$>
+        </For>
       </Filesystem>
     </CardPage>
     <CardPage title="Commission" description="A pay for an art request website." icon="ph:money-wavy-fill" url="/commission"/>

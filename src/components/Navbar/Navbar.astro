@@ -1,6 +1,8 @@
 ---
 import NavButton from "./NavButton.astro";
 import TeIcon from "../Svg/TeIcon.astro";
+import NavBox from "./NavBox.astro";
+import NavBoxItem from "./NavBoxItem.astro";
 ---
 
 <nav class="w-full text-white sticky top-0 z-20 px-2 shadow-xl">
@@ -9,10 +11,17 @@ import TeIcon from "../Svg/TeIcon.astro";
       <TeIcon class="w-12 h-12 p-1"/>
       <p>TEURIA</p>
     </a>
-    <div class="flex gap-4">
+    <div class="hidden md:flex">
       <NavButton link="/posts">Blogs</NavButton>
       <NavButton link="/arts">Arts</NavButton>
       <NavButton link="/games">Games</NavButton>
+    </div>
+    <div class="flex md:hidden">
+      <NavBox title="More">
+        <NavBoxItem link="/posts">Blogs</NavBoxItem>
+        <NavBoxItem link="/arts">Arts</NavBoxItem>
+        <NavBoxItem link="/games">Games</NavBoxItem>
+      </NavBox>
     </div>
   </div>
 </nav>

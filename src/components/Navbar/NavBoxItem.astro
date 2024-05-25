@@ -1,0 +1,11 @@
+---
+interface Props {
+  link: string
+}
+
+const { link } = Astro.props;
+---
+
+<a class="flex justify-center min-w-16 hover:bg-midnight-light hover:text-cyan-400 duration-300 p-4 mx-auto max-w-[40rem]" href={link}>
+  <button class="font-bold select-none"><slot/></button>
+</a>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
+import For from '../../../components/ControlFlow/For.astro';
 
 const allPosts = await getCollection("posts");
 const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x => x).flat())];
@@ -9,14 +10,15 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x =
 <Layout>
   <div class="md:text-lg mx-auto w-[80rem] max-[1000px]:w-full px-4 md:px-10 py-20 font-slab">
     <p class="text-center font-bold text-4xl pb-12">TAGS</p>
-    {
-      uniqueTags.map(x => <span class="inline-block p-1 my-2 md:py-2 md:my-4">
-      <a href={`/posts/tags/${x}`}>
-        <span class="hover:bg-midnight-light duration-300 bg-slate-500 rounded-sm p-2 md:p-4 text-xl md:text-3xl font-sans">
-          #{x}
-        </span>
-      </a>
-    </span>)
-    }
+    <For of={uniqueTags}>
+      {x => <span class="inline-block p-1 my-2 md:py-2 md:my-4">
+        <a href={`/posts/tags/${x}`}>
+          <span class="hover:bg-midnight-light duration-300 bg-slate-500 rounded-sm p-2 md:p-4 text-xl md:text-3xl font-sans">
+            #{x}
+          </span>
+        </a>
+      </span>
+      }
+    </For>
   </div>
 </Layout>
