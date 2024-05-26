@@ -24,6 +24,20 @@ export const POST: APIRoute = async ({ request }) => {
       return exit("Please provide your contact email.", false);
     }
 
+    if (platform === "Email") {
+      const emailRegex = /[\w]+[@]{1}[\w]+\.[\w]+$/g 
+
+      if (!contactName.match(emailRegex)) {
+        return exit("Invalid email format.", false);
+      }
+    } else {
+      const discordRegex = /[\w|\.]+$/gy
+
+      if (!contactName.match(discordRegex)) {
+        return exit("Discord username should only contains letters, numbers, underscore and periods.", false);
+      }
+    }
+
     if (title === "") {
       return exit("Please provide the title of the art.", false);
     }
@@ -87,7 +101,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (res.ok) {
-        return exit("Your order has been sent!", true);
+      return exit("Your order has been sent!", true);
     }
 
     return exit("Something went wrong with sending your order. Please try again later.", false);
