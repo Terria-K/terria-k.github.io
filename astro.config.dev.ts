@@ -13,5 +13,11 @@ export default defineConfig({
             "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`,
         }
     },
-    adapter: vercel()
+    adapter: vercel(),
+    markdown: {
+        shikiConfig: {
+            theme: "tokyo-night",
+            wrap: false
+        }
+    }
 });
