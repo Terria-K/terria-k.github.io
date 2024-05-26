@@ -1,9 +1,14 @@
+import { createClient } from "@vercel/edge-config";
 import type { APIRoute } from "astro";
 
 export const prerender = false;
 
 
 export const POST: APIRoute = async ({ request }) => {
+    const disabled: boolean | undefined = await createClient(import.meta.env.EDGE_CONFIG).get("disabled");
+    if (disabled) {
+      return exit("The commission request is still closed for now, please come back later.", false);
+    }
     const formData = await request.formData();
 
     const platform = (formData.get("platform")?.valueOf() as string).trim();
