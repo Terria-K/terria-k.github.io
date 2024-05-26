@@ -15,6 +15,7 @@ import Accordion from '../components/Accordion/Accordion.astro';
 import CardPage from "../components/CardPage/CardPage.astro";
 import Filesystem from "../components/Filesystem/Filesystem.astro";
 import For from "../components/ControlFlow/For.astro";
+import { Icon } from "astro-icon/components";
 
 export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
 const Content = rendered.Content;
@@ -57,8 +58,16 @@ artYears.forEach(x => {
     <Content {components}/>
     <h2 class="text-4xl text-center font-bold py-8 font-cantarell">This is the only pages that exists in this website.</h2>
 
-    <CardPage title="Home" description="The homepage of this website." icon="ph:house-fill" url="/"/>
-    <CardPage title="Arts" description="Contains a list of arts that Teuria drew." icon="ph:paint-brush-fill" url="/arts" hasDerivedPages>
+    <CardPage title="Home" icon="ph:house-fill" url="/">
+      <Fragment slot="description">
+        The homepage of this website.
+      </Fragment>
+    </CardPage>
+    <CardPage title="Arts" icon="ph:paint-brush-fill" url="/arts" hasDerivedPages>
+      <Fragment slot="description">
+        Contains a list of arts that Teuria drew.
+      </Fragment>
+
       <Filesystem title="arts">
         <Link href="/arts">index</Link>
         <For of={artYears}>
@@ -75,7 +84,11 @@ artYears.forEach(x => {
         </For>
       </Filesystem>
     </CardPage>
-    <CardPage title="Blogs" description="Teuria's story sharing." icon="ph:newspaper-clipping-fill" url="/posts" hasDerivedPages>
+    <CardPage title="Blogs" icon="ph:newspaper-clipping-fill" url="/posts" hasDerivedPages>
+      <Fragment slot="description">
+        Teuria's story sharing.
+      </Fragment>
+
       <Filesystem title="posts">
         <Link href="/posts">index</Link>
         <For of={slugs}>
@@ -90,7 +103,11 @@ artYears.forEach(x => {
       </Filesystem>
 
     </CardPage>
-    <CardPage title="Games" description="Games that are developed by Teuria." icon="ph:game-controller-fill" url="/games" hasDerivedPages>
+    <CardPage title="Games" icon="ph:game-controller-fill" url="/games" hasDerivedPages>
+      <Fragment slot="description">
+        Games that are developed by Teuria.
+      </Fragment>
+
       <Filesystem title="games">
         <Link href="/games">index</Link>
         <For of={gameSlugs}>
@@ -98,8 +115,16 @@ artYears.forEach(x => {
         </For>
       </Filesystem>
     </CardPage>
-    <CardPage title="Commission" description="A pay for an art request website." icon="ph:money-wavy-fill" url="/commission"/>
-    <CardPage title="Labs" description="An experimental, finished, or unfinished website showcase." icon="ph:fire-fill" url="/labs" hasDerivedPages>
+    <CardPage title="Commission" icon="ph:money-wavy-fill" url="/commission">
+      <Fragment slot="description">
+        A pay for an art request website.
+      </Fragment>   
+    </CardPage>
+    <CardPage title="Labs" icon="ph:fire-fill" url="/labs" hasDerivedPages>
+      <Fragment slot="description">
+        An experimental, finished, or unfinished website showcase. JavaScript included. <Icon class="inline" name="ph:radioactive-fill"/>
+      </Fragment>
+
       <Filesystem title="labs">
         <Link href="/labs">index</Link>
       </Filesystem>
