@@ -8,5 +8,5 @@ const disabled: boolean | undefined = await createClient(import.meta.env.EDGE_CO
 ---
 
 <input {disabled} 
-    class="disabled:bg-gray-500 hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
-    type="submit" value={disabled ? "Closed" : "Order"}/>
+    class="disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
+    type="submit" value={disabled ? "Closed" : "Order"} title={disabled ? "Commission is currently closed" : null}/>
