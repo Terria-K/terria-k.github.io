@@ -29,8 +29,12 @@ const selected = Astro.url.pathname.includes(link);
     inset: 0 -1px;
     z-index: -1;
     transform: skew(-10deg) scaleY(var(--scale-y));
-    background-color: rgb(91, 189, 228);
+    background-color: #5bbde4;
     opacity: var(--scale-y);
+  }
+
+  .navbutton:hover::after {
+    background-color: #93edf3;
   }
 
   a:hover:not(.selected) {
