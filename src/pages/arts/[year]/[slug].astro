@@ -8,6 +8,7 @@ import ArtPreviewLayout from '../../../layouts/ArtPreviewLayout.astro';
 import FormattedDate from "../../../components/FormattedDate.astro";
 import { Image } from 'astro:assets';
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
@@ -57,12 +58,14 @@ export async function getStaticPaths() {
 
 
 export const components = { a: Link, h1: Header }
+const { slug } = Astro.params;
 const { picture, name, date, content, description } = Astro.props;
 
 const Content = (content ? await content() : undefined)?.Content;
 ---
 
 <ArtPreviewLayout title={name} content={description} imageSrc={picture.src}>
+  <script is:inline src="https://unpkg.com/htmx.org@1.9.12" slot="head"></script>
   <div class="flex w-full justify-center items-center">
     <div class="grid gap-6 md:grid-cols-2 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md">
       <div class="max-w-[57rem]">
@@ -83,4 +86,37 @@ const Content = (content ? await content() : undefined)?.Content;
       </div>
     </div>
   </div>
+
+  <div class="mx-auto max-w-[70rem] grid gap-4">
+    <form id="comment-form" hx-post="/api/comment" hx-target="#response">
+      <label>
+        <p>Comment: </p>
+        <textarea class="w-full py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="comment" rows="2" placeholder="Write a comment here"/>
+      </label>
+
+      <input class="hidden" readonly name="slug" value={slug}/>
+      <span id="response"></span>
+      <input class="px-4 py-2 hover:bg-green-400 duration-300 bg-green-600 rounded cursor-pointer" type="submit" value="Send"/>
+    </form>
+    <div class="relative grid gap-4 pb-10" hx-get={`/partials/message?slug=${slug}`} hx-target="this" hx-trigger="load, submit from:#comment-form">
+      <Icon class="w-16 h-16" name="svg-spinners:tadpole"/>
+    </div>
+  </div>
+
+
+  <style is:inline>
+    .message {
+      padding: 1rem;
+      background-color: var(--col-midnight);
+      border-radius: 12px;
+    }
+
+    .success {
+      color: lightgreen;
+    }
+
+    .failed {
+      color: red;
+    }
+  </style>
 </ArtPreviewLayout>
