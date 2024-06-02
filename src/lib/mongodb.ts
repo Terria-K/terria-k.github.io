@@ -41,17 +41,23 @@ export async function addMessages(message: string, slug: string) {
     await messageDb.insertOne({
         text: message,
         art: slug,
-        date: new Date(),
-        score: 0
+        owner: "Guest",
+        date: new Date()
     });
 }
 
-export async function upvoteComment(id: ObjectId) {
-    const messageDb = await Messages();
-    await messageDb.updateOne({_id: id}, { $inc: { score: 1 }});
+export async function Users() {
+    const db = await database();
+    return db.collection("users");
 }
 
-export async function downvoteComment(id: ObjectId) {
-    const messageDb = await Messages();
-    await messageDb.updateOne({_id: id}, { $inc: { score: -1 }});
+export async function addUsers(username: string, email: string, password: string) {
+    const usersDb = await Users();
+    const usrObj = {
+        _id: new ObjectId(),
+        username,
+        email,
+    }
+    await usersDb.insertOne({ ...usrObj, password });
+    return usrObj;
 }

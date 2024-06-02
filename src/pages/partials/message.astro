@@ -9,26 +9,17 @@ export const prerender = false;
 const slug = Astro.url.searchParams.get("slug");
 
 const messageDoc = await Messages();
-const messages = await messageDoc.find({ art: slug }).toArray();
+const messages = (await messageDoc.find({ art: slug }).toArray()).sort((x, y) => y.date - x.date);
 
 ---
+<p>Comments: ({messages.length})</p>
 <!-- Let's used the JSX one, it might be optimized that way.. -->
 {
-  messages.map(x => (<div class="message flex justify-between">
+  messages.map((x: any) => (<div class="mx-2 message flex gap-5 items-center">
     <div>
+      <h1 class="font-bold text-lg">Guest</h1>
       <span class="text-gray-500 text-sm"><FormattedDate date={x.date}/></span>
       <p>{x.text}</p>
     </div>
-
-    <div class="text-center">
-      <button hx-post={`/api/upvote?message=${x._id}`}>
-        <Icon class="w-4 h-4" name="ph:arrow-fat-line-up"/>
-      </button>
-      <p>0</p>
-      <button hx-post={`/api/downvote?message=${x._id}`}>
-        <Icon class="w-4 h-4" name="ph:arrow-fat-line-down"/>
-      </button>
-    </div>
-
   </div>))
 }
