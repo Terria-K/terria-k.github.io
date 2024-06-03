@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { Users, addUsers } from "../../lib/mongodb";
+import { Users } from "../../lib/mongodb";
 
 export const prerender = false;
 
@@ -25,5 +25,5 @@ export const GET: APIRoute = async (ctx) => {
         "$unset": { emailToken: "" }
     });
 
-    return new Response("Success");
+    return ctx.redirect("/login");
 }
