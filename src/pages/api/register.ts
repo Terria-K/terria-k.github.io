@@ -32,6 +32,11 @@ export const POST: APIRoute = async (ctx) => {
         return new Response("{ \"message\": \"Password does not matched.\" }", { status: 401 });
     }
 
+    const [isValid, resp] = validateSecurePassword(password);
+    if (!isValid) {
+        return resp as Response;
+    }
+
     const userDb = await Users();
     let user = await userDb.findOne({ email });
     if (user) {
@@ -52,4 +57,47 @@ export const POST: APIRoute = async (ctx) => {
     await sendMail(ctx.url.href, email, emailToken);
 
     return new Response("Success");
+}
+
+function validateSecurePassword(password: string) {
+    if (password.length < 8) {
+        return [
+            false, 
+            new Response("{ \"message\": \"Password must have atleast 8 characters.\" }", { status: 401 })
+        ];
+    }
+    const requiredSmallOrUnderscore = /[a-z_]+/g
+    const requiredBig = /[A-Z]+/g
+    const requiredNumbers = /[0-9]+/g
+    const requiredSpecial = /[!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?]+/g
+
+    if (!password.match(requiredSmallOrUnderscore)) {
+        return [
+            false, 
+            new Response("{ \"message\": \"Password must contain small letters or underscore.\" }", { status: 401 })
+        ];
+    }
+
+    if (!password.match(requiredBig)) {
+        return [
+            false, 
+            new Response("{ \"message\": \"Password must contain capital letters.\" }", { status: 401 })
+        ];
+    }
+
+    if (!password.match(requiredNumbers)) {
+        return [
+            false, 
+            new Response("{ \"message\": \"Password must contain a numbers.\" }", { status: 401 })
+        ];
+    }
+
+    if (!password.match(requiredSpecial)) {
+        return [
+            false, 
+            new Response("{ \"message\": \"Password must contain a special characters.\" }", { status: 401 })
+        ];
+    }
+
+    return [true]
 }
