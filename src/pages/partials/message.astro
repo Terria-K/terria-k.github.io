@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+import FormattedDate from "../../components/FormattedDate.astro";
+import { Messages } from "../../lib/mongodb";
+
+export const partial = true;
+export const prerender = false;
+
+const slug = Astro.url.searchParams.get("slug");
+
+const messageDoc = await Messages();
+const messages = (await messageDoc.find({ art: slug }).toArray()).sort((x, y) => y.date - x.date);
+
+---
+<p>Comments: ({messages.length})</p>
+<!-- Let's used the JSX one, it might be optimized that way.. -->
+{
+  messages.map((x: any) => (<div class="mx-2 message flex gap-5 items-center">
+    <div>
+      <h1 class="font-bold text-lg">Guest</h1>
+      <span class="text-gray-500 text-sm"><FormattedDate date={x.date}/></span>
+      <p>{x.text}</p>
+    </div>
+  </div>))
+}

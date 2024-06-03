@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+
+  <script>
+    const result = document.getElementById("result");
+    const form = document.getElementById("form") as HTMLFormElement | null;
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const resp = await fetch("/api/login", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!resp.ok) {
+        if (resp.status === 401) {
+          const error = await resp.json();
+          result!.innerText = error.message;
+        } else {
+          result!.innerText = "Email, Username or Password are invalid.";
+        }
+      } else {
+        const token = (await resp.json()).token;
+        localStorage.setItem("user-access", token);
+        window.location.href = "/";
+      }
+    })
+
+  </script>
+
+  <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
+    <form id="form" class="grid gap-4">
+      <label>
+        <p class="email">Email: <span class="text-red-400">*</span></p>
+        <input name="email" type="text"/>
+
+        <p class="email">Password: <span class="text-red-400">*</span></p>
+        <input name="password" type="password"/>
+      </label>
+
+      <div>
+        <input 
+          class="hover:bg-green-400 bg-green-600 duration-300 
+          text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
+          type="submit" value="Login"/>
+      </div>
+      <p class="text-red-500" id="result"></p>
+    </form>
+  </div>
+</Layout>
+
+<style>
+  label {
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+
+  input[type=text], input[type=password] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-radius: 0.25rem;
+    border-width: 2px;
+    border-color: var(--col-midnight-light);
+  }
+</style>
