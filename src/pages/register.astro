@@ -26,8 +26,6 @@ import Layout from "../layouts/Layout.astro";
         }
         result!.className = "text-red-500";
       } else {
-        const token = (await resp.json()).token;
-        localStorage.setItem("user-access", token);
         result!.innerText = "Registered successfully! Please check your inbox (or spam) in your email to verify your account."
         result!.className = "text-green-500";
       }
