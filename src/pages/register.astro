@@ -18,11 +18,18 @@ import Layout from "../layouts/Layout.astro";
       });
 
       if (!resp.ok) {
-        result!.innerText = "Something is incorrect.";
+        const error = await resp.json();
+        if (error) {
+          result!.innerText = error.message;
+        } else {
+          result!.innerText = "Something is incorrect";
+        }
+        result!.className = "text-red-500";
       } else {
         const token = (await resp.json()).token;
         localStorage.setItem("user-access", token);
-        window.location.href = "/";
+        result!.innerText = "Registered successfully! Please check your inbox (or spam) in your email to verify your account."
+        result!.className = "text-green-500";
       }
     })
 

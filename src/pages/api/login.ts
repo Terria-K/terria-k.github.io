@@ -9,6 +9,10 @@ export const POST: APIRoute = async (ctx) => {
     const formData = await ctx.request.formData();
     const email = (formData.get("email")?.valueOf() as string).trim();
     const password = (formData.get("password")?.valueOf() as string).trim();
+
+    if (email === "" || password === "") {
+        return new Response("{ \"message\": \"Email or Password are empty.\" }", { status: 401 });
+    }
     const userDb = await Users();
     const user = await userDb.findOne({ email });
     if (user) {
