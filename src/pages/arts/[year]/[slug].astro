@@ -88,7 +88,7 @@ const Content = (content ? await content() : undefined)?.Content;
   </div>
 
   <div class="mx-auto max-w-[70rem] grid gap-4">
-    <form id="comment-form" hx-post="/api/comment" hx-target="#response" hx-on::after-request="this.reset()">
+    <form id="comment-form">
       <label>
         <textarea class="w-full py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="comment" rows="2" placeholder="Write a comment here"/>
       </label>
@@ -102,6 +102,31 @@ const Content = (content ? await content() : undefined)?.Content;
     </div>
   </div>
 
+  <script>
+    const form = document.getElementById("comment-form") as HTMLFormElement | null;
+    const resp = document.getElementById("response");
+
+    form?.addEventListener("submit", async e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const access = localStorage.getItem("user-access");
+
+      const res = await fetch("/api/comment", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Authorization": "Bearer " + access
+        }
+      });
+
+      if (!res.ok) {
+        resp!.innerHTML = "<p class=\"text-red-500\">User is not authenticated.</p>";
+      } else {
+        form.reset();
+      }
+    })
+  </script>
 
   <style is:inline>
     .message {

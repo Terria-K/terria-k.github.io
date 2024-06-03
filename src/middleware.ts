@@ -2,6 +2,7 @@ import { defineMiddleware } from "astro:middleware";
 import { jwtVerify, verifyToken } from "./lib/auth";
 
 const PRIVATE_ROUTES = ["/api/comment"]
+const OPTIONAL_PRIVATE = ["/api/comment"]
 
 export const onRequest = defineMiddleware(async (context, next) => { 
     if (!PRIVATE_ROUTES.includes(context.url.pathname)) {
@@ -10,11 +11,16 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const tokenVerified = await verifyToken(context.request);
 
     if (!tokenVerified) {
-        return new Response("Forbidden", { status: 403 })   
+        if (OPTIONAL_PRIVATE.includes(context.url.pathname)) {
+            context.locals = { user: null }
+            return next();
+        }
+        return new Response("Unauthenticated", { status: 401 })   
     }
 
     try {
-        await jwtVerify(tokenVerified as string, import.meta.env.JWT_SECRET_KEY);
+        const user = await jwtVerify(tokenVerified as string, import.meta.env.JWT_SECRET_KEY);
+        context.locals = { user };
         return next();
     }
     catch (err) {

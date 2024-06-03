@@ -8,6 +8,9 @@ export async function verifyToken(request: Request): Promise<boolean | string> {
     }
 
     const bearerToken = bearerHeader.split(" ")[1];
+    if (bearerToken === "null") {
+        return false;
+    }
     return bearerToken;
 }
 

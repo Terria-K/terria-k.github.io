@@ -36,12 +36,12 @@ export async function Messages() {
     return db.collection("messages");
 }
 
-export async function addMessages(message: string, slug: string) {
+export async function addMessages(message: string, slug: string, owner: string) {
     const messageDb = await Messages();
     await messageDb.insertOne({
         text: message,
         art: slug,
-        owner: "Guest",
+        owner,
         date: new Date()
     });
 }
@@ -61,5 +61,4 @@ export async function addUsers(username: string, email: string, password: string
         isVerified: false
     }
     await usersDb.insertOne({ ...usrObj, password });
-    return usrObj;
 }
