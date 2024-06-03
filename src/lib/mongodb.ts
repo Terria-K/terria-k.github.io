@@ -51,12 +51,14 @@ export async function Users() {
     return db.collection("users");
 }
 
-export async function addUsers(username: string, email: string, password: string) {
+export async function addUsers(username: string, email: string, password: string, emailToken: string) {
     const usersDb = await Users();
     const usrObj = {
         _id: new ObjectId(),
         username,
         email,
+        emailToken,
+        isVerified: false
     }
     await usersDb.insertOne({ ...usrObj, password });
     return usrObj;

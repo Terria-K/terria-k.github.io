@@ -1,7 +1,8 @@
 import type { APIRoute } from "astro";
-import { jwtSign } from "../../lib/auth";
+import crypto from "crypto";
 import brcypt from "bcrypt";
 import { addUsers } from "../../lib/mongodb";
+import { sendMail } from "../../lib/mail";
 
 export const prerender = false;
 
@@ -14,9 +15,11 @@ export const POST: APIRoute = async (ctx) => {
     const salt = await brcypt.genSalt(10);
     const hashedPassword = await brcypt.hash(password, salt);
 
-    const user = await addUsers(username, email, hashedPassword);
+    const emailToken: string = crypto.randomBytes(64).toString("hex");
 
-    const token = await jwtSign({ user }, import.meta.env.JWT_SECRET_KEY);
+    const user = await addUsers(username, email, hashedPassword, emailToken);
 
-    return new Response(JSON.stringify(token));
+    await sendMail(ctx.url.href, email, emailToken);
+
+    return new Response("Success");
 }

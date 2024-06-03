@@ -14,7 +14,11 @@ export const POST: APIRoute = async (ctx) => {
     if (user) {
         const isMatch = bycrpt.compare(password, user.password);        
         if (!isMatch) {
-            return new Response("{ \"message\": \"Invalid Password\" }", { status: 401 });
+            return new Response("{ \"message\": \"Invalid Password.\" }", { status: 401 });
+        }
+
+        if (!user.isVerified) {
+            return new Response("{ \"message\": \"Email has not been verified yet!\" }", { status: 401 })
         }
 
         const tokenUser = {
