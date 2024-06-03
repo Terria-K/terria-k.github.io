@@ -17,6 +17,7 @@
     "@fontsource-variable/roboto-slab": "^5.0.20",
     "@fontsource/cantarell": "^5.0.13",
     "@fontsource/fira-sans": "^5.0.20",
+    "@fontsource/lexend-deca": "^5.0.13",
     "@playform/inline": "^0.0.2",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
