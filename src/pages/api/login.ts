@@ -16,7 +16,7 @@ export const POST: APIRoute = async (ctx) => {
     const userDb = await Users();
     const user = await userDb.findOne({ email });
     if (user) {
-        const isMatch = bycrpt.compare(password, user.password);        
+        const isMatch = await bycrpt.compare(password, user.password);
         if (!isMatch) {
             return new Response("{ \"message\": \"Invalid Password.\" }", { status: 401 });
         }
