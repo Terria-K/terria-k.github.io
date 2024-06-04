@@ -121,8 +121,9 @@ const Content = (content ? await content() : undefined)?.Content;
       });
 
       if (!res.ok) {
-        resp!.innerHTML = "<p class=\"text-red-500\">User is not authenticated.</p>";
+        resp!.innerHTML = "<p class=\"text-red-500\">Something went wrong. Please check your internet connection</p>";
       } else {
+        resp!.innerHTML = "";
         form.reset();
       }
     })

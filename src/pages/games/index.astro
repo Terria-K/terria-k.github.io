@@ -14,7 +14,6 @@ const games = await getCollection("games");
       <For of={games}>
         {x => <GamesPost name={x.data.title} description={x.data.description} image={x.data.image} slug={x.slug}/>}
       </For>
-      
     </ul>
   </div>
 </Layout>
