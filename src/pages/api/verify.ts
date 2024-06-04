@@ -4,12 +4,13 @@ import { Users } from "../../lib/mongodb";
 export const prerender = false;
 
 export const GET: APIRoute = async (ctx) => {
-    const userDb = await Users();
     const token = ctx.url.searchParams.get("token");
 
     if (!token) {
         return new Response("Can't find a token!", { status: 401 });
     }
+
+    const userDb = await Users();
 
     const user = await userDb.findOne({ emailToken: token });
     if (!user) {
