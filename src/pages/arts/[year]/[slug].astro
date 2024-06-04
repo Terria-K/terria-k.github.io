@@ -89,7 +89,7 @@ const Content = (content ? await content() : undefined)?.Content;
 
   <div class="mx-auto max-w-[76rem] grid gap-4">
     <form class="mx-8" id="comment-form">
-      <div hx-get={`/partials/commentVerify`} hx-target="this" hx-trigger="load, submit from:#comment-form">
+      <div id="commentVerify">
         <Icon class="w-16 h-16" name="svg-spinners:3-dots-fade"/>
       </div>
       <label>
@@ -109,6 +109,7 @@ const Content = (content ? await content() : undefined)?.Content;
     // We cannot trust HTMX for handling the Authorization as a header.
     const form = document.getElementById("comment-form") as HTMLFormElement | null;
     const resp = document.getElementById("response");
+    const commentVerify = document.getElementById("commentVerify");
 
     form?.addEventListener("submit", async e => {
       e.preventDefault();
@@ -131,6 +132,22 @@ const Content = (content ? await content() : undefined)?.Content;
         form.reset();
       }
     })
+
+
+    {
+      const access = localStorage.getItem("user-access");
+
+      const res = await fetch("/partials/commentVerify", {
+        headers: {
+          "Authorization": "Bearer " + access
+        }
+      });
+
+      if (res.ok) {
+        commentVerify!.innerHTML = await res.text();
+    }
+    }
+
   </script>
 
   <style is:inline>
