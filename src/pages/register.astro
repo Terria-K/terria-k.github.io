@@ -70,6 +70,7 @@ import Layout from "../layouts/Layout.astro";
       } else {
         result!.innerText = "Registered successfully! Please check your inbox (or spam) in your email to verify your account."
         result!.className = "text-green-500";
+        form.reset();
       }
     })
 
