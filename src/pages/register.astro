@@ -1,38 +1,10 @@
 ---
+import { Icon } from "astro-icon/components";
+import Link from "../components/Markdown/Link.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-
-  <script>
-    const result = document.getElementById("result");
-    const form = document.getElementById("form") as HTMLFormElement | null;
-
-    form?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-
-      const resp = await fetch("/api/register", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!resp.ok) {
-        const error = await resp.json();
-        if (error) {
-          result!.innerText = error.message;
-        } else {
-          result!.innerText = "Something is incorrect";
-        }
-        result!.className = "text-red-500";
-      } else {
-        result!.innerText = "Registered successfully! Please check your inbox (or spam) in your email to verify your account."
-        result!.className = "text-green-500";
-      }
-    })
-
-  </script>
-
   <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
     <form id="form" class="grid gap-4">
       <label>
@@ -49,15 +21,59 @@ import Layout from "../layouts/Layout.astro";
         <input name="confirmation" type="password"/>
       </label>
 
+      <p>Have an account already? <Link samePage href="/login">Click here to login</Link></p>
       <div>
-        <input 
+        <button
+          id="input-submit"
           class="hover:bg-green-400 bg-green-600 duration-300 
-          text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
-          type="submit" value="Register"/>
+          text-white px-8 py-4 text-xl rounded-xl cursor-pointer disabled:bg-green-950 disabled:cursor-not-allowed w-[137px]">
+          <p class="flex justify-center" id="shadow-root">
+            <Icon class="w-8 h-8" name="svg-spinners:3-dots-fade"/>
+          </p>
+          <p class="flex justify-center" id="replacement"></p>
+        </button>
       </div>
       <p id="result"></p>
     </form>
   </div>
+
+  <script>
+    const result = document.getElementById("result");
+    const form = document.getElementById("form") as HTMLFormElement | null;
+    const input = document.getElementById("input-submit") as HTMLInputElement | null;
+    const shadowRoot = document.getElementById("shadow-root");
+    const replacement = document.getElementById("replacement");
+    shadowRoot!.attachShadow({ mode: "open" });
+    replacement!.innerHTML = "Register";
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      input!.disabled = true;
+      replacement!.innerHTML = shadowRoot!.innerHTML;
+
+      const resp = await fetch("/api/register", {
+        method: "POST",
+        body: formData,
+      });
+      input!.disabled = false;
+      replacement!.innerHTML = "Register";
+
+      if (!resp.ok) {
+        const error = await resp.json();
+        if (error) {
+          result!.innerText = error.message;
+        } else {
+          result!.innerText = "Something is incorrect";
+        }
+        result!.className = "text-red-500";
+      } else {
+        result!.innerText = "Registered successfully! Please check your inbox (or spam) in your email to verify your account."
+        result!.className = "text-green-500";
+      }
+    })
+
+  </script>
 </Layout>
 
 <style>
