@@ -1,8 +1,8 @@
 import { defineMiddleware } from "astro:middleware";
 import { jwtVerify, verifyToken } from "./lib/auth";
 
-const PRIVATE_ROUTES = ["/api/comment"]
-const OPTIONAL_PRIVATE = ["/api/comment"]
+const PRIVATE_ROUTES = ["/api/comment", "/partials/commentVerify"]
+const OPTIONAL_PRIVATE = ["/api/comment", "/partials/commentVerify"]
 
 export const onRequest = defineMiddleware(async (context, next) => { 
     if (!PRIVATE_ROUTES.includes(context.url.pathname)) {

@@ -2,4 +2,4 @@
 const props = Astro.props;
 ---
 
-<a {...props} target="_blank" class="text-cyan-500 underline"><slot/></a>
+<a {...props} target={!props.samePage ? "_blank" : undefined} class="text-cyan-500 underline"><slot/></a>

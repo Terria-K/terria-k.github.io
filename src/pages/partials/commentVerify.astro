@@ -1,0 +1,21 @@
+---
+import Link from "../../components/Markdown/Link.astro";
+
+export const partial = true;
+export const prerender = false;
+
+const user = (Astro.locals as any).user;
+let name: string;
+if (!user) {
+    name = "Guest";
+} else {
+    name = user.tokenUser.username;
+}
+---
+
+<p class="py-4 text-gray-500">
+  You are currently login as <strong>{name}</strong>.
+  {
+    name === "Guest" ? <Link href="/login" samePage>Login here</Link> : null
+  }
+</p>

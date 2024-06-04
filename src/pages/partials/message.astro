@@ -9,7 +9,6 @@ const slug = Astro.url.searchParams.get("slug");
 
 const messageDoc = await Messages();
 const messages = (await messageDoc.find({ art: slug }).toArray()).sort((x, y) => y.date - x.date);
-
 ---
 <p>Comments: ({messages.length})</p>
 {

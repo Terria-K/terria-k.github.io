@@ -89,6 +89,9 @@ const Content = (content ? await content() : undefined)?.Content;
 
   <div class="mx-auto max-w-[76rem] grid gap-4">
     <form class="mx-8" id="comment-form">
+      <div hx-get={`/partials/commentVerify`} hx-target="this" hx-trigger="load, submit from:#comment-form">
+        <Icon class="w-16 h-16" name="svg-spinners:3-dots-fade"/>
+      </div>
       <label>
         <textarea class="w-full py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="comment" rows="2" placeholder="Write a comment here"/>
       </label>
@@ -103,6 +106,7 @@ const Content = (content ? await content() : undefined)?.Content;
   </div>
 
   <script>
+    // We cannot trust HTMX for handling the Authorization as a header.
     const form = document.getElementById("comment-form") as HTMLFormElement | null;
     const resp = document.getElementById("response");
 
@@ -121,7 +125,7 @@ const Content = (content ? await content() : undefined)?.Content;
       });
 
       if (!res.ok) {
-        resp!.innerHTML = "<p class=\"text-red-500\">Something went wrong. Please check your internet connection</p>";
+        resp!.innerHTML = "<p class=\"text-red-500\">Something went wrong. Please check your internet connection.</p>";
       } else {
         resp!.innerHTML = "";
         form.reset();
