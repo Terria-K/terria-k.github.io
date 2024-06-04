@@ -1,8 +1,7 @@
 import nodemailer from "nodemailer";
-import type Mail from "nodemailer/lib/mailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
-export async function sendMail(req: string, email: string, emailToken: string) {
+export function sendMail(req: string, email: string, emailToken: string) {
     const transporter = nodemailer.createTransport({
         service: "outlook",
         host: "smtp-mail.outlook.com",
@@ -23,20 +22,12 @@ export async function sendMail(req: string, email: string, emailToken: string) {
         <a href="${req.replace("register", "verify")}?token=${emailToken}">Click here</a> `
     };
 
-    return await sent(transporter, mailOptions);
-}
+    transporter.sendMail(mailOptions, (err: Error | null, info: SMTPTransport.SentMessageInfo) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
 
-async function sent(
-    transpoter: nodemailer.Transporter<SMTPTransport.SentMessageInfo>,
-    mailOptions: Mail.Options
-): Promise<SMTPTransport.SentMessageInfo> {
-    return new Promise((resolve, reject) => {
-        transpoter.sendMail(mailOptions, (err: Error | null, info: SMTPTransport.SentMessageInfo) => {
-            if (err) {
-                return reject(err);
-            }
-
-            return resolve(info);
-        });
+        console.log(info);
     });
 }

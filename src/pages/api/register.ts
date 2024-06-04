@@ -54,7 +54,7 @@ export const POST: APIRoute = async (ctx) => {
 
     await addUsers(username, email, hashedPassword, emailToken);
 
-    await sendMail(ctx.url.href, email, emailToken);
+    sendMail(ctx.url.href, email, emailToken);
 
     return new Response("Success");
 }
