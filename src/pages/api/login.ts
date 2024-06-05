@@ -11,18 +11,22 @@ export const POST: APIRoute = async (ctx) => {
     const password = (formData.get("password")?.valueOf() as string).trim();
 
     if (email === "" || password === "") {
-        return new Response("{ \"message\": \"Email or Password are empty.\" }", { status: 401 });
+        return new Response("Email or Password are empty.", { status: 401 });
     }
     const userDb = await Users();
     const user = await userDb.findOne({ email });
     if (user) {
         const isMatch = await bycrpt.compare(password, user.password);
         if (!isMatch) {
-            return new Response("{ \"message\": \"Invalid Password.\" }", { status: 401 });
+            return new Response("Invalid Password", { status: 401 });
         }
 
         if (!user.isVerified) {
-            return new Response("{ \"message\": \"Email has not been verified yet!\" }", { status: 401 })
+            return new Response(`
+            Email has not been verified yet! <a 
+                style="color: cyan;" 
+                href="/api/resend?receiver=${email}" target="_blank">Click here to resend.</a>
+        `, { status: 401 })
         }
 
         const tokenUser = {
@@ -35,6 +39,6 @@ export const POST: APIRoute = async (ctx) => {
         return new Response(JSON.stringify(token));
     }
 
-    return new Response("{ \"message\": \"Email, Username or Password are invalid.\" }", { status: 401 });
+    return new Response("Email, Username or Password are invalid.", { status: 401 });
 }
 

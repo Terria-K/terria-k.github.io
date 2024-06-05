@@ -55,8 +55,8 @@ import Layout from "../layouts/Layout.astro";
 
       if (!resp.ok) {
         if (resp.status === 401) {
-          const error = await resp.json();
-          result!.innerText = error.message;
+          const error = await resp.text();
+          result!.innerHTML = error;
         } else {
           result!.innerText = "Email, Username or Password are invalid.";
         }

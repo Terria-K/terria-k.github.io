@@ -13,13 +13,17 @@ export function sendMail(req: string, email: string, emailToken: string) {
         }
     });
 
+    if (req.includes("?")) {
+        req = req.substring(0, req.indexOf("?"));
+    }
+
     const mailOptions = {
         from: `"Teuria" <${import.meta.env.OUTLOOK_EMAIL}>`,
         to: email,
         subject: "Please verify your email in Teuria...",
         html: `<p>Verify your email by cliking in this link</p>
         <br/>
-        <a href="${req.replace("register", "verify")}?token=${emailToken}">Click here</a> `
+        <a href="${req.replace("resend", "verify").replace("register", "verify")}?token=${emailToken}">Click here</a> `
     };
 
     transporter.sendMail(mailOptions, (err: Error | null, info: SMTPTransport.SentMessageInfo) => {
