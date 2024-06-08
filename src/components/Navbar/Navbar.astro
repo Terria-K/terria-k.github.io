@@ -3,9 +3,10 @@ import NavButton from "./NavButton.astro";
 import TeIcon from "../Svg/TeIcon.astro";
 import NavBurger from "./NavBurger.astro";
 import NavBurgerItem from "./NavBurgerItem.astro";
+import AuthNav from "../@svelte-components/AuthNav.svelte";
 ---
 
-<nav class="w-full text-white sticky top-0 z-20 px-2 shadow-xl border-b-2">
+<nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl border-b-2" flamethrower-preserve>
   <div class="mx-auto max-w-[96rem] flex justify-between font-cantarell">
     <a href="/" class="flex items-center gap-4 font-bold cursor-pointer">
       <TeIcon class="w-12 h-12 p-1"/>
@@ -16,6 +17,7 @@ import NavBurgerItem from "./NavBurgerItem.astro";
       <NavButton link="/arts">Arts</NavButton>
       <NavButton link="/games">Games</NavButton>
       <NavButton link="/labs">Labs</NavButton>
+      <AuthNav client:load/>
     </div>
     <div class="flex md:hidden">
       <NavBurger>
