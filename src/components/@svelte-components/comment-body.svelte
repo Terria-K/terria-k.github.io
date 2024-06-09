@@ -42,13 +42,13 @@
     <p class="body">{body}</p>
   </div>
 
-  <!-- {#if sessionname !== "Guest" && sessionname === username} -->
+  {#if sessionname !== "Guest" && sessionname === username}
     <button on:click={remove} class="trash delete" data-id={id}>
       <span>
         <Icon style="width:24px;height:24px;" icon="ph:trash"/>
       </span>
     </button>
-  <!-- {/if} -->
+  {/if}
 </div>
 
 
