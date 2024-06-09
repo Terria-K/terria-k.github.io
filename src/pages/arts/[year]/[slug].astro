@@ -65,7 +65,6 @@ const Content = (content ? await content() : undefined)?.Content;
 ---
 
 <ArtPreviewLayout title={name} content={description} imageSrc={picture.src}>
-  <script is:inline src="https://unpkg.com/htmx.org@1.9.12" slot="head"></script>
   <div class="flex w-full justify-center items-center">
     <div class="grid gap-6 md:grid-cols-2 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md">
       <div class="max-w-[57rem]">
