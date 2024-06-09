@@ -21,7 +21,7 @@ export const GET: APIRoute = async (ctx) => {
         return new Response("User has already been verified!", { status: 401 });
     }
 
-    await db.update(User).set({ emailToken: undefined, isVerified: true });
+    await db.update(User).set({ emailToken: null, isVerified: true });
 
     return ctx.redirect("/login");
 }
