@@ -5,7 +5,7 @@ import CommissionForm from "../../components/@svelte-components/CommissionForm.s
 
 
 <Layout>
-  <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
+  <div class="font-sans mx-auto max-w-[65rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
     <CommissionForm client:load>
       <p class="text-white font-bold text-2xl">Contact</p>
 
@@ -23,6 +23,17 @@ import CommissionForm from "../../components/@svelte-components/CommissionForm.s
         <p class="hidden email">Email: <span class="text-red-400">*</span></p>
         <input name="contactname" type="text"/>
         <p class="text-gray-400">If you're on Discord, please make yourself available for me to able to contact you, or join in my Discord Server in the icon below.</p>
+      </label>
+
+      <label>
+        <p>Payment Method: <span class="text-red-400">*</span></p>
+        <p class="text-gray-400">Minimum of $10</p>
+
+        <select name="payment" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" value="Paypal">
+          <option class="bg-midnight-light" value="Paypal">Paypal</option>
+          <option class="bg-midnight-light" value="Kofi">Kofi (+$1.50)</option>
+          <option class="bg-midnight-light" value="GCASH">GCASH (&#x20B1 500.00)</option>
+        </select>
       </label>
 
       <p class="text-white font-bold text-2xl">Request</p>
@@ -65,12 +76,6 @@ import CommissionForm from "../../components/@svelte-components/CommissionForm.s
         Prices of each art is minimum of $10 and you can go beyond that if you want to support me more as an artist. <br/>
         You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
       </p>
-      <p class="font-bold">Available payment method</p>
-      <ul>
-        <li>Paypal</li>
-        <li>Kofi (+$1.50)</li>
-        <li>GCASH (&#x20B1 500.00)</li>
-      </ul>
     </CommissionForm>
   </div>
 </Layout>

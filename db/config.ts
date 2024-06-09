@@ -21,7 +21,20 @@ const Comment = defineTable({
   }
 });
 
+const ArtCommission = defineTable({
+  columns: {
+    _id: column.text({ primaryKey: true }),
+    title: column.text(),
+    description: column.text(),
+    platform: column.text(),
+    contact: column.text(),
+    size: column.text(),
+    references: column.text(),
+    payment: column.text()
+  }
+});
+
 // https://astro.build/db/config
 export default defineDb({
-  tables: { Comment, User }
+  tables: { Comment, User, ArtCommission }
 });
