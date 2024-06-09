@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import bycrpt from "bcrypt";
 import { jwtSign } from "../../lib/auth";
-import { Users } from "../../lib/mongodb";
+import { User, db, eq, or } from "astro:db";
 
 export const prerender = false;
 
@@ -13,8 +13,15 @@ export const POST: APIRoute = async (ctx) => {
     if (email === "" || password === "") {
         return new Response("Email or Password are empty.", { status: 401 });
     }
-    const userDb = await Users();
-    const user = await userDb.findOne({ email });
+
+    let findIfExists = await db.select().from(User).where(
+        or(
+            eq(User.email, email), 
+            eq(User.username, email))
+        );
+
+    let user = findIfExists.at(0);
+
     if (user) {
         const isMatch = await bycrpt.compare(password, user.password);
         if (!isMatch) {

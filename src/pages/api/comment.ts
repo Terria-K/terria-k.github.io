@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { addMessages } from "../../lib/mongodb";
+import { addMessages } from "../../lib/database";
 
 export const prerender = false;
 
@@ -13,13 +13,13 @@ export const POST: APIRoute = async (ctx) => {
     if (comment === "") {
         return new Response("<p class=\"failed\">Comment is empty</p>");
     }
-
+    
     const user = (ctx.locals as any).user;
     let name: string;
     if (!user) {
-        name = "Guest";
+        name = "-1";
     } else {
-        name = user.tokenUser.username;
+        name = user.tokenUser.id;
     }
 
     await addMessages(comment, slug, name);

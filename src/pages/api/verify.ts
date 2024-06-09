@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { Users } from "../../lib/mongodb";
+import { User, db, eq } from "astro:db";
 
 export const prerender = false;
 
@@ -10,9 +10,9 @@ export const GET: APIRoute = async (ctx) => {
         return new Response("Can't find a token!", { status: 401 });
     }
 
-    const userDb = await Users();
+    let findIfExists = await db.select().from(User).where(eq(User.emailToken, token));
+    let user = findIfExists.at(0);
 
-    const user = await userDb.findOne({ emailToken: token });
     if (!user) {
         return new Response("User not found!", { status: 401 });
     }
@@ -21,10 +21,7 @@ export const GET: APIRoute = async (ctx) => {
         return new Response("User has already been verified!", { status: 401 });
     }
 
-    await userDb.updateOne({ emailToken: token }, { 
-        "$set": { isVerified: true },
-        "$unset": { emailToken: "" }
-    });
+    await db.update(User).set({ emailToken: undefined, isVerified: true });
 
     return ctx.redirect("/login");
 }

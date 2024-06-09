@@ -1,8 +1,9 @@
 import type { APIRoute } from "astro";
 import crypto from "crypto";
 import brcypt from "bcrypt";
-import { Users, addUsers } from "../../lib/mongodb";
+import { addUsers } from "../../lib/database";
 import { sendMail } from "../../lib/mail";
+import { User, db, eq, or } from "astro:db";
 
 export const prerender = false;
 
@@ -37,14 +38,14 @@ export const POST: APIRoute = async (ctx) => {
         return resp as Response;
     }
 
-    const userDb = await Users();
-    let user = await userDb.findOne({ email });
-    if (user) {
-        return new Response("{ \"message\": \"Account already existed with this email.\" }", { status: 401 });
-    }
-    user = await userDb.findOne({ username });
-    if (user) {
-        return new Response("{ \"message\": \"Account already existed with this username.\" }", { status: 401 });
+    let findIfExists = await db.select().from(User).where(
+        or(
+            eq(User.email, email), 
+            eq(User.username, username))
+        );
+
+    if (findIfExists.length > 0) {
+        return new Response("{ \"message\": \"Account already existed with this email or username.\" }", { status: 401 });
     }
 
     const salt = await brcypt.genSalt(10);
