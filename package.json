@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev --config astro.config.dev.ts",
     "start": "astro dev",
-    "build": "astro check && astro build --config astro.config.build.ts",
+    "build": "astro check && astro build --config astro.config.build.ts --remote",
     "preview": "astro preview",
     "astro": "astro"
   },
