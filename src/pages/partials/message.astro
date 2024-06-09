@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-import FormattedDate from "../../components/FormattedDate.astro";
 import { Comment, db, eq, User, like } from "astro:db";
 
 export const partial = true;
@@ -8,10 +6,14 @@ export const prerender = false;
 
 const slug = Astro.url.searchParams.get("slug");
 
-const messageDoc = await db.select().from(Comment)
-  .where(like(Comment.artRef, `%${slug}%`))
-  .innerJoin(User, eq(Comment.author, User._id)); 
-const messages = messageDoc.sort((x, y) => y.Comment.date.valueOf() - x.Comment.date.valueOf());
+const messageDoc = await db.select({
+    comment: Comment,
+    username: User.username
+  }).from(Comment)
+    .where(like(Comment.artRef, `%${slug}%`))
+    .innerJoin(User, eq(Comment.author, User._id)); 
+
+const messages = messageDoc.sort((x, y) => y.comment.date.valueOf() - x.comment.date.valueOf());
 
 const isExpired = (Astro.locals as any).expired;
 let name: string = "";
@@ -29,15 +31,15 @@ if (!isExpired) {
 {
   messages.map((x: typeof messageDoc[0]) => (
     <comment-body 
-      username={x.User.username} 
-      date={x.Comment.date.toLocaleDateString("en-us", {
+      username={x.username} 
+      date={x.comment.date.toLocaleDateString("en-us", {
 					weekday: 'long',
 					year: 'numeric',
 					month: 'long',
 					day: 'numeric'
       }).replace(",", "")}
-      body={x.Comment.body}
-      id={x.Comment._id} 
+      body={x.comment.body}
+      id={x.comment._id} 
       sessionname={name}></comment-body>
 
   ))
