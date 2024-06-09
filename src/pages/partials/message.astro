@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import FormattedDate from "../../components/FormattedDate.astro";
 import { Comment, db, eq, User, like } from "astro:db";
 
@@ -12,14 +13,32 @@ const messageDoc = await db.select().from(Comment)
   .innerJoin(User, eq(Comment.author, User._id)); 
 const messages = messageDoc.sort((x, y) => y.Comment.date.valueOf() - x.Comment.date.valueOf());
 
+const isExpired = (Astro.locals as any).expired;
+let name: string = "";
+if (!isExpired) {
+  const user = (Astro.locals as any).user;
+  if (!user) {
+      name = "Guest";
+  } else {
+      name = user.tokenUser.username;
+  }
+}
+
 ---
 <p>Comments: ({messages.length})</p>
 {
-  messages.map((x: typeof messageDoc[0]) => (<div class="mx-2 p-4 bg-midnight rounded-xl flex gap-5 items-center">
-    <div>
-      <h1 class={`font-bold text-lg ${x.User.username === "Guest" ? "text-gray-400" : ""}`}>{x.User.username}</h1>
-      <span class="text-gray-500 text-sm"><FormattedDate date={x.Comment.date}/></span>
-      <p>{x.Comment.body}</p>
-    </div>
-  </div>))
+  messages.map((x: typeof messageDoc[0]) => (
+    <comment-body 
+      username={x.User.username} 
+      date={x.Comment.date.toLocaleDateString("en-us", {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
+      }).replace(",", "")}
+      body={x.Comment.body}
+      id={x.Comment._id} 
+      sessionname={name}></comment-body>
+
+  ))
 }

@@ -13,6 +13,7 @@ const User = defineTable({
 
 const Comment = defineTable({
   columns: {
+    _id: column.text({ primaryKey: true }),
     author: column.text({ references: () => User.columns._id }),
     artRef: column.text(),
     date: column.date(),

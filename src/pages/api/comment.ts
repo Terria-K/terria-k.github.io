@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { addMessages } from "../../lib/database";
+import { addMessages, removeMessages } from "../../lib/database";
 
 export const prerender = false;
 
@@ -24,4 +24,20 @@ export const POST: APIRoute = async (ctx) => {
 
     await addMessages(comment, slug, name);
     return new Response("<p class=\"success\">Sent successfully</p>");
+}
+
+export const DELETE: APIRoute = async (ctx) => {
+    const body = await ctx.request.json();
+
+    const user = (ctx.locals as any).user;
+
+    if (!user) {
+        return new Response("Unauthorized", { status: 401 });
+    } 
+    if (user.tokenUser.username !== body.username) {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
+    await removeMessages(body.id);
+    return new Response("Success");
 }

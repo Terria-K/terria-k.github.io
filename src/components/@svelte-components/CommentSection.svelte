@@ -1,6 +1,5 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
-  import { onMount } from "svelte";
 
   export let slug: string;
   let section: HTMLElement;
@@ -25,7 +24,12 @@
   }
 
   async function loadComments() {
-    const res = await fetch(`/partials/message?slug=${slug}`);
+    const access = localStorage.getItem("user-access");
+    const res = await fetch(`/partials/message?slug=${slug}`, {
+      headers: {
+        "Authorization": "Bearer " + access
+      }
+    });
 
     if (res.ok) {
       return await res.text();
