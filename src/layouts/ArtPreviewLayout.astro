@@ -19,12 +19,12 @@ const prop = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={prop.content} />
-    <meta name="og:title" content={`Teuria's Website - ${prop.title}`} />       
+    <meta name="og:title" content={`${prop.title}`} />       
     <meta name="og:description" content={prop.content} />
     <meta name="og:image" content={prop.imageSrc}/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{`Teuria's Website - ${prop.title}`}</title>
+    <title>{`${prop.title}`}</title>
     <slot name="head"/>
     <script>
       import flamethrower from "flamethrower-router";
