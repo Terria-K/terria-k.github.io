@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { addMessages, removeMessages } from "../../lib/database";
-
+import { Comment,User,db,desc,eq,like,sql } from "astro:db";
 export const prerender = false;
 
 
@@ -24,6 +24,45 @@ export const POST: APIRoute = async (ctx) => {
 
     await addMessages(comment, slug, name);
     return new Response("<p class=\"success\">Sent successfully</p>");
+}
+
+export const GET: APIRoute = async (ctx) => {
+    const slug = ctx.url.searchParams.get("slug");
+    const page = ctx.url.searchParams.get("page");
+    let pageNumber = 0;
+    if (page) {
+        pageNumber = +page;
+    }
+
+    const messages = await db.select({
+        count: sql<number>`count(*) over()`,
+        comment: Comment,
+        username: User.username
+    }).from(Comment)
+        .where(like(Comment.artRef, `%${slug}%`))
+        .innerJoin(User, eq(Comment.author, User._id))
+        .orderBy(desc(Comment.date))
+        .limit(5)
+        .offset(pageNumber * 5); 
+
+
+    const isExpired = (ctx.locals as any).expired;
+    let name: string = "";
+    if (!isExpired) {
+        const user = (ctx.locals as any).user;
+        if (!user) {
+            name = "Guest";
+        } else {
+            name = user.tokenUser.username;
+        }
+    }
+
+    let data = {
+        sessionName: name,
+        messages
+    };
+
+    return new Response(JSON.stringify(data));
 }
 
 export const DELETE: APIRoute = async (ctx) => {

@@ -1,4 +1,3 @@
-<svelte:options customElement="comment-body" />
 <script lang="ts">
     import Icon from "@iconify/svelte";
 
@@ -7,6 +6,7 @@
     export let date: string;
     export let body: string;
     export let id: string;
+
 
     async function remove() {
       const access = localStorage.getItem("user-access");
