@@ -1,13 +1,13 @@
 ---
-import { Icon } from 'astro-icon/components';
-import Footer from '../components/Footer/Footer.astro';
-import Navbar from '../components/Navbar/Navbar.astro';
-import GlobalStyleLayout from './GlobalStyleLayout.astro';
+import { Icon } from "astro-icon/components";
+import Footer from "../components/Footer/Footer.astro";
+import Navbar from "../components/Navbar/Navbar.astro";
+import GlobalStyleLayout from "./GlobalStyleLayout.astro";
 
 interface Props {
-    title: string,
-    content: string,
-    imageSrc: string
+  title: string;
+  content: string;
+  imageSrc: string;
 }
 
 const prop = Astro.props;
@@ -19,13 +19,13 @@ const prop = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={prop.content} />
-    <meta name="og:title" content={`${prop.title}`} />       
+    <meta name="og:title" content={`${prop.title}`} />
     <meta name="og:description" content={prop.content} />
-    <meta name="og:image" content={prop.imageSrc}/>
+    <meta name="og:image" content={prop.imageSrc} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{`${prop.title}`}</title>
-    <slot name="head"/>
+    <slot name="head" />
     <script>
       import flamethrower from "flamethrower-router";
 
@@ -33,26 +33,29 @@ const prop = Astro.props;
     </script>
   </head>
 
-  <GlobalStyleLayout/>
+  <GlobalStyleLayout />
 
   <body>
-    <meta name="theme_color" content="#01f1fe"/>
-    <meta name="twitter:title" content={prop.title}/>
-    <meta name="twitter:description" content={prop.content}/>
-    <meta name="twitter:image" content={prop.imageSrc}/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <Navbar/>
+    <meta name="theme_color" content="#01f1fe" />
+    <meta name="twitter:title" content={prop.title} />
+    <meta name="twitter:description" content={prop.content} />
+    <meta name="twitter:image" content={prop.imageSrc} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <Navbar />
 
     <div class="bg-midnight-blue py-4">
-      <a href="/arts" class="text-white px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
-          <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
-          <p>Artworks</p>
+      <a
+        href="/arts"
+        class="text-white px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center"
+      >
+        <Icon class="w-8 h-8" name="ph:arrow-left-light" />
+        <p>Artworks</p>
       </a>
     </div>
     <div class="min-h-screen font-sans">
       <slot />
     </div>
 
-    <Footer/>
+    <Footer />
   </body>
 </html>
