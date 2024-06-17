@@ -27,13 +27,15 @@
   }
 </script>
 
-<button class={`btn ${open ? "open" : ""}`} on:click={() => open = !open}>
+<button class="btn" on:click={() => open = !open} data-open={!open ? undefined : ""}>
   <Icon icon="ph:caret-down-fill"/>
 </button>
 {#if open}
   <div class="dialog">
     {#await authVerify()}
-      <Icon class="icon" icon="svg-spinners:3-dots-fade"/>
+      <span class="icon">
+        <Icon icon="svg-spinners:3-dots-fade"/>
+      </span>
     {:then html}
       {@html html}
     {/await}
@@ -60,10 +62,10 @@
     position: absolute;
     background-color: var(--col-midnight);
     border-radius: 0.25rem;
-    transform: translateX(-120px);
+    transform: translateX(-80px);
   }
 
-  .user {
+  :global(.user) {
     display: grid;
     align-items: center;
   }
@@ -99,7 +101,7 @@
     background-color: rgb(6, 182, 212);
   }
 
-  .open {
+  .btn[data-open] {
     transform: rotate(180deg);
   }
 </style>
