@@ -5,6 +5,36 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <div class="font-sans mx-auto max-w-[96rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
-    <LoginForm client:load/>
+    <LoginForm client:load>
+      <label>
+        <p class="email">Email: <span class="text-red-400">*</span></p>
+        <input name="email" type="text"/>
+
+        <p class="email">Password: <span class="text-red-400">*</span></p>
+        <input name="password" type="password"/>
+      </label>
+
+      <p>Don't have an account yet?
+        <a href="/register" class="text-cyan-500 underline">Create on here</a>
+      </p>
+    </LoginForm>
   </div>
 </Layout>
+
+<style>
+  label {
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+
+  input[type=text], input[type=password] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-radius: 0.25rem;
+    border-width: 2px;
+    border-color: var(--col-midnight-light);
+  }
+</style>

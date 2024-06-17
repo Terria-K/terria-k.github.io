@@ -34,22 +34,12 @@
 </script>
 
 <form bind:this={form} on:submit={login} class="grid gap-4">
-  <label>
-    <p class="email">Email: <span class="text-red-400">*</span></p>
-    <input name="email" type="text"/>
-
-    <p class="email">Password: <span class="text-red-400">*</span></p>
-    <input name="password" type="password"/>
-  </label>
-
-  <p>Don't have an account yet?  
-    <a href="/register" class="text-cyan-500 underline">Create on here</a>
-  </p>
+  <slot/>
 
   <div>
     <button
       disabled={loading}
-      class="hover:bg-green-400 bg-green-600 duration-300 
+      class="hover:bg-green-400 bg-green-600 duration-300
       text-white px-8 py-4 text-xl rounded-xl cursor-pointer disabled:bg-green-950 disabled:cursor-not-allowed w-[137px]">
       <p class="flex justify-center">
         {#if loading}
@@ -62,21 +52,3 @@
   </div>
   <p class="text-red-500">{@html errorText}</p>
 </form>
-
-<style>
-  label {
-    display: flex;
-    flex-direction: column;
-    color: white;
-  }
-
-  input[type=text], input[type=password] {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    background-color: transparent;
-    border-radius: 0.25rem;
-    border-width: 2px;
-    border-color: var(--col-midnight-light);
-  }
-</style>
