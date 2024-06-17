@@ -1,14 +1,16 @@
 ---
 interface Props {
-  link: string,
+  link: string;
 }
 
 const { link } = Astro.props;
-const selected = Astro.url.pathname.includes(link);
 ---
 
-<a class=`flex font-bold justify-center items-center min-w-16 navbutton ${selected ? "selected text-black" : "hover:text-black"}` href={link}>
-  <slot/>
+<a
+  class="flex font-bold justify-center items-center min-w-16 navbutton hover:text-black"
+  href={link}
+>
+  <slot />
 </a>
 
 <style>

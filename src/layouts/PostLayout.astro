@@ -6,7 +6,7 @@ import GlobalStyleLayout from './GlobalStyleLayout.astro';
 interface Props {
   description: string,
   title: string,
-  image: string 
+  image: string
 }
 
 const props = Astro.props;
@@ -20,11 +20,12 @@ const props = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:title" content={`Teuria's Blog - ${props.title}`} />       
+    <meta property="og:title" content={`Teuria's Blog - ${props.title}`} />
     <meta property="og:description" content={props.description} />
     <meta property="og:image" content={props.image}/>
     <title>{`Teuria's Blog - ${props.title}`}</title>
     <script>
+      import "../components/@svelte-components/auth-nav.svelte";
       import flamethrower from "flamethrower-router";
       flamethrower({});
     </script>

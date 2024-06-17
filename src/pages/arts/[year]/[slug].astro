@@ -3,19 +3,21 @@ export const prerender = true;
 
 import Link from "../../../components/Markdown/Link.astro";
 import Header from "../../../components/Markdown/Header.astro";
-import fs from 'path';
-import ArtPreviewLayout from '../../../layouts/ArtPreviewLayout.astro';
+import fs from "path";
+import ArtPreviewLayout from "../../../layouts/ArtPreviewLayout.astro";
 import FormattedDate from "../../../components/FormattedDate.astro";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import CommentSection from "../../../components/@svelte-components/CommentSection.svelte";
 
 export async function getStaticPaths() {
-  const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+  const pictures: ImageMetadata[] = await Astro.glob(
+    "/src/assets/webp_arts/**/*.webp",
+  ).then((x) => x.map((x) => x.default));
   const arts = await getCollection("artworks");
 
-  let artworkMds: Record<string, typeof arts[0]> = {};
-  arts.forEach(x => {
+  let artworkMds: Record<string, (typeof arts)[0]> = {};
+  arts.forEach((x) => {
     artworkMds[x.slug] = x;
   });
 
@@ -23,15 +25,14 @@ export async function getStaticPaths() {
 
   for (let picture of pictures) {
     const baseName = fs.basename(picture.src);
-    const dateName = baseName.split('.')[0];
+    const dateName = baseName.split(".")[0];
     let name = dateName.substring(11).replaceAll("_", " ");
     const date = new Date(dateName.substring(0, 10));
-    const slug = name;
     const year = baseName.split("-")[2].substring(0, 4);
 
     let id = year + "/" + dateName.substring(11).toLowerCase();
 
-    let content: typeof arts[0]["render"] | undefined;
+    let content: (typeof arts)[0]["render"] | undefined;
     let description = "";
 
     const mds = artworkMds[id];
@@ -48,16 +49,23 @@ export async function getStaticPaths() {
     }
 
     paths.push({
-      params: { year, slug },
-      props: { picture, name, date, works: slug, content: content, description, year: year }
-    })
+      params: { year, slug: name },
+      props: {
+        picture,
+        name,
+        date,
+        works: name,
+        content: content,
+        description,
+        year,
+      },
+    });
   }
 
   return paths;
 }
 
-
-export const components = { a: Link, h1: Header }
+export const components = { a: Link, h1: Header };
 const { slug } = Astro.params;
 const { picture, name, date, content, description } = Astro.props;
 
@@ -66,27 +74,24 @@ const Content = (content ? await content() : undefined)?.Content;
 
 <ArtPreviewLayout title={name} content={description} imageSrc={picture.src}>
   <div class="flex w-full justify-center items-center">
-    <div class="grid gap-6 md:grid-cols-2 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md">
+    <div
+      class="grid gap-6 md:grid-cols-2 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md"
+    >
       <div class="max-w-[57rem]">
-        <Image src={picture} alt={name} loading="eager"/>
+        <Image src={picture} alt={name} loading="eager" />
       </div>
       <div class="text-white">
         <p class="md:mt-10 font-bold text-2xl lg:text-3xl">{name}</p>
         <p class="text-gray-400 text-2xl lg:text-lg">
-          <FormattedDate {date}/>
+          <FormattedDate {date} />
         </p>
         <p class="py-4 text-gray-300 text-2xl lg:text-lg">{description}</p>
-          {
-            Content 
-            ? <Content {components}/>
-            : null
-          }
-        </p>
+        {Content ? <Content {components} /> : null}
       </div>
     </div>
   </div>
 
   <div class="mx-auto max-w-[76rem] grid gap-4">
-    <CommentSection client:load {slug}/>
+    <CommentSection client:load {slug} />
   </div>
 </ArtPreviewLayout>

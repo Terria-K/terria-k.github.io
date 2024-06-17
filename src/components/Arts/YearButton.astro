@@ -1,6 +1,7 @@
 ---
 interface Props {
   year: number;
+  currentYear: string;
 }
 
 const prop = Astro.props;
@@ -8,7 +9,7 @@ const prop = Astro.props;
 
 <a href=`/arts/${prop.year}` class="w-full">
   <button
-    class="w-full hover:bg-midnight-light duration-300 py-4 font-bold text-3xl"
+    class={`w-full hover:bg-midnight-light duration-300 py-4 font-bold text-3xl ${prop.year === +prop.currentYear ? "bg-midnight-light" : ""}`}
     >{prop.year}</button
   >
 </a>

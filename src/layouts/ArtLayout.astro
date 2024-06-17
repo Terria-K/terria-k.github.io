@@ -17,21 +17,21 @@ const prop = Astro.props;
   <div class="mx-auto max-w-[96rem] px-10 py-10 space-y-4 text-white gap-10">
     <Accordion title="Year of Progress">
       <div
-        class="bg-midnight rounded-lg flex flex-col md:flex-row gap-4 justify-evenly overflow-x-auto"
+        class="bg-midnight rounded-lg flex flex-col md:flex-row justify-evenly overflow-x-auto"
       >
         <a href="/arts" class="w-full">
           <button
-            class=`w-full hover:bg-midnight-light duration-300 py-4 font-bold text-3xl ${prop.year === "All" ? "bg-midnight-light" : ""}`
+            class={`w-full hover:bg-midnight-light duration-300 py-4 font-bold text-3xl ${prop.year === "All" ? "bg-midnight-light" : ""}`}
           >
             All
           </button>
         </a>
-        <YearButton year={2024} />
-        <YearButton year={2023} />
-        <YearButton year={2022} />
-        <YearButton year={2021} />
-        <YearButton year={2020} />
-        <YearButton year={2019} />
+        <YearButton year={2024} currentYear={prop.year} />
+        <YearButton year={2023} currentYear={prop.year} />
+        <YearButton year={2022} currentYear={prop.year} />
+        <YearButton year={2021} currentYear={prop.year} />
+        <YearButton year={2020} currentYear={prop.year} />
+        <YearButton year={2019} currentYear={prop.year} />
       </div>
     </Accordion>
 

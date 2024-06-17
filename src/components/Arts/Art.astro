@@ -9,20 +9,20 @@ const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.w
 
 <div class="w-full text-white bg-gray-800 rounded-lg p-4 gap-4 flex flex-col">
   <p class="text-center font-bold text-3xl select-none">Artworks</p>
-  <div class="container bg-gray-900 rounded-lg p-4 justify-center flex-wrap flex gap-3 h-[300px] overflow-auto md:h-auto no-scrollbar">
+  <div class="art-container bg-gray-900 rounded-lg p-4 justify-center flex-wrap flex gap-3 h-[300px] overflow-auto md:h-auto no-scrollbar">
     {
-      pictures 
+      pictures
         ? pictures.map(async x => {
           const baseName = fs.basename(x.src);
           const artworkName = baseName.split('.')[0].substring(11).replaceAll("_", " ");
           const year = baseName.split("-")[2].substring(0, 4);
-          return <a href={`/arts/${year}/${artworkName}`} class="max-w-80 h-100"> 
+          return <a href={`/arts/${year}/${artworkName}`} class="max-w-80 h-100">
               <Image src={x} alt={fs.basename(x.src).split('.')[0]} loading="lazy"/>
             </a>
-        }) 
+        })
         : null
     }
-    <a href="/arts" class="w-80 h-100 bg-midnight hover:bg-midnight-light duration-300 flex flex-col items-center justify-center 
+    <a href="/arts" class="w-80 h-100 bg-midnight hover:bg-midnight-light duration-300 flex flex-col items-center justify-center
       text-4xl font-bold select-none cursor-pointer py-8 rounded-md">
       <Icon name="ph:cards"/>
       <p>More Arts</p>
@@ -31,11 +31,11 @@ const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.w
 </div>
 
 <style>
-  .container {
+  .art-container {
     scroll-snap-type: y mandatory
   }
 
-  .container > a {
+  .art-container > a {
     scroll-snap-align: center;
   }
 </style>

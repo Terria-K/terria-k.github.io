@@ -1,32 +1,32 @@
 <script lang="ts">
-    import Icon from "@iconify/svelte";
+  import Icon from "@iconify/svelte";
 
-    export let username: string;
-    export let sessionname: string;
-    export let date: string;
-    export let body: string;
-    export let id: string;
+  export let username: string;
+  export let sessionname: string;
+  export let date: string;
+  export let body: string;
+  export let id: string;
 
 
-    async function remove() {
-      const access = localStorage.getItem("user-access");
+  async function remove() {
+    const access = localStorage.getItem("user-access");
 
-      const body = {
-        username,
-        id
-      }
-      const res = await fetch("/api/comment", {
-        body: JSON.stringify(body),
-        method: "DELETE",
-        headers: {
-          "Authorization": "Bearer " + access
-        }
-      });
-
-      if (res.ok) {
-        window.location.reload();
-      }
+    const body = {
+      username,
+      id
     }
+    const res = await fetch("/api/comment", {
+      body: JSON.stringify(body),
+      method: "DELETE",
+      headers: {
+        "Authorization": "Bearer " + access
+      }
+    });
+
+    if (res.ok) {
+      window.location.reload();
+    }
+  }
 </script>
 
 <div class="box">
@@ -68,7 +68,7 @@
     margin: 0;
     font-weight: bold;
     font-size: 1.125rem;
-    line-height: 1.75rem; 
+    line-height: 1.75rem;
   }
 
   .guest {
