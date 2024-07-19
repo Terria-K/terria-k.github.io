@@ -1,0 +1,43 @@
+---
+title: Progress on Archie
+description: The development progress about Archie.
+date: 2024-65-27
+tags:
+    - archie
+image: /src/assets/blogs/archie_discontinued.webp
+---
+
+import Image from "astro/components/Image.astro";
+import archie_rewritten from "/src/assets/blogs/archie-progress/archie-rewritten.webp";
+import button from "/src/assets/blogs/archie-progress/button.webp"
+
+As you may know, Archie has not been actively developed in past 6 months, but
+that does not means it is cancelled. So what is going on about the project?
+
+# Game Rewritten
+
+<Image src={archie_rewritten} alt="archie_rewritten"/>
+
+The whole game has been rewritten to my new engine that does not rely on XNA
+technology. The engine is called [Riateu](https://github.com/Terria-K/Riateu)
+which is made with [MoonWorks](https://github.com/MoonsideGames/MoonWorks) a
+free cross-platform game development framework.
+
+This allows me to have more control over to the graphics renderer and I could
+make more optimization with the renderer. The current state does not have a
+lighting system as of yet, but that is to be implemented soon in the
+development.
+
+# Box Physics Improvements
+The box physics are still the same as the old one, but there is an improvements
+made to it to make it more consistent. When player is pushing the box, the box
+no longer have an inconsistent push where sometimes it pushes too far from the
+player, causing an unpredictable behavior.
+
+# Button Improvements
+<Image src={button} alt="button"/>
+
+Buttons now interact like a solid. Boxes and Player can now step on the button.
+While it may sounds like an aesthetic change, it can also change some gameplay.
+
+[WORK IN PROGRESS BLOGS...]
