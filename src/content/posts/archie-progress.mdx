@@ -38,6 +38,21 @@ player, causing an unpredictable behavior.
 <Image src={button} alt="button"/>
 
 Buttons now interact like a solid. Boxes and Player can now step on the button.
-While it may sounds like an aesthetic change, it can also change some gameplay.
+While it may sounds like an aesthetic change, it can also change some gameplay
+and may affect some smaller areas.
+
+# Game Architecture
+The rewrite now uses ECS (Entity Component System) with this library called
+[MoonTools.ECS](https://gitea.moonside.games/MoonsideGames/MoonTools.ECS). May
+drop this depending on the stage of development.
+
+## It does gives some benefits like:
++ Entities are more composable that it makes it easy to think more on the game rather than the whole system for your game.
++ Does not need to keep track the reference, which means it is less of an error
+prone.
++ Performant enough and predictable. What you write is what the entities will do.
+
+It significantly improves the game elements, but in a cost of development time
+since it is hard to get used to this architecture.
 
 [WORK IN PROGRESS BLOGS...]

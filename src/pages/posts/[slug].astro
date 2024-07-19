@@ -29,8 +29,9 @@ import Pre from "../../components/Markdown/Pre.astro";
 import FormattedDate from '../../components/FormattedDate.astro';
 import Tab from '../../components/Markdown/Tab.astro';
 import Accordion from '../../components/Accordion/Accordion.astro';
+import SubHeading from '../../components/Markdown/SubHeading.astro';
 
-export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
+export const components = { a: Link, h1: Header, h2: SubHeading, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render()
@@ -53,7 +54,7 @@ const { Content } = await entry.render()
         </For>
       </span>
     </If>
-    
+
     <h2 class="font-bold text-xl md:text-2xl text-gray-400 font-cantarell">
       <FormattedDate date={entry.data.date}/>
     </h2>
@@ -61,7 +62,7 @@ const { Content } = await entry.render()
     <div class="flex justify-center">
       <Image class="rounded-2xl object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
     </div>
-    
+
     <Content {components}/>
   </div>
 </PostLayout>
