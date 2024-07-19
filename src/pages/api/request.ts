@@ -1,7 +1,7 @@
 import { createClient } from "@vercel/edge-config";
 import type { APIRoute } from "astro";
 import { db, ArtCommission } from "astro:db";
-import { v4 } from "uuid";
+import { ulid } from "ulid";
 
 export const prerender = false;
 
@@ -27,13 +27,13 @@ export const POST: APIRoute = async ({ request }) => {
     if (contactName === "") {
       if (platform === "Discord") {
         return exit("Please provide your Discord username or your Discord ID.", false);
-      } 
+      }
 
       return exit("Please provide your contact email.", false);
     }
 
     if (platform === "Email") {
-      const emailRegex = /[\w]+[@]{1}[\w]+\.[\w]+$/g 
+      const emailRegex = /[\w]+[@]{1}[\w]+\.[\w]+$/g
 
       if (!contactName.match(emailRegex)) {
         return exit("Invalid email format.", false);
@@ -70,7 +70,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     await db.insert(ArtCommission).values({
-      _id: v4(),
+      _id: ulid(),
       title,
       description,
       contact: contactName,

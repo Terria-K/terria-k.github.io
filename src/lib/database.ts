@@ -1,9 +1,9 @@
 import { Comment, User, db, eq } from "astro:db";
-import { v4 } from "uuid";
+import { ulid } from "ulid";
 
 export async function addMessages(message: string, slug: string, owner: string) {
     await db.insert(Comment).values({
-        _id: v4(),
+        _id: ulid(),
         body: message,
         artRef: slug,
         author: owner,
@@ -17,7 +17,7 @@ export async function removeMessages(id: string) {
 
 export async function addUsers(username: string, email: string, password: string, emailToken: string) {
     const usrObj = {
-        _id: v4(),
+        _id: ulid(),
         username,
         email,
         emailToken,
