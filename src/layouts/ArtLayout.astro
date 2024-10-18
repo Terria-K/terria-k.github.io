@@ -14,7 +14,7 @@ const prop = Astro.props;
 ---
 
 <Layout>
-  <div class="mx-auto max-w-[96rem] px-10 py-10 space-y-4 text-white gap-10">
+  <div class="mx-auto max-w-[96rem] px-4 py-10 space-y-4 text-white gap-10">
     <Accordion title="Year of Progress">
       <div
         class="bg-midnight rounded-lg flex flex-col md:flex-row justify-evenly overflow-x-auto"
@@ -35,11 +35,10 @@ const prop = Astro.props;
       </div>
     </Accordion>
 
-    <div class="w-full flex justify-center">
-      <ul class="masonry-sm md:masonry-md lg:masonry-lg">
+    <div class="masonry-sm md:masonry-md lg:masonry-lg">
         {
           prop.pictures.reverse().map(async (x, i) => {
-            const loadType = i > 17 ? "lazy" : "eager";
+            const loadType = i > 11 ? "lazy" : "eager";
             const baseName = fs.basename(x.src);
             const artworkName = baseName
               .split(".")[0]
@@ -48,7 +47,6 @@ const prop = Astro.props;
             const year = baseName.split("-")[2].substring(0, 4);
 
             return (
-              <li class="list-none cursor-pointer relative">
                 <a href={`/arts/${year}/${artworkName}`}>
                   <Image
                     class="object-cover rounded"
@@ -59,11 +57,9 @@ const prop = Astro.props;
                     loading={loadType}
                   />
                 </a>
-              </li>
             );
           })
         }
-      </ul>
     </div>
   </div>
 </Layout>
