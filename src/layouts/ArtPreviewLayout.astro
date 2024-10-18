@@ -26,11 +26,6 @@ const prop = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{`${prop.title}`}</title>
     <slot name="head" />
-    <script>
-      import flamethrower from "flamethrower-router";
-
-      flamethrower({});
-    </script>
   </head>
 
   <GlobalStyleLayout />

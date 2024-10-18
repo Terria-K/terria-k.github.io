@@ -1,12 +1,13 @@
 import type { APIRoute } from "astro";
-import { db, ArtCommission } from "astro:db";
 import { ulid } from "ulid";
 
 export const prerender = false;
 
 
-export const POST: APIRoute = async ({ request }) => {
-    if (true) {
+export const POST: APIRoute = async ({ locals, request }) => {
+    const kv = locals.runtime.env.commission;
+    const enabled = await kv.get("enabled");
+    if (enabled === "true") {
       return exit("The commission request is still closed for now, please come back later.", false);
     }
     const formData = await request.formData();
@@ -67,16 +68,16 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    await db.insert(ArtCommission).values({
-      _id: ulid(),
-      title,
-      description,
-      contact: contactName,
-      platform,
-      payment,
-      references: reference,
-      size: size === "Custom" ? `${+width}x${+height}` : size
-    });
+    // await db.insert(ArtCommission).values({
+    //   _id: ulid(),
+    //   title,
+    //   description,
+    //   contact: contactName,
+    //   platform,
+    //   payment,
+    //   references: reference,
+    //   size: size === "Custom" ? `${+width}x${+height}` : size
+    // });
 
     const json = {
         "username": "Commission Receiver",

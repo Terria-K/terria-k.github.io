@@ -8,7 +8,6 @@ import ArtPreviewLayout from "../../../layouts/ArtPreviewLayout.astro";
 import FormattedDate from "../../../components/FormattedDate.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import CommentSection from "../../../components/@svelte-components/CommentSection.svelte";
 
 export async function getStaticPaths() {
   const pictures: ImageMetadata[] = await Astro.glob(
@@ -66,7 +65,6 @@ export async function getStaticPaths() {
 }
 
 export const components = { a: Link, h1: Header };
-const { slug } = Astro.params;
 const { picture, name, date, content, description } = Astro.props;
 
 const Content = (content ? await content() : undefined)?.Content;
@@ -89,9 +87,5 @@ const Content = (content ? await content() : undefined)?.Content;
         {Content ? <Content {components} /> : null}
       </div>
     </div>
-  </div>
-
-  <div class="mx-auto max-w-[76rem] grid gap-4">
-    <CommentSection client:load {slug} />
   </div>
 </ArtPreviewLayout>

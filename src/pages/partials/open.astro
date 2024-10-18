@@ -1,11 +1,11 @@
 ---
-// import { createClient } from "@vercel/edge-config";
-
 export const partial = true;
 export const prerender = false;
 
-// const disabled: boolean | undefined = await createClient(import.meta.env.EDGE_CONFIG).get("disabled");
-const disabled: boolean | undefined = true;
+
+const kv = Astro.locals.runtime.env.commission;
+
+const disabled: boolean | undefined = await kv.get("disabled") === "true";
 ---
 
 <input {disabled} 

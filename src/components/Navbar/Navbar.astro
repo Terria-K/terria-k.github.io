@@ -5,7 +5,7 @@ import NavBurger from "./NavBurger.astro";
 import NavBurgerItem from "./NavBurgerItem.astro";
 ---
 
-<nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl md:border-b-2 bg-midnight" flamethrower-preserve>
+<nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl md:border-b-2 bg-midnight">
   <div class="mx-auto max-w-[96rem] flex justify-between font-cantarell">
     <a href="/" class="flex items-center gap-4 font-bold cursor-pointer">
       <TeIcon class="w-12 h-12 p-1"/>
@@ -15,7 +15,6 @@ import NavBurgerItem from "./NavBurgerItem.astro";
       <NavButton link="/posts">Blogs</NavButton>
       <NavButton link="/arts">Arts</NavButton>
       <NavButton link="/games">Games</NavButton>
-      <auth-nav></auth-nav>
     </div >
     <div class="flex md:hidden">
       <NavBurger>

@@ -4,6 +4,7 @@ dist/
 # generated types
 .astro/
 .vercel/
+worker-configuration.d.ts
 
 /src/assets/arts/**/*
 # dependencies
@@ -27,3 +28,4 @@ pnpm-debug.log*
 
 
 bun.lockb
+.wrangler

@@ -2,3 +2,7 @@ name = "teuria"
 compatibility_flags = [ "nodejs_compat_v2" ]
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "dist"
+
+kv_namespaces = [
+    { binding = "commission", id = "91534900d7104344859dc4cfd65c0998", preview_id = "91534900d7104344859dc4cfd65c0998" }
+]
