@@ -4,6 +4,9 @@ export const prerender = false;
 
 
 const kv = Astro.locals.runtime.env.commission;
+if (!kv) {
+    return;
+}
 
 const disabled: boolean | undefined = await kv.get("disabled") === "true";
 ---

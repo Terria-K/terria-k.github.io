@@ -1,3 +1,4 @@
+import type { KVNamespace } from "@cloudflare/workers-types";
 import type { APIRoute } from "astro";
 import { ulid } from "ulid";
 
@@ -5,8 +6,13 @@ export const prerender = false;
 
 
 export const POST: APIRoute = async ({ locals, request }) => {
-    const kv = locals.runtime.env.commission;
-    const enabled = await kv.get("enabled");
+    const env = locals.runtime.env;
+    if (!env) {
+      return exit("In Development", false);
+    }
+    const commission: KVNamespace = env.commission;
+    const TeuriaDB: D1Database = env.TeuriaDB;
+    const enabled = await commission.get("enabled");
     if (enabled === "true") {
       return exit("The commission request is still closed for now, please come back later.", false);
     }
@@ -68,16 +74,14 @@ export const POST: APIRoute = async ({ locals, request }) => {
       }
     }
 
-    // await db.insert(ArtCommission).values({
-    //   _id: ulid(),
-    //   title,
-    //   description,
-    //   contact: contactName,
-    //   platform,
-    //   payment,
-    //   references: reference,
-    //   size: size === "Custom" ? `${+width}x${+height}` : size
-    // });
+    const stmts = await TeuriaDB.prepare("INSERT INTO commissions VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)")
+      .bind(ulid(), title, description, contactName, platform, payment, reference, size === "Custom" ? `${+width}x${+height}` : size)
+      .run()
+
+    if (stmts.error) {
+      return exit("There was an error on the commission. Please try again later.", false);
+    }
+    
 
     const json = {
         "username": "Commission Receiver",
