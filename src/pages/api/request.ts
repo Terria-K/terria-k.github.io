@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
     const commission: KVNamespace = env.commission;
     const TeuriaDB: D1Database = env.TeuriaDB;
     const enabled = await commission.get("enabled");
-    if (enabled === "true") {
+    if (enabled === "false") {
       return exit("The commission request is still closed for now, please come back later.", false);
     }
     const formData = await request.formData();
