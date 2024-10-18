@@ -1,6 +1,6 @@
 import type { KVNamespace } from "@cloudflare/workers-types";
 import type { APIRoute } from "astro";
-import { ulid } from "ulid";
+import { ulidFactory } from "ulid-workers";
 
 export const prerender = false;
 
@@ -73,6 +73,8 @@ export const POST: APIRoute = async ({ locals, request }) => {
         return exit("The height must be at maximum of 2500 pixels", false);
       }
     }
+
+    const ulid = ulidFactory();
 
     const stmts = await TeuriaDB.prepare("INSERT INTO commissions VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)")
       .bind(ulid(), title, description, contactName, platform, payment, reference, size === "Custom" ? `${+width}x${+height}` : size)
