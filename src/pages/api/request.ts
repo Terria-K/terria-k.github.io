@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
     const commission: KVNamespace = env.commission;
     const TeuriaDB: D1Database = env.TeuriaDB;
     const enabled = await commission.get("enabled");
-    if (enabled === "false") {
+    if (enabled !== "true") {
       return exit("The commission request is still closed for now, please come back later.", false);
     }
     const formData = await request.formData();
@@ -76,13 +76,9 @@ export const POST: APIRoute = async ({ locals, request }) => {
 
     const ulid = ulidFactory();
 
-    const stmts = await TeuriaDB.prepare("INSERT INTO commissions VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)")
+    await TeuriaDB.prepare("INSERT INTO commissions VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)")
       .bind(ulid(), title, description, contactName, platform, payment, reference, size === "Custom" ? `${+width}x${+height}` : size)
       .run()
-
-    if (stmts.error) {
-      return exit("There was an error on the commission. Please try again later.", false);
-    }
     
 
     const json = {
