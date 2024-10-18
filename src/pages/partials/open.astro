@@ -8,7 +8,7 @@ if (!kv) {
     return;
 }
 
-const disabled: boolean | undefined = await kv.get("disabled") === "true";
+const disabled: boolean | undefined = await kv.get("enabled") === "false";
 ---
 
 <input {disabled} 
