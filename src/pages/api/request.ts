@@ -1,4 +1,3 @@
-import { createClient } from "@vercel/edge-config";
 import type { APIRoute } from "astro";
 import { db, ArtCommission } from "astro:db";
 import { ulid } from "ulid";
@@ -7,8 +6,7 @@ export const prerender = false;
 
 
 export const POST: APIRoute = async ({ request }) => {
-    const disabled: boolean | undefined = await createClient(import.meta.env.EDGE_CONFIG).get("disabled");
-    if (disabled) {
+    if (true) {
       return exit("The commission request is still closed for now, please come back later.", false);
     }
     const formData = await request.formData();
