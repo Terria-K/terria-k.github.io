@@ -54,6 +54,31 @@ import '@fontsource/lexend-deca';
       -ms-overflow-style: none;  /* IE and Edge */
       scrollbar-width: none;  /* Firefox */
     }
+
+    .masonry-sm {
+      display: grid;
+      grid-gap: 0.5em;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: masonry;
+    }
+
+    .masonry-md {
+      display: grid;
+      grid-gap: 0.5em;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: masonry;
+    }
+
+    .masonry-lg {
+      display: grid;
+      grid-gap: 0.5em;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: masonry;
+    }
+
+    .break-inside {
+        break-inside: avoid;
+    }
   }
 
   /* Chrome, Safari, Edge, Opera */

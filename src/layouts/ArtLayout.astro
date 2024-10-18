@@ -36,7 +36,7 @@ const prop = Astro.props;
     </Accordion>
 
     <div class="w-full flex justify-center">
-      <ul class="flex flex-wrap gap-2 justify-center">
+      <ul class="masonry-sm md:masonry-md lg:masonry-lg">
         {
           prop.pictures.reverse().map(async (x, i) => {
             const loadType = i > 17 ? "lazy" : "eager";
@@ -46,13 +46,16 @@ const prop = Astro.props;
               .substring(11)
               .replaceAll("_", " ");
             const year = baseName.split("-")[2].substring(0, 4);
+
             return (
-              <li class="list-none h-[300px] cursor-pointer relative">
+              <li class="list-none cursor-pointer relative">
                 <a href={`/arts/${year}/${artworkName}`}>
                   <Image
-                    class="object-cover w-full h-full align-middle rounded"
+                    class="object-cover rounded"
                     src={x}
                     alt={artworkName}
+                    width={x.width}
+                    height={x.height}
                     loading={loadType}
                   />
                 </a>
