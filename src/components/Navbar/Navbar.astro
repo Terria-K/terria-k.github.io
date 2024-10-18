@@ -5,7 +5,7 @@ import NavBurger from "./NavBurger.astro";
 import NavBurgerItem from "./NavBurgerItem.astro";
 ---
 
-<nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl border-b-2" flamethrower-preserve>
+<nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl md:border-b-2 bg-midnight" flamethrower-preserve>
   <div class="mx-auto max-w-[96rem] flex justify-between font-cantarell">
     <a href="/" class="flex items-center gap-4 font-bold cursor-pointer">
       <TeIcon class="w-12 h-12 p-1"/>
@@ -28,11 +28,14 @@ import NavBurgerItem from "./NavBurgerItem.astro";
 </nav>
 
 <style>
-  nav {
-    --col-midnight-transparent: #1f222b88;
-    --col-midnight-light-transparent: #33324b88;
-    background-image: linear-gradient(70deg, var(--col-midnight-transparent), 75%, var(--col-midnight-light-transparent) 100%);
-    backdrop-filter: blur(1rem);
-    border-color: #5bbde4;
+  @media (min-width: 768px) {
+    nav {
+      --col-midnight-transparent: #1f222b88;
+      --col-midnight-light-transparent: #33324b88;
+      background-image: linear-gradient(70deg, var(--col-midnight-transparent), 75%, var(--col-midnight-light-transparent) 100%);
+      backdrop-filter: blur(1rem);
+      border-color: #5bbde4;
+      background-color: transparent;
+    }
   }
 </style>
