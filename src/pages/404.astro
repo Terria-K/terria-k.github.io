@@ -15,7 +15,6 @@ import Accordion from '../components/Accordion/Accordion.astro';
 import CardPage from "../components/CardPage/CardPage.astro";
 import Filesystem from "../components/Filesystem/Filesystem.astro";
 import For from "../components/ControlFlow/For.astro";
-import { Icon } from "astro-icon/components";
 
 export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
 const Content = rendered.Content;
@@ -119,15 +118,6 @@ artYears.forEach(x => {
       <Fragment slot="description">
         A pay for an art request website.
       </Fragment>   
-    </CardPage>
-    <CardPage title="Labs" icon="ph:fire-fill" url="/labs" hasDerivedPages>
-      <Fragment slot="description">
-        An experimental, finished, or unfinished website showcase. JavaScript included. <Icon class="inline" name="ph:radioactive-fill"/>
-      </Fragment>
-
-      <Filesystem title="labs">
-        <Link href="/labs">index</Link>
-      </Filesystem>
     </CardPage>
   </header>
 
