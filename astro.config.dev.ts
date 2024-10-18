@@ -1,6 +1,6 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import { teuriaIntegrations } from './astro.config.all';
-import vercel from "@astrojs/vercel/serverless";
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     integrations: teuriaIntegrations(),
@@ -13,7 +13,7 @@ export default defineConfig({
             "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`,
         }
     },
-    adapter: vercel(),
+    adapter: cloudflare(),
     markdown: {
         shikiConfig: {
             theme: "tokyo-night",
