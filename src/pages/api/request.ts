@@ -86,7 +86,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
         "content": "Commision Up!",
     }
-    const url = "https://discord.com/api/webhooks/" + import.meta.env.SPICA;
+    const url = "https://discord.com/api/webhooks/" + locals.runtime.env.SPICA;
 
     const res = await fetch(url, {
         method: "POST",
