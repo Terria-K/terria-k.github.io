@@ -12,10 +12,8 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x =
     <p class="text-center font-bold text-4xl pb-12">TAGS</p>
     <For of={uniqueTags}>
       {x => <span class="inline-block p-1 my-2 md:py-2 md:my-4">
-        <a href={`/posts/tags/${x}`}>
-          <span class="hover:bg-midnight-light duration-300 bg-slate-500 rounded-sm p-2 md:p-4 text-xl md:text-3xl font-sans">
-            #{x}
-          </span>
+        <a class="hover:bg-midnight-light duration-300 bg-slate-500 rounded-sm p-2 md:p-4 text-xl md:text-3xl font-sans" href={`/posts/tags/${x}`}>
+          #{x}
         </a>
       </span>
       }

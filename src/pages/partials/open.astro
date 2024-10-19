@@ -2,13 +2,9 @@
 export const partial = true;
 export const prerender = false;
 
+const kv = Astro.locals.runtime?.env.commission;
 
-const kv = Astro.locals.runtime.env.commission;
-if (!kv) {
-    return;
-}
-
-const disabled: boolean | undefined = await kv.get("enabled") === "false";
+let disabled: boolean | undefined = !kv ? true : await kv.get("enabled") === "false";
 ---
 
 <input {disabled} 

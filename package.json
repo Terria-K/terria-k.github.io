@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "wrangler types && astro dev --config astro.config.dev.ts",
+    "dev": "astro dev --config astro.config.dev.ts",
     "start": "wrangler types && astro dev",
     "build": "wrangler types && astro check && astro build --config astro.config.build.ts --remote",
     "preview": "wrangler pages dev ./dist --port 5960",
@@ -16,7 +16,6 @@
     "@astrojs/svelte": "5.7.0",
     "@astrojs/tailwind": "^5.1.2",
     "@fontsource-variable/roboto-slab": "^5.1.0",
-    "@fontsource/cantarell": "^5.1.0",
     "@fontsource/fira-sans": "^5.1.0",
     "@fontsource/lexend-deca": "^5.1.0",
     "@playform/inline": "^0.0.2",

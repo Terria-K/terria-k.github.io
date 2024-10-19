@@ -3,6 +3,8 @@ title: The creation of my first personal website
 description: A first blog that talks about the creation of this website. It is my first time doing this kind of thing.
 date: 2024-04-20
 image: /src/assets/blogs/creation_of_website.webp
+tags:
+    - website
 ---
 
 Hello, I am Terria Katsura! And this is my first creation of my personal website and is also my first blog too.

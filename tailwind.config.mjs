@@ -11,7 +11,6 @@ export default {
 			fontFamily: {
 				slab: ['Roboto Slab Variable'],
 				sans: ['Fira Sans'],
-				cantarell: ['Cantarell'],
 				deca: ["Lexend Deca"]
 			}
 		},

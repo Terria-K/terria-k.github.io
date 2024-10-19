@@ -13,7 +13,6 @@ export default defineConfig({
             "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`,
         }
     },
-    adapter: cloudflare(),
     markdown: {
         shikiConfig: {
             theme: "tokyo-night",
