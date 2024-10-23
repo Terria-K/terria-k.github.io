@@ -94,22 +94,21 @@ import { Icon } from "astro-icon/components";
     form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
-      const formData = new FormData(form);
       const res = await fetch("/api/request", {
         method: "POST",
-        body: formData
+        body: new FormData(form)
       });
 
       result.innerHTML = await res.text();
 
       if (res.ok) {
         form.reset();
-      } else {
-        const submitButton = document.getElementById("btn-submit");
-        submitButton.disabled = true;
-        submitButton.style = "background-color: rgb(22 101 52)";
-        turnstile.reset();
+        return;
       }
+      const submitButton = document.getElementById("btn-submit");
+      submitButton.disabled = true;
+      submitButton.style = "background-color: rgb(22 101 52)";
+      turnstile.reset();
     });
 
     window.onloadTurnstileCallback = function() {

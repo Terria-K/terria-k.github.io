@@ -125,5 +125,5 @@ export const POST: APIRoute = async ({ locals, request }) => {
 }
 
 function exit(message: string, success: boolean) {
-    return new Response(`<span class="${success ? "text-green-500" : "text-red-500"}">${message}</span>`);
+  return new Response(`<span class="${success ? "text-green-500" : "text-red-500"}">${message}</span>`, { status: success ? 200 : 400});
 }
