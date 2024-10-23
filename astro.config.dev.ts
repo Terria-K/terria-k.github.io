@@ -1,6 +1,5 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import { teuriaIntegrations } from './astro.config.all';
-import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     integrations: teuriaIntegrations(),
