@@ -16,7 +16,28 @@ export const POST: APIRoute = async ({ locals, request }) => {
     if (enabled !== "true") {
       return exit("The commission request is still closed for now, please come back later.", false);
     }
+
+    const key = env.TURNSTILE_KEY;
     const formData = await request.formData();
+    const token = formData.get("cf-turnstile-response");
+    const ip = request.headers.get("CF-Connecting-IP");
+
+    const result = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      body: JSON.stringify({
+        secret: key,
+        response: token,
+        remoteip: ip
+      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const outcome = await result.json();
+    if (!outcome.success) {
+      return exit("Captcha token is not valid!", false);
+    }
 
     const platform = (formData.get("platform")?.valueOf() as string).trim();
 
@@ -86,9 +107,9 @@ export const POST: APIRoute = async ({ locals, request }) => {
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
         "content": "Commision Up!",
     }
-    const url = "https://discord.com/api/webhooks/" + locals.runtime.env.SPICA;
+    const discordUrl = "https://discord.com/api/webhooks/" + env.SPICA;
 
-    const res = await fetch(url, {
+    const res = await fetch(discordUrl, {
         method: "POST",
         headers: {
             'Content-Type': "application/json"

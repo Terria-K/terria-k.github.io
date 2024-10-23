@@ -1,12 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import CommissionForm from "../../components/@svelte-components/CommissionForm.svelte";
+import { Icon } from "astro-icon/components";
 ---
 
 
 <Layout>
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" is:inline></script>
+
   <div class="font-sans mx-auto max-w-[65rem] px-5 lg:px-10 space-y-10 py-20 pb-4">
-    <CommissionForm client:load>
+    <form id="comform" class="grid gap-4">
       <p class="text-white font-bold text-2xl">Contact</p>
 
       <label>
@@ -76,8 +78,54 @@ import CommissionForm from "../../components/@svelte-components/CommissionForm.s
         Prices of each art is minimum of $10 and you can go beyond that if you want to support me more as an artist. <br/>
         You may only pay for the art once it is finished to have a preview of what it looks like before paying for it.
       </p>
-    </CommissionForm>
+
+      <div id="turnstile"></div>
+      <div id="btn-container">
+        <Icon class="w-16 h-16" name="svg-spinners:tadpole"/>
+      </div>
+      <p id="result"></p>
+    </form>
   </div>
+
+  <script slot="after" is:inline defer>
+    const form = document.getElementById("comform");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const res = await fetch("/api/request", {
+        method: "POST",
+        body: formData
+      });
+
+      result.innerHTML = await res.text();
+
+      if (res.ok) {
+        form.reset();
+      }
+    });
+
+    window.onloadTurnstileCallback = function() {
+      turnstile.render("#turnstile", {
+        sitekey: "0x4AAAAAAAyNrnjg0jqrw0IR",
+        callback: function(_) {
+          const submitButton = document.getElementById("btn-submit");
+          submitButton.disabled = false;
+          submitButton.style = "background-color: rgb(22 163 74)";
+        }
+      });
+    }
+
+    window.onload = async function() {
+      const container = document.getElementById("btn-container");
+      const res = await fetch("/partials/open");
+      if (res.ok) {
+        container.innerHTML = await res.text();
+      }
+    }
+  </script>
 </Layout>
 
 <style>

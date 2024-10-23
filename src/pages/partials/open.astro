@@ -7,6 +7,8 @@ const kv = Astro.locals.runtime?.env.commission;
 let disabled: boolean | undefined = !kv ? true : await kv.get("enabled") === "false";
 ---
 
-<input {disabled} 
-    class="disabled:bg-gray-500 disabled:cursor-not-allowed hover:bg-green-400 bg-green-600 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
+<input disabled
+    id="btn-submit"
+    style={disabled ? "background-color: rgb(107 114 128)" : "background-color: rgb(22 101 52)"}
+    class="disabled:cursor-not-allowed hover:bg-green-400 duration-300 text-white px-8 py-4 text-xl rounded-xl cursor-pointer" 
     type="submit" value={disabled ? "Closed" : "Order"} title={disabled ? "Commission is currently closed" : null}/>
