@@ -1,11 +1,46 @@
 ---
+import { parse }from "node-html-parser";
+import If from "../ControlFlow/If.astro";
+import Repeat from "../ControlFlow/Repeat.astro";
 const props = Astro.props;
+
+const slot = await Astro.slots.render("default");
+const document = parse(`<body>${slot}</body>`);
+const lines = document.querySelectorAll(".line");
+
+async function *render() {
+  if (lines.length == 0) {
+    yield slot.replaceAll("\n", "");
+    return;
+  }
+  let i = 0;
+
+  for (const l of lines) {
+    yield l.innerHTML + "\n";
+    i++;
+  }
+}
 ---
 
-<code {...props}><slot/></code>
-
 <style>
-  code {
-    background-color: var(--col-midnight);
+  .line-number {
+    color: gray;
+    user-select: none;
+    text-align: end;
   }
 </style>
+
+<code class={`${lines.length == 0 ? "inline-block rounded px-1 bg-slate-900" : "bg-midnight flex gap-4"}`} {...props}>
+  <If when={lines.length != 0}>
+    <div class="w-4 flex flex-col">
+      <Repeat times={lines.length}>
+        {i => <span class="line-number">{i + 1}</span>}
+      </Repeat>
+    </div>
+    <span><Fragment set:html={render()}/></span>
+  </If>
+
+  <If when={lines.length == 0}>
+    <Fragment set:html={render()}/>
+  </If>
+</code>

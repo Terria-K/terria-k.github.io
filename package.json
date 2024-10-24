@@ -21,13 +21,13 @@
     "@playform/inline": "^0.0.2",
     "astro": "4.16.6",
     "astro-icon": "^1.1.1",
+    "node-html-parser": "^6.1.13",
     "sharp": "^0.33.5",
     "typescript": "^5.6.3",
     "ulid": "^2.3.0",
     "ulid-workers": "^2.1.0"
   },
   "devDependencies": {
-    "astro-meta-tags": "^0.2.2",
     "@cloudflare/workers-types": "^4.20241011.0",
     "@iconify-json/ph": "^1.2.1",
     "@iconify-json/simple-icons": "^1.2.8",
@@ -35,9 +35,11 @@
     "@iconify-json/svg-spinners": "^1.2.1",
     "@iconify-json/vscode-icons": "^1.2.2",
     "@types/bcrypt": "^5.0.2",
+    "@types/jsdom": "^21.1.7",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/nodemailer": "^6.4.16",
     "@types/uuid": "^9.0.8",
+    "astro-meta-tags": "^0.2.2",
     "tailwindcss": "^3.4.14",
     "wrangler": "^3.81.0"
   }
