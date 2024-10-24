@@ -1,0 +1,15 @@
+---
+export interface Props {
+  times: number,
+  children: ((i: number) => unknown);
+}
+
+async function *render(props: Props) {
+for (let i = 0; i < props.times; i++) {
+    const rendered = await Astro.slots.render("default", [i]);
+    yield rendered;
+}
+}
+---
+
+<Fragment set:html={render(Astro.props)}/>
