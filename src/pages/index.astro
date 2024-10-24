@@ -7,11 +7,12 @@ import { Image } from 'astro:assets';
 import relentless_night from "../assets/webp_arts/2023/12-31-2023|Relentless_Night.png.webp";
 import { Icon } from 'astro-icon/components';
 import AboutMe from '../components/AboutMe.astro';
+import MetaImage from '../components/MetaImage.astro';
 ---
 
 <Layout>
   <meta property="og:title" content="Teuria Website" slot="head"/>
-  <meta property="og:image" content={relentless_night.src} slot="head"/>
+  <MetaImage slot="head" source="og" src={relentless_night}/>
   <meta property="og:description" content="This is Teuria's website for showcasing their arts, website, and developed games. It will also contain work in progress or preview stuff.
           There are also blogs that will be posted in the blog here." slot="head"/>
 

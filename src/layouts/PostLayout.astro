@@ -1,12 +1,13 @@
 ---
 import Footer from '../components/Footer/Footer.astro';
+import MetaImage from '../components/MetaImage.astro';
 import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
 
 interface Props {
   description: string,
   title: string,
-  image: string
+  image: ImageMetadata 
 }
 
 const props = Astro.props;
@@ -22,7 +23,7 @@ const props = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta property="og:title" content={`Teuria's Blog - ${props.title}`} />
     <meta property="og:description" content={props.description} />
-    <meta property="og:image" content={props.image}/>
+    <MetaImage source="og" src={props.image}/>
     <title>{`Teuria's Blog - ${props.title}`}</title>
   </head>
 

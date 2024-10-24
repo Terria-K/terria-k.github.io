@@ -37,7 +37,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render()
 ---
 
-<PostLayout title={entry.data.title} description={entry.data.description} image={entry.data.image.src}>
+<PostLayout title={entry.data.title} description={entry.data.description} image={entry.data.image}>
   <div class="bg-midnight-blue py-4">
     <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
       <Icon class="w-8 h-8" name="ph:arrow-left-light"/>

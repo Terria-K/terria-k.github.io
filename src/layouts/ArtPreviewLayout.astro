@@ -3,11 +3,12 @@ import { Icon } from "astro-icon/components";
 import Footer from "../components/Footer/Footer.astro";
 import Navbar from "../components/Navbar/Navbar.astro";
 import GlobalStyleLayout from "./GlobalStyleLayout.astro";
+import MetaImage from "../components/MetaImage.astro";
 
 interface Props {
   title: string;
   content: string;
-  imageSrc: string;
+  imageSrc: ImageMetadata;
 }
 
 const prop = Astro.props;
@@ -21,7 +22,7 @@ const prop = Astro.props;
     <meta name="description" content={prop.content} />
     <meta name="og:title" content={`${prop.title}`} />
     <meta name="og:description" content={prop.content} />
-    <meta name="og:image" content={prop.imageSrc} />
+    <MetaImage src={prop.imageSrc} source="og"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{`${prop.title}`}</title>
@@ -34,7 +35,7 @@ const prop = Astro.props;
     <meta name="theme_color" content="#01f1fe" />
     <meta name="twitter:title" content={prop.title} />
     <meta name="twitter:description" content={prop.content} />
-    <meta name="twitter:image" content={prop.imageSrc} />
+    <MetaImage src={prop.imageSrc} source="twitter"/>
     <meta name="twitter:card" content="summary_large_image" />
     <Navbar />
 

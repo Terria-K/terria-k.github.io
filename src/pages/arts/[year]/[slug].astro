@@ -70,7 +70,7 @@ const { picture, name, date, content, description } = Astro.props;
 const Content = (content ? await content() : undefined)?.Content;
 ---
 
-<ArtPreviewLayout title={name} content={description} imageSrc={picture.src}>
+<ArtPreviewLayout title={name} content={description} imageSrc={picture}>
   <div class="flex w-full justify-center items-center">
     <div
       class="grid gap-6 md:grid-cols-2 px-8 md:px-20 max-h-full max-w-full py-8 rounded-md"

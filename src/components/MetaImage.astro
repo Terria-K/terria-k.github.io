@@ -1,0 +1,32 @@
+---
+// Copied from Image from Astro originally, modified for meta tags.
+// This ensures that the original won't be linked to filesystem anymore.
+import type { HTMLAttributes } from 'astro/types';
+import { type LocalImageProps, getImage } from 'astro:assets';
+
+type Props = Omit<LocalImageProps, "alt"> & { source: "twitter" | "og" };
+
+const props = Astro.props;
+
+
+if (typeof props.width === 'string') {
+	props.width = parseInt(props.width);
+}
+
+if (typeof props.height === 'string') {
+	props.height = parseInt(props.height);
+}
+
+const image = await getImage(props);
+
+const additionalAttributes: HTMLAttributes<'img'> = {};
+if (image.srcSet.values.length > 0) {
+	additionalAttributes.srcset = image.srcSet.attribute;
+}
+
+if (import.meta.env.DEV) {
+	additionalAttributes['data-image-component'] = 'true';
+}
+---
+
+<meta name={`${props.source}:image`} content={image.src} {...additionalAttributes} />
