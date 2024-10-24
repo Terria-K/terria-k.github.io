@@ -1,7 +1,7 @@
 ---
 
 export interface Props<T> {
-  of: T[] | undefined,
+  of: ArrayIterator<T> | T[] |  undefined,
   children: ((item: T, i: number) => unknown);
 }
 
