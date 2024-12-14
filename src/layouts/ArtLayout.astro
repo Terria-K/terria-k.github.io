@@ -14,9 +14,7 @@ interface Props {
 
 const prop = Astro.props;
 
-const masonry: Item<any>[] = [];
-
-prop.pictures.reverse().map(async (x, i) => {
+const masonry = prop.pictures.reverse().map((x, i) => {
   const loadType = i > 11 ? "lazy" : "eager";
   const baseName = fs.basename(x.src);
   const artworkName = baseName
@@ -24,10 +22,11 @@ prop.pictures.reverse().map(async (x, i) => {
     .substring(11)
     .replaceAll("_", " ");
   const year = baseName.split("-")[2].substring(0, 4)
-  masonry.push({
+
+  return {
     type: MasonryItemArt,
-    props: { src: x, loadType, artworkName, year }
-  })
+    props: { src: x, loadType, artworkName, year } 
+  } satisfies Item<any>;
 });
 ---
 
