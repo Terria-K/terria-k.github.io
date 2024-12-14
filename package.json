@@ -38,7 +38,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/nodemailer": "^6.4.17",
     "@types/uuid": "^9.0.8",
-    "astro-meta-tags": "^0.2.2",
+    "astro-meta-tags": "^0.3.1",
     "tailwindcss": "^3.4.16",
     "wrangler": "^3.95.0"
   }
