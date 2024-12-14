@@ -36,7 +36,7 @@ function removeOriginalImages() {
           if (!reOriginalImage.test(file)) continue;
 
           foundFilesCount++;
-          logger.warn(`Removing ${file}`);
+          logger.info(`Removing ${file}`);
 
           const result = await unlink(path.join(astroAssetsDir, file));
 
@@ -48,7 +48,7 @@ function removeOriginalImages() {
         }
 
         if (foundFilesCount > 0) {
-          logger.warn(`Removed ${removedFilesCount}/${foundFilesCount} files.`);
+          logger.info(`Removed ${removedFilesCount}/${foundFilesCount} files.`);
         }
 
         /** Helper function */
