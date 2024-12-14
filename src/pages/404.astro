@@ -31,15 +31,15 @@ type ArtMeta = {
   name: string
 };
 
-const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+const pictures: string[] = Object.keys(import.meta.glob("/src/assets/webp_arts/**/*.webp"))
 const artYears = ["2024", "2023", "2022", "2021", "2020", "2019"];
 const picturesByYear: Record<string, ArtMeta[]> = {};
 
 artYears.forEach(x => {
   picturesByYear[x] = [];
   pictures.forEach(picture => {
-    if (picture.src.includes(x)) {
-      const baseName = fs.basename(picture.src);
+    if (picture.includes(x)) {
+      const baseName = fs.basename(picture);
       const dateName = baseName.split('.')[0];
       let name = dateName.substring(11).replaceAll("_", " ");
       picturesByYear[x].push({
@@ -47,7 +47,6 @@ artYears.forEach(x => {
       });
     }
   })
-
 });
 ---
 

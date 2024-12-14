@@ -8,11 +8,10 @@ import ArtPreviewLayout from "../../../layouts/ArtPreviewLayout.astro";
 import FormattedDate from "../../../components/FormattedDate.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import { globImage } from "../../../utils/image";
 
 export async function getStaticPaths() {
-  const pictures: ImageMetadata[] = await Astro.glob(
-    "/src/assets/webp_arts/**/*.webp",
-  ).then((x) => x.map((x) => x.default));
+  const pictures: ImageMetadata[] = await globImage(import.meta.glob("/src/assets/webp_arts/**/*.webp"));
   const arts = await getCollection("artworks");
 
   let artworkMds: Record<string, (typeof arts)[0]> = {};

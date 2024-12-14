@@ -4,7 +4,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     integrations: teuriaIntegrations(),
-    output: 'hybrid',
+    output: 'static',
     image: {
         service: sharpImageService()
     },

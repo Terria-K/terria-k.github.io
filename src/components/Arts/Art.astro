@@ -3,8 +3,9 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
 import fs from 'path';
+import { globImage } from "../../utils/image";
 
-const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default).reverse().slice(0, 7));
+const pictures: ImageMetadata[] = (await globImage(import.meta.glob("/src/assets/webp_arts/**/*.webp"))).reverse().slice(0, 7);
 ---
 
 <div class="w-full text-white bg-gray-800 rounded-lg p-4 gap-4 flex flex-col">

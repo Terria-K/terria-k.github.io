@@ -1,7 +1,8 @@
 ---
 import ArtLayout from '../../layouts/ArtLayout.astro';
+import { globImage } from "../../utils/image";
 
-const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+let pictures: ImageMetadata[] = await globImage(import.meta.glob("/src/assets/webp_arts/**/*.webp"));
 ---
 
 <ArtLayout year="All" {pictures}/>

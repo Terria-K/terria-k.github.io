@@ -1,9 +1,11 @@
 ---
 import YearButton from "../components/Arts/YearButton.astro";
-import Image from "astro/components/Image.astro";
 import Layout from "./Layout.astro";
 import fs from "path";
 import Accordion from "../components/Accordion/Accordion.astro";
+import MasonryItemArt from "../components/Arts/MasonryItemArt.astro";
+import Masonry from "../components/Masonry/Masonry.astro";
+import type { Item } from "../components/Masonry/Masonry";
 
 interface Props {
   year: string;
@@ -11,6 +13,22 @@ interface Props {
 }
 
 const prop = Astro.props;
+
+const masonry: Item<any>[] = [];
+
+prop.pictures.reverse().map(async (x, i) => {
+  const loadType = i > 11 ? "lazy" : "eager";
+  const baseName = fs.basename(x.src);
+  const artworkName = baseName
+    .split(".")[0]
+    .substring(11)
+    .replaceAll("_", " ");
+  const year = baseName.split("-")[2].substring(0, 4)
+  masonry.push({
+    type: MasonryItemArt,
+    props: { src: x, loadType, artworkName, year }
+  })
+});
 ---
 
 <Layout>
@@ -35,29 +53,6 @@ const prop = Astro.props;
       </div>
     </Accordion>
 
-    <div class="masonry-sm md:masonry-md lg:masonry-lg">
-        {
-          prop.pictures.reverse().map(async (x, i) => {
-            const loadType = i > 11 ? "lazy" : "eager";
-            const baseName = fs.basename(x.src);
-            const artworkName = baseName
-              .split(".")[0]
-              .substring(11)
-              .replaceAll("_", " ");
-            const year = baseName.split("-")[2].substring(0, 4);
-
-            return (
-                <a href={`/arts/${year}/${artworkName}`}>
-                  <Image
-                    class="object-cover rounded"
-                    src={x}
-                    alt={artworkName}
-                    loading={loadType}
-                  />
-                </a>
-            );
-          })
-        }
-    </div>
+    <Masonry items={masonry} gap={5} columns={4}/>
   </div>
 </Layout>

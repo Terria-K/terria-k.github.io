@@ -1,6 +1,7 @@
 ---
 // Copied from Image from Astro originally, modified for meta tags.
 // This ensures that the original won't be linked to filesystem anymore.
+import type { UnresolvedImageTransform } from 'astro';
 import type { HTMLAttributes } from 'astro/types';
 import { type LocalImageProps, getImage } from 'astro:assets';
 
@@ -17,7 +18,7 @@ if (typeof props.height === 'string') {
 	props.height = parseInt(props.height);
 }
 
-const image = await getImage(props);
+const image = await getImage(props as UnresolvedImageTransform);
 
 const additionalAttributes: HTMLAttributes<'img'> = {};
 if (image.srcSet.values.length > 0) {

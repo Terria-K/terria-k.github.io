@@ -1,0 +1,20 @@
+---
+import Image from "astro/components/Image.astro";
+interface Props {
+    src: ImageMetadata,
+    year: string,
+    artworkName: string,
+    loadType: "eager" | "lazy"
+}
+
+const { src, year, artworkName, loadType} = Astro.props;
+---
+
+<a href={`/arts/${year}/${artworkName}`}>
+    <Image
+    class="object-cover rounded"
+    src={src}
+    alt={artworkName}
+    loading={loadType}
+    />
+</a>

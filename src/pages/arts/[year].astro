@@ -2,9 +2,10 @@
 export const prerender = true;
 
 import ArtLayout from "../../layouts/ArtLayout.astro";
+import { globImage } from "../../utils/image";
 
 export async function getStaticPaths() {
-  const pictures: ImageMetadata[] = await Astro.glob("/src/assets/webp_arts/**/*.webp").then(x => x.map(x => x.default));
+  const pictures: ImageMetadata[] = await globImage(import.meta.glob("/src/assets/webp_arts/**/*.webp"));
 
   const years = ["2024", "2023", "2022", "2021", "2020", "2019"];
 

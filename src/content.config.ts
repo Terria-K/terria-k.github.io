@@ -16,7 +16,8 @@ const posts = defineCollection({
     description: z.string(),
     date: z.date(),
     tags: z.array(z.string().refine(x => x === x.toLowerCase(), "Tag must be lowercase.")).optional(),
-    image: image()
+    image: image(),
+    hidden: z.boolean().optional()
   })
 });
 
@@ -28,6 +29,10 @@ const artworks = defineCollection({
   })
 })
 
+const fourOFour = defineCollection({
+    type: "content"
+});
+
 export const collections = {
-  games, posts, artworks
+  games, posts, artworks, ["404"]: fourOFour
 };

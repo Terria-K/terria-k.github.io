@@ -3,7 +3,7 @@ import { teuriaIntegrations } from './astro.config.all';
 
 export default defineConfig({
     integrations: teuriaIntegrations(),
-    output: 'hybrid',
+    output: 'static',
     image: {
         service: passthroughImageService()
     },
