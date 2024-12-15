@@ -2,21 +2,24 @@
 import If from '../ControlFlow/If.astro';
 
 interface Props {
+  ["class"]?: string,
   href?: string,
   theme: "primary" | "secondary" | "line" | "transparent",
   disabled?: boolean
 }
 
-const { href, theme, disabled } = Astro.props;
+const { href, theme, disabled, class: c } = Astro.props;
 ---
 
 <If when={href && !disabled}>
-  <a href={href} class={`${theme} grid items-center shadow-lg text-center font-bold rounded-2xl h-14 text-2xl duration-300`}>
-    <slot/>
+  <a href={href}>
+    <button class={`${theme} ${c} shadow-lg text-center font-bold rounded-lg px-3 py-2 text-md lg:text-lg xl:text-xl duration-300`}>
+      <slot/>
+    </button>
   </a>
 </If>
 <If when={!href || disabled}>
-  <button {disabled} class={`${theme} shadow-lg font-bold rounded-2xl h-14 text-2xl duration-300`}>
+  <button {disabled} class={`${theme} ${c} shadow-lg font-bold rounded-lg px-3 py-2 text-md lg:text-lg xl:text-xl duration-300`}>
     <slot/>
   </button>
 </If>
@@ -31,7 +34,7 @@ const { href, theme, disabled } = Astro.props;
   }
 
   .primary:disabled {
-    color: gray;
+    color: var(--ria-text-disabled-color);
     background-color: var(--ria-button-primary-disabled-color);
   }
 
@@ -48,21 +51,23 @@ const { href, theme, disabled } = Astro.props;
   }
 
   .line {
-    border: 4px solid var(--ria-button-outline-color);
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    border: 3px solid var(--ria-button-outline-color);
   }
 
   .line:hover {
-    border: 4px solid var(--ria-button-outline-hover-color);
+    border: 3px solid var(--ria-button-outline-hover-color);
   }
 
   .line:disabled {
-    border: 4px solid var(--ria-button-outline-disabled-color);   
+    border: 3px solid var(--ria-button-outline-disabled-color);   
   }
 </style>
 
 <style is:global>
   * {
-    --ria-text-disabled-color: rgb(62, 62, 80);
+    --ria-text-disabled-color: gray;
 
     --ria-button-primary-color: rgb(85, 104, 129);
     --ria-button-primary-hover-color: rgb(143, 161, 185);

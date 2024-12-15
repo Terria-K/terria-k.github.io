@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import Accordion from "../Accordion/Accordion.astro";
 import If from "../ControlFlow/If.astro";
+import Button from "../Button/Button.astro";
 
 interface Props {
   title: string,
@@ -22,11 +23,9 @@ const props = Astro.props;
     <div class="flex flex-col mx-4 my-2">
       <h2 class="font-bold text-xl md:text-2xl">{props.title}</h2>
       <p class="text-sm md:text-lg"><slot name="description"/></p>
-      <a href={props.url}>
-        <button class="shadow-lg text-center font-bold bg-slate-600 rounded-lg px-3 py-2 text-md duration-300 hover:bg-slate-400">
-          Visit
-        </button>
-      </a>
+      <Button theme="secondary" href={props.url}>
+        Visit
+      </Button>
     </div>
   </div>
 
