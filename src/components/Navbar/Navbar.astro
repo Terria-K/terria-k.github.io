@@ -7,8 +7,9 @@ import NavBurgerItem from "./NavBurgerItem.astro";
 
 <nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl md:border-b-2 bg-midnight">
   <div class="mx-auto max-w-[96rem] flex justify-between font-deca">
-    <a href="/" class="flex items-center gap-4 font-bold cursor-pointer">
-      <TeIcon class="te-icon w-12 h-12 p-1"/><span class="te-title translate-x-[-16px] skew-x-[-12deg]">TEURIA</span>
+    <a href="/" class="flex items-center gap-4 font-bold cursor-pointer [&>*]:duration-300 [&_svg]:hover:rotate-45 [&_span]:hover:translate-x-[-4px] [&_span]:hover:skew-x-0">
+      <TeIcon class="te-icon w-12 h-12 p-1"/>
+      <span class="te-title translate-x-[-16px] skew-x-[-12deg]">TEURIA</span>
     </a>
     <div class="md:flex hidden ">
       <NavButton link="/commission">Commission</NavButton>
@@ -28,28 +29,6 @@ import NavBurgerItem from "./NavBurgerItem.astro";
 </nav>
 
 <style>
-  @keyframes teuria-anim {
-    from {
-        transform: rotate(0deg);
-    },
-    to {
-        transform: rotate(90deg);
-    }
-  }
-
-  .te-icon,
-  .te-title {
-    transition: 300ms;
-  }
-
-  a:hover .te-icon {
-    transform: rotate(45deg);
-  }
-
-  a:hover .te-title {
-    transform: skew(0deg);
-  }
-
   @media (min-width: 768px) {
     nav {
       --col-midnight-transparent: #1f222b88;
