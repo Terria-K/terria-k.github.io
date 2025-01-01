@@ -2,6 +2,7 @@
 import { Image } from "astro:assets"
 import IconFooter from "./IconFooter.astro"
 import terria from "../../assets/Terria.png"
+import { Icon } from "astro-icon/components"
 ---
 
 <footer class="w-full bg-midnight text-white text-lg p-4 py-10 flex flex-col items-center justify-center gap-4 font-deca">
@@ -18,6 +19,14 @@ import terria from "../../assets/Terria.png"
   <div class="text-base flex gap-1 text-gray-400">
     <a href="/posts">Blogs</a>|<a href="/arts">Arts</a>|<a href="/games">Games</a>|<a href="/commission">Commission</a>|<a href="/posts/tags">Tags</a>
   </div>
+
+
+  <div>
+    <p class="w-full font-bold text-gray-200 gap-1">
+      BUY ME A <a target="_blank" href="https://ko-fi.com/terriakatsura" class="text-cyan-400 underline">Kofi</a> <Icon class="inline w-6 h-6" name="simple-icons:kofi"/>
+    </p>
+  </div>
+
 
   <div class="flex gap-3 items-center">
     <Image class="w-10 h-10 rounded-full" src={terria} alt="terria"/>

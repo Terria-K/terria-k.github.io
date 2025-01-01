@@ -4,8 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Art from '../components/Arts/Art.astro';
 import { Image } from 'astro:assets';
 
-import relentless_night from "../assets/webp_arts/2023/12-31-2023|Relentless_Night.png.webp";
-import { Icon } from 'astro-icon/components';
+import dear_albireo from "../assets/webp_arts/2024/12-31-2024|Dear_Albireo.png.webp";
 import AboutMe from '../components/AboutMe.astro';
 import MetaImage from '../components/MetaImage.astro';
 import Button from '../components/Button/Button.astro';
@@ -13,26 +12,25 @@ import Button from '../components/Button/Button.astro';
 
 <Layout>
   <meta property="og:title" content="Teuria Website" slot="head"/>
-  <MetaImage slot="head" source="og" src={relentless_night}/>
+  <MetaImage slot="head" source="og" src={dear_albireo}/>
   <meta property="og:description" content="This is Teuria's website for showcasing their arts, website, and developed games. It will also contain work in progress or preview stuff.
           There are also blogs that will be posted in the blog here." slot="head"/>
 
   <section class="w-full text-white">
-    <article class="relative h-[95svh] bg-opacity-40 bg-black ">
+    <article class="relative h-[95svh] bg-opacity-40 bg-black">
       <div class="w-full h-full absolute object-cover inset-0 z-[-1]">
-        <Image class="w-full h-full object-cover" src={relentless_night} alt="banner" draggable="false" loading="eager"/>
+        <Image class="w-full h-full object-cover" src={dear_albireo} alt="banner" draggable="false" loading="eager"/>
       </div>
-      <div class="h-full flex items-center justify-center">
-        <div class="grid gap-6">
-          <p class="text-center font-extrabold font-deca text-5xl px-4">
+      <div class="mx-auto max-w-[96rem] h-full items-center flex">
+        <div class="grid gap-6 px-4">
+          <p class="text-center font-deca font-extrabold text-5xl">
             Welcome, I am Teuria!
           </p>
-          <div class="max-w-[27rem] mx-auto grid gap-4">
-            <p class="px-6 font-sans text-xl text-center">
-              This is Teuria's website for showcasing their arts, website, and developed games. It will also contain work in progress or preview stuff.
-              There are also blogs that will be posted in the blog here.
+          <div class="max-w-[27rem] grid gap-4">
+            <p class="font-sans text-xl font-bold">
+              Contains Artworks, Website, and Games. Blogs as well.
             </p>
-            <div class="mx-10 flex flex-col lg:flex-row items-center justify-center gap-1">
+            <div class="flex flex-col lg:flex-row items-center gap-1">
               <Button theme="primary" href="/commission">
                 Commission
               </Button>
@@ -40,9 +38,6 @@ import Button from '../components/Button/Button.astro';
                 About Me
               </Button>
             </div>
-            <p class="text-center w-full font-bold text-gray-200 text-xl gap-1">
-              BUY ME A <a target="_blank" href="https://ko-fi.com/terriakatsura" class="text-cyan-400 underline">Kofi</a> <Icon class="inline w-6 h-6" name="simple-icons:kofi"/>
-            </p>
           </div>
         </div>
       </div>
