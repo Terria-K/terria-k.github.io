@@ -1,5 +1,5 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 interface Props {
     src: ImageMetadata,
     year: string,
@@ -12,7 +12,7 @@ const { src, year, artworkName, loadType} = Astro.props;
 
 <a href={`/arts/${year}/${artworkName}`}>
     <Image
-    class="object-cover rounded"
+    class="object-cover"
     src={src}
     alt={artworkName}
     loading={loadType}

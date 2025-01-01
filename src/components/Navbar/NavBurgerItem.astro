@@ -9,10 +9,3 @@ const { link } = Astro.props;
 <a class="item flex justify-center min-w-16 hover:text-cyan-400 duration-300 p-4" href={link}>
   <button class="font-bold select-none"><slot/></button>
 </a>
-
-<style>
-  .item:hover {
-    --col-midnight-light-transparent: #33324bab;
-    background-color: var(--col-midnight-light-transparent);
-  }
-</style>

@@ -2,11 +2,39 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<details class="flex justify-center items-center min-w-16 rounded-full hover:bg-midnight-light duration-300">
-  <summary class="cursor-pointer flex justify-center items-center font-bold select-none h-[48px] duration-300 gap-1">
+<div class="flex justify-center">
+  <button id="btn-open" class="flex justify-center items-center cursor-pointer">
     <Icon class="w-10 h-10" name="ph:list-bold"/>
-  </summary>
-  <div class="py-2 absolute left-[100%] w-full border-b-2 shadow-xl bg-midnight -translate-x-full border-[#5bbde4]">
+  </button>
+  <div id="slot" class="absolute left-0 mt-12 w-full duration-300 -translate-y-80 select-none">
     <slot/>
   </div>
-</details>
+</div>
+
+<script>
+  const btn = document.getElementById("btn-open");
+  const slot = document.getElementById("slot");
+  btn.addEventListener("click", () => {
+    const navigation = document.getElementById("navigation");
+    if (slot.classList.contains("opened")) {
+      slot.classList.remove("opened");
+      navigation.classList.remove("opened");
+    }
+    else {
+      slot.classList.add("opened");
+      navigation.classList.add("opened");
+    }
+  });
+</script>
+
+
+<style>
+  .opened {
+    --col-midnight-transparent: #1f222b88;
+    --col-midnight-light-transparent: #33324b88;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: 300ms;
+    transform: translateY(0px);
+    user-select: auto;
+  }
+</style>

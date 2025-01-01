@@ -9,7 +9,7 @@ const { items, gap, columns } = Astro.props;
 const groups = Array.from({ length: columns }, (_, i) => items.filter((_, index) => index % columns === i));
 ---
 
-<section class="md:flex overflow-x-auto" style={`gap: ${gap}px`}>
+<section class="flex overflow-x-auto" style={`gap: ${gap}px`}>
   <For of={groups}>
     {(column) => (
       <div class="flex flex-col" style={`gap: ${gap}px`}>

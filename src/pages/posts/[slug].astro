@@ -2,7 +2,7 @@
 export const prerender = true;
 
 import { Icon } from 'astro-icon/components';
-import Image from 'astro/components/Image.astro';
+import { Image } from 'astro:assets';
 import Tag from '../../components/Blog/Tag.astro';
 import PostLayout from "../../layouts/PostLayout.astro";
 import { getCollection } from 'astro:content';
@@ -38,31 +38,30 @@ const { Content } = await entry.render()
 ---
 
 <PostLayout title={entry.data.title} description={entry.data.description} image={entry.data.image}>
-  <div class="bg-midnight-blue py-4">
-    <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center">
-      <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
-      <p>Blogs</p>
-    </a>
+  <div class="mx-auto w-full flex justify-center mt-20 md:-mb-12 max-w-screen-lg">
+    <Image class="object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
   </div>
 
-  <div class="md:text-lg mx-auto w-[70rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 bg-gray-800 py-8 font-sans">
+  <div class="md:text-lg relative mx-auto w-[55rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 py-8 font-sans md:z-10 bg-gray-800">
 
-    <If when={entry.data.tags}>
-      <span class="flex gap-2">
-        <For of={entry.data.tags}>
-          {x => <Tag tag={x}/>}
-        </For>
-      </span>
-    </If>
-
-    <h2 class="font-bold text-xl md:text-2xl text-gray-400 font-slab">
+    <h2 class="font-bold text-lg md:text-xl text-gray-400 font-slab text-center">
       <FormattedDate date={entry.data.date}/>
     </h2>
-    <h1 class="text-2xl md:text-4xl font-slab">{entry.data.title}</h1>
-    <div class="flex justify-center">
-      <Image class="rounded-2xl object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
-    </div>
+    <h1 class="text-3xl md:text-4xl font-slab text-center">{entry.data.title}</h1>
+
+    <If when={entry.data.tags}>
+      <div class="flex justify-center">
+        <span class="flex gap-2">
+          <For of={entry.data.tags}>
+            {(x: string) => <Tag tag={x}/>}
+          </For>
+        </span>
+      </div>
+    </If>
+
+    <hr class="border-gray-500 -mx-10 my-4 lg:my-8"/>
 
     <Content {components}/>
+
   </div>
 </PostLayout>

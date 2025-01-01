@@ -5,13 +5,13 @@ import NavBurger from "./NavBurger.astro";
 import NavBurgerItem from "./NavBurgerItem.astro";
 ---
 
-<nav id="keep" class="w-full text-white sticky top-0 z-20 px-2 shadow-xl md:border-b-2 bg-midnight">
+<nav id="navigation" class="w-full text-white fixed top-0 z-20 px-2 bg-transparent duration-300">
   <div class="mx-auto max-w-[96rem] flex justify-between font-deca">
     <a href="/" class="flex items-center gap-4 font-bold cursor-pointer [&>*]:duration-300 [&_svg]:hover:rotate-45 [&_span]:hover:translate-x-[-4px] [&_span]:hover:skew-x-0">
       <TeIcon class="te-icon w-12 h-12 p-1"/>
       <span class="te-title translate-x-[-16px] skew-x-[-12deg]">TEURIA</span>
     </a>
-    <div class="md:flex hidden ">
+    <div class="md:flex hidden">
       <NavButton link="/commission">Commission</NavButton>
       <NavButton link="/posts">Blogs</NavButton>
       <NavButton link="/arts">Arts</NavButton>
@@ -28,15 +28,23 @@ import NavBurgerItem from "./NavBurgerItem.astro";
   </div>
 </nav>
 
-<style>
-  @media (min-width: 768px) {
-    nav {
-      --col-midnight-transparent: #1f222b88;
-      --col-midnight-light-transparent: #33324b88;
-      background-image: linear-gradient(70deg, var(--col-midnight-transparent), 75%, var(--col-midnight-light-transparent) 100%);
-      backdrop-filter: blur(1rem);
-      border-color: #5bbde4;
-      background-color: transparent;
+<script>
+  document.addEventListener('scroll', () => {
+    const navigation = document.getElementById("navigation");
+    if (window.scrollY > 0) {
+      navigation.classList.add("scrolled")
+      return;
     }
+    navigation.classList.remove("scrolled")
+  });
+</script>
+
+<style>
+  .opened,
+  .scrolled  {
+    --col-midnight-transparent: #1f222b88;
+    --col-midnight-light-transparent: #33324b88;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: 300ms;
   }
 </style>

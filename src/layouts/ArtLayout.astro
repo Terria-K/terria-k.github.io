@@ -31,8 +31,8 @@ const masonry = prop.pictures.reverse().map((x, i) => {
 ---
 
 <Layout>
-  <div class="mx-auto max-w-[96rem] px-4 py-10 space-y-4 text-white gap-10">
-    <Accordion title="Year of Progress">
+  <div class="mx-auto max-w-[96rem] px-4 py-10 space-y-4 text-white gap-10 mt-10">
+    <Accordion class="mb-10" title="Year of Progress">
       <div
         class="bg-midnight rounded-lg flex flex-col md:flex-row justify-evenly overflow-x-auto"
       >
@@ -52,6 +52,11 @@ const masonry = prop.pictures.reverse().map((x, i) => {
       </div>
     </Accordion>
 
-    <Masonry items={masonry} gap={5} columns={4}/>
+    <span class="md:hidden">
+      <Masonry items={masonry} gap={5} columns={2}/>
+    </span>
+    <span class="hidden md:block">
+      <Masonry items={masonry} gap={5} columns={4}/>
+    </span>
   </div>
 </Layout>
