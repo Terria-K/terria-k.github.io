@@ -12,10 +12,10 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
-  const btn = document.getElementById("btn-open");
-  const slot = document.getElementById("slot");
+  const btn = document.getElementById("btn-open")!;
+  const slot = document.getElementById("slot")!;
   btn.addEventListener("click", () => {
-    const navigation = document.getElementById("navigation");
+    const navigation = document.getElementById("navigation")!;
     if (slot.classList.contains("opened")) {
       slot.classList.remove("opened");
       navigation.classList.remove("opened");

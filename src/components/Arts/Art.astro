@@ -2,7 +2,7 @@
 import fs from 'path';
 import { globImage } from "../../utils/image";
 import Masonry from "../Masonry/Masonry.astro";
-import { Item } from "../Masonry/Masonry";
+import type { Item } from "../Masonry/Masonry";
 import MasonryItemArt from "./MasonryItemArt.astro";
 
 const pictures: ImageMetadata[] = (await globImage(import.meta.glob("/src/assets/webp_arts/**/*.webp"))).reverse().slice(0, 8);

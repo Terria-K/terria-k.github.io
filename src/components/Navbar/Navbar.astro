@@ -30,7 +30,7 @@ import NavBurgerItem from "./NavBurgerItem.astro";
 
 <script>
   document.addEventListener('scroll', () => {
-    const navigation = document.getElementById("navigation");
+    const navigation = document.getElementById("navigation")!;
     if (window.scrollY > 0) {
       navigation.classList.add("scrolled")
       return;
