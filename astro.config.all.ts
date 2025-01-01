@@ -7,9 +7,7 @@ import removeOriginalImages from './src/hooks/removeOriginalImages';
 
 export function teuriaIntegrations() {
     return [
-        tailwind(), icon(), mdx(), metaTags(), playformInline({
-            Critters: true
-        }),
+        tailwind(), icon(), mdx(), metaTags(), 
         removeOriginalImages()
     ]
 }
