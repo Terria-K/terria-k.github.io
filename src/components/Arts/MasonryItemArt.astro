@@ -10,11 +10,24 @@ interface Props {
 const { src, year, artworkName, loadType} = Astro.props;
 ---
 
-<a href={`/arts/${year}/${artworkName}`}>
+<a class="relative [&_p]:hover:opacity-100 duration-300" href={`/arts/${year}/${artworkName}`}>
+  <div class="relative inset-0 z-[-1]">
     <Image
     class="object-cover"
     src={src}
     alt={artworkName}
     loading={loadType}
     />
+  </div>
+
+  <p class="opacity-0 absolute bottom-2 left-2 font-bold duration-300">{artworkName}</p>
 </a>
+
+<style>
+  a {
+    background-color: transparent;
+  }
+  a:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>
