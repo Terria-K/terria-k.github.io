@@ -30,7 +30,7 @@ const prop = Astro.props;
     <div class="flex gap-2">
       {
         prop.tags 
-          ? prop.tags.map(x => 
+          ? prop.tags.sort().map(x => 
               <Tag tag={x}/>
           )  
           : null

@@ -1,0 +1,75 @@
+---
+title: FortRise v5.0 Dev Log 1
+description: Let's improve the mod loader even more!
+date: 2025-01-02
+image: /src/assets/blogs/fortrise-5-devlog-1.webp
+tags:
+    - fortrise
+    - modding
+    - devlog
+---
+
+# Introduction
+I am back and I wanted to share to you what I have planned for next release of FortRise. I was too busy and did not get to work on this
+project for like several months and it should be understandable because I had a school projects to work with, and also my personal stuff as
+well.
+
+This also means that I learnt a lot outside and gain a lot of experiences. So today, I wanted to use what I learnt and use it for the 
+development of the project. Still, do not expect a pain-staking task such as good compatibility with other platforms like Linux, as such 
+is very hard to do, but I am still trying my best to do so.
+
+## For now, here is what to expect and to keep in mind in upcoming release of FortRise:
++ Runtime Atlas Packing
++ Assets hot reloading
++ Better Pickup and Arrows registry API
++ Enhanced Vanilla texture replacement API
++ ModIO API
++ Additional built-in events (you may request this one but please give a reason why)
+
+## Some features that might not be in this release, but possible to be in or in the near future
++ Installer improvements and better GUI installer 
++ Vanilla Dark World Patcher
++ FNA upgrade with SDL3 (for sdl_gpu access)
++ Better shader support (if FNA upgrade is implemented)
++ .NET 9 Port
++ Wren language support (if .NET 9 Port is implemented)
+
+# Runtime Atlas Packing
+To explain what this does, Runtime Atlas Packing is simply simplifying how we load images and use them in game. 
+TowerFall uses Atlas to reduce CPU overhead every draw for performance and also optimize GPU memory usage. Such thing that FortRise also
+embrace this idea, but at come with the cost of having to create the Atlas by your own. Currently, we
+use external tools such as [cluttered](https://github.com/Terria-K/cluttered) 
+or [Free Texture packer](https://github.com/odrick/free-tex-packer) to create an atlas for us to load it in game.
+
+But what if the loader just do it for us? Well this is what the Runtime Atlas Packing does, is to pack all the images on the game instead.
+This increases the load times of the game, but from my experience with this approach, it does not really matter.
+
+And by the way, this only works in a zippped mods, you will see why in the next section.
+
+# Assets hot reloading
+Along with the runtime atlas packing, implementing hot reload now makes sense to do so. This is only works for development mods that uses
+folder instead of a zipped mods, so if you wanted to disable this feature for production, just make your mod a zip file. This is also the
+reason why Runtime Atlas Packing only works with zipped mods, we had to prevent a slow reload times as much as possible.
+
+# ModIO API
+This API let you access a specific folders and files from your mod or other mod by using a metadata name of a mod of your choice.
+This is easily accessible via the `ModIO` class where you put the `mod` prefix followed by the `:` (colon), then a mod metadata name.
+(`mod:<name>/`)
+
+Such powerful API comes along with a helper events called `RiseCore.Events.OnAfterLoadContent` which helps you to look for all mods
+that in the Mods folder and load specific file from that Mod. This API will be used along with 
+the [ArcherLoader](https://github.com/RedDude/ArcherLoader/pull/6) by RedDude.
+
+# Other Notes
+Right now, the ModIO API and Better Pickup and Arrow Registry API are only planned that has been finished recently. Other stuff
+will be implemented as well. 
+
+If you are asking, will there be any breaking changes in this version? Yes, there is and I've written a migration guide for those who
+are affected of such changes when it is finally out. Some mods just need to be recompile in order to work in this version. 
+I am working this in a `fortfs` branch of FortRise, so you can check at the progress by yourself.
+
+# Join the Official TowerFall Discord Server
+[![FortRise Invite](https://discordapp.com/api/guilds/248961953656078337/embed.png?style=banner2)](https://discord.gg/m25mWsSv8P)
+
+### Featured mods in the background:
+[OopsAllArrowsMod](https://github.com/CoolModder/Towerfall-Redemption) by CoolModder
