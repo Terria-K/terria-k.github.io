@@ -1,0 +1,124 @@
+---
+title: FortRise v5.0 Dev Log 2
+description: Shaping things up!
+date: 2025-01-19
+image: /src/assets/blogs/fortrise-5-devlog-2.webp
+tags:
+    - fortrise
+    - modding
+    - devlog
+---
+
+import Image from "astro/components/Image.astro";
+import events from "/src/assets/blogs/fortrise-5-devlog-2/events.webp"
+
+# Introduction
+Hello! Just to let you know about the state of the project, yes it is being continued and in fact, most of the planned features
+has been finished, making it close to a completion and may have been ready for beta testing. We will now call Pre-Release as Beta
+now.
+
+I also has an upcoming levels this year that I have not released yet, with also some improvements to the older levels as well.
+You will see the release and improvements after the release of FortRise v5.0 since the levels are now depends on this version.
+
+# The features and changes
+Here's the features and changes that I've made before writing this blog:
+
+## Atlas Structure Changes
+As I've told you in the previous blog where I will implement the Runtime Atlas Packer, well, the atlas structure has also been changed
+to work with the Runtime Atlas. 
+
+**The new layout will work like this:** Instead of having an `atlas.png` file and `atlas.xml`, you instead use the folder 
+that match these names like `atlas`, `menuAtlas`, `bgAtlas`, and `bossAtlas`. These names are the only valid option you can
+use since this is how TowerFall's Atlas originally works anyway.
+
+Here's how the file structure would look like:
+```
+Content
+L Atlas
+  L atlas
+      L enemies
+        L slime.png
+    menuAtlas
+      L variants
+        L noDodgeCooldown.png
+```
+
+You will then use the following property to retrieve the texture:
++ TFGame.Atlas
++ TFGame.MenuAtlas
++ TFGame.BGAtlas
++ TFGame.BossAtlas
+
+This is also useful for using it with GameData as you cannot simply load your own Atlas with it, so we just take the vanilla atlas
+instead.
+
+This is an optional feature, so if you are tired of moving into this new structure just yet, or cannot
+simply do that because of how old the mod is, you can simply not do this at all and just use Atlas, it is up to you.
+
+## Texture Replacement Changes
+On top of this changes, the texture replacement has also changed as well, but this time, is it not optional as the previous one
+is proving to be fragile and hard to work with. But the changes here is massively improved anyway, and you might dislike how it
+is implemented, but what can we do anyway?
+
+To implement texture replacement, you first map the texture path of the texture you want to replace from a vanilla texture, example:
+`enemies/slime/slime`, but this does not actually works as the default behavior of the Atlas Structure is to put a mod prefix at the start
+of the path. To combat this, you encapsulate the path with the parenthesis like so: `(enemies/slime/slime)` and this should not include
+a prefix.
+
+Also, the tagging has been changed too, to work with this, you need to create a file that match similarly to the texture you want to tag with
+a `.tag` extension, example: `(enemies/slime/slime).tag`, inside of that file, this is where you put the tag like this:
+```
+level=ExampleLevelNameHere
+theme=ThemeHere
+```
+And that is pretty much it, we need your feedback around this changes so we can try and improve this a little bit more!
+
+## Texture Hot Reloading 
+With these features, comes with a new great tool, hot reloading! Texture hot reloading allows the game to reload the texture upon changes
+to the file. This new structure allows the hot reloading to work properly and this is great for archer and texture pack creators.
+
+## Speed-up relinking time
+The amount of time that the mod will need to be relinked has been sped up, so the load times would not be that slower anymore.
+
+
+## Quest Events
+I also did a sidequest to rewrite the quest's wave system. This now allows us to spawn events to the quest levels and programatically
+implement one. This includes such as summoning Miasma Walls to the level, Lavas, etc.. I will use this feature as well to my upcoming
+levels to see how this works out.
+
+<div class="h-full flex justify-center">
+    <Image src={events} alt="Quest Events" width={512} height={240}/>
+</div>
+
+The way how it works is that we have a new element to the quest data called `<event>`, this takes a child of string, and an attributes
+defined by the mod developer. You put this `<event>` inside of a `<wave>` element where the group is also located as well.
+
+The event should automatically disappear after a wave is finished, but level creators also has an ability to make 
+the event disappear early by using `<event_disappear>` which just takes a child of string. 
+
+This also works on Gauntlet, but the event would not disappear automatically, so the `<event_disappear>` would come in handy.
+
+# Conclusion
+This is all the changes I have made so far, and the fact that there's also some lingering plans as well, I may able to do them
+as well. I would love to create a new GUI installer, so that might be the next one I will do. And some `#mod-suggestion`
+on the TowerFall Discord Server that could be in the mod loader as well.
+
+# Support the development
+School is starting tomorrow, and the time and my sanity would going to be my enemy when developing this mod loader. If you would love to
+support this project. You may contribute via Github on the [FortRise Repository](https://github.com/FortRise/FortRise). The current branch
+on-going is the `fortfs` branch. I will also create a guide to how to contribute this project pretty soon after my school is done tomorrow.
+
+Alternatively, you may also support me through donation by buying me a [Ko-Fi](https://ko-fi.com/terriakatsura). A small amount of money would 
+be greatly appreciated!
+
+# Join the Official TowerFall Discord Server
+[![FortRise Invite](https://discordapp.com/api/guilds/248961953656078337/embed.png?style=banner2)](https://discord.gg/m25mWsSv8P)
+
+## Featured mods in the background:
+**[ArcherLoader](https://github.com/RedDude/ArcherLoader)** by RedDude
+
+**Madeline & Badeline** by
++ EXOK Games, 
++ ported by HMaeght, 
++ edits by Challengin' Chuck, 
++ Hair, SFX by RedDude
