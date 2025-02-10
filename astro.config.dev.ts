@@ -1,3 +1,4 @@
+import tailwind from "@tailwindcss/vite";
 import { defineConfig, passthroughImageService } from 'astro/config';
 import { teuriaIntegrations } from './astro.config.all';
 
@@ -8,6 +9,9 @@ export default defineConfig({
         service: passthroughImageService()
     },
     vite: {
+        plugins: [
+            tailwind()
+        ],
         define: {
             "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`,
         }

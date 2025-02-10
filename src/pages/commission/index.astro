@@ -14,7 +14,7 @@ import { Icon } from "astro-icon/components";
       <label>
         <p>Platform: <span class="text-red-400">*</span></p>
 
-        <select name="platform" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" value="Email">
+        <select name="platform" class="py-2 px-2 bg-transparent rounded-sm border-2 border-midnight-light" value="Email">
           <option class="bg-midnight-light" value="Email">Email</option>
           <option class="bg-midnight-light" value="Discord">Discord</option>
         </select>
@@ -31,7 +31,7 @@ import { Icon } from "astro-icon/components";
         <p>Payment Method: <span class="text-red-400">*</span></p>
         <p class="text-gray-400">Minimum of $10</p>
 
-        <select name="payment" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" value="Paypal">
+        <select name="payment" class="py-2 px-2 bg-transparent rounded-sm border-2 border-midnight-light" value="Paypal">
           <option class="bg-midnight-light" value="Paypal">Paypal</option>
           <option class="bg-midnight-light" value="Kofi">Kofi (+$1.50)</option>
           <option class="bg-midnight-light" value="GCASH">GCASH (&#x20B1 600.00)</option>
@@ -47,13 +47,13 @@ import { Icon } from "astro-icon/components";
 
       <label>
         <p>Details: <span class="text-red-400">*</span></p>
-        <textarea class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="description" rows="5" cols="30"></textarea>
+        <textarea class="py-2 px-2 bg-transparent rounded-sm border-2 border-midnight-light" name="description" rows="5" cols="30"></textarea>
       </label>
       <label class="size-mode">
         <p>Size: <span class="text-red-400">*</span></p>
         <p class="text-gray-400">Landscape mode is recommended as Teuria is a Landscape artist, but feel free to use whatever you want.</p>
 
-        <select name="size" class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" value="Landscape">
+        <select name="size" class="py-2 px-2 bg-transparent rounded-sm border-2 border-midnight-light" value="Landscape">
           <option class="bg-midnight-light" value="Landscape">Landscape</option>
           <option class="bg-midnight-light" value="Portrait">Portrait</option>
           <option class="bg-midnight-light" value="Custom">Custom</option>
@@ -71,7 +71,7 @@ import { Icon } from "astro-icon/components";
       <label>
         References or Idea:
         <p class="text-gray-500 text-sm">You can put a links for references or idea to have a clear idea of what you want.</p>
-        <textarea class="py-2 px-2 bg-transparent rounded border-2 border-midnight-light" name="reference" rows="2" cols="30"></textarea>
+        <textarea class="py-2 px-2 bg-transparent rounded-sm border-2 border-midnight-light" name="reference" rows="2" cols="30"></textarea>
       </label>
 
       <p class="text-gray-300 text-lg">
@@ -146,7 +146,7 @@ import { Icon } from "astro-icon/components";
     background-color: transparent;
     border-radius: 0.25rem;
     border-width: 2px;
-    border-color: var(--col-midnight-light);
+    border-color: var(--color-midnight-light);
   }
 
   .size-mode:has(option[value="Custom"]:checked) .custom-size {

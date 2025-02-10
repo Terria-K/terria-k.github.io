@@ -12,7 +12,7 @@ const { name, description, slug, image } = Astro.props;
 ---
 
 <li class="list-none">
-  <div class="bg-gray-800 p-4 rounded flex flex-col md:flex-row gap-4">
+  <div class="bg-gray-800 p-4 rounded-sm flex flex-col md:flex-row gap-4">
     <a href={`/games/${slug}`}>
       <Image class="object-cover h-full" src={image} alt={name} />
     </a>
@@ -21,7 +21,7 @@ const { name, description, slug, image } = Astro.props;
       <a href={`/games/${slug}`} class="font-bold text-3xl">{name}</a>
       <p class="text-gray-300 text-xl">{description}</p>
       <a href={`/games/${slug}`}>
-        <button class="hover:bg-red-400 duration-300 bg-red-500 px-4 py-2 text-2xl md:px-4 md:py-2 rounded mt-4">View</button>
+        <button class="hover:bg-red-400 duration-300 bg-red-500 px-4 py-2 text-2xl md:px-4 md:py-2 rounded-sm mt-4">View</button>
       </a>
     </div>
   </div>

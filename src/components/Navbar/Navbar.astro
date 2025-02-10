@@ -5,9 +5,9 @@ import NavBurger from "./NavBurger.astro";
 import NavBurgerItem from "./NavBurgerItem.astro";
 ---
 
-<nav id="navigation" class="w-full text-white fixed top-0 z-20 px-2 bg-transparent duration-300">
+<nav id="navigation" class="w-full text-white fixed top-0 z-20 px-2 bg-transparent duration-300 data-[opened]:bg-black/80 data-[scrolled]:bg-black/80">
   <div class="mx-auto max-w-[96rem] flex justify-between font-deca">
-    <a href="/" class="flex items-center gap-4 font-bold cursor-pointer [&>*]:duration-300 [&_svg]:hover:rotate-45 [&_span]:hover:translate-x-[-4px] [&_span]:hover:skew-x-0">
+    <a href="/" class="flex items-center gap-4 font-bold cursor-pointer *:duration-300 hover:[&_svg]:rotate-45 hover:[&_span]:translate-x-[-4px] hover:[&_span]:skew-x-0">
       <TeIcon class="te-icon w-12 h-12 p-1"/>
       <span class="te-title translate-x-[-16px] skew-x-[-12deg]">TEURIA</span>
     </a>
@@ -32,19 +32,10 @@ import NavBurgerItem from "./NavBurgerItem.astro";
   document.addEventListener('scroll', () => {
     const navigation = document.getElementById("navigation")!;
     if (window.scrollY > 0) {
-      navigation.classList.add("scrolled")
+      navigation.setAttribute("data-scrolled", "");
       return;
     }
-    navigation.classList.remove("scrolled")
+
+    navigation.removeAttribute("data-scrolled");
   });
 </script>
-
-<style>
-  .opened,
-  .scrolled  {
-    --col-midnight-transparent: #1f222b88;
-    --col-midnight-light-transparent: #33324b88;
-    background-color: rgba(0, 0, 0, 0.8);
-    transition: 300ms;
-  }
-</style>

@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@source '../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}';
+
+@theme {
+  --color-midnight: rgb(31, 34, 43);
+  --color-midnight-light: rgb(51, 50, 75);
+  --color-midnight-lighter: rgb(74, 82, 110);
+  --color-midnight-blue: rgb(32, 29, 54);
+  --color-midnight-transparent: rgba(31, 34, 43, 0.533);
+  --color-midnight-light-transparent: rgba(51, 50, 75, 0.533);
+
+  --font-slab: Roboto Slab Variable;
+  --font-sans: Fira Sans;
+  --font-deca: Lexend Deca;
+}
+
+@utility no-scrollbar {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

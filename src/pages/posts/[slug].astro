@@ -37,7 +37,7 @@ const { Content } = await entry.render()
 ---
 
 <PostLayout title={entry.data.title} description={entry.data.description} image={entry.data.image}>
-  <div class="mx-auto w-full flex justify-center mt-20 md:-mb-12 max-w-screen-lg">
+  <div class="mx-auto w-full flex justify-center mt-20 md:-mb-12 max-w-(--breakpoint-lg)">
     <Image class="object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
   </div>
 

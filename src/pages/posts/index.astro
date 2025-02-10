@@ -11,15 +11,16 @@ const posts = await getCollection("posts")
 
 <Layout>
   <main class="flex-auto">
-    <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12">
+    <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12 list-none">
       <For of={posts}>
-        {(x, i) => <li class="list-none">
-            <If when={!x.data.hidden}>
-              <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
-                date={x.data.date} title={x.data.title} description={x.data.description} url={x.slug}/>
-            </If>
-
-          </li>}
+        {(x, i) => 
+          <If when={!x.data.hidden}>
+            <li>
+            <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
+              date={x.data.date} title={x.data.title} description={x.data.description} url={x.slug}/>
+            </li>
+          </If>
+        }
       </For>
     </ul>
   </main>

@@ -6,6 +6,7 @@ import BlogPost from "../../../components/Blog/BlogPost.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import For from "../../../components/ControlFlow/For.astro";
+import If from "../../../components/ControlFlow/If.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -34,7 +35,7 @@ const { posts } = Astro.props;
 <Layout>
   <main class="flex-auto">
 
-    <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12">
+    <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12 list-none">
       <div class="py-4">
         <a href="/posts" class="max-w-[80rem] px-4 mx-auto font-bold duration-300 cursor-pointer hover:text-cyan-400 flex gap-4 items-center text-white">
           <Icon class="w-8 h-8" name="ph:arrow-left-light"/>
@@ -43,10 +44,13 @@ const { posts } = Astro.props;
       </div>
       <For of={posts}>
         {(x, i) => (
-          <li class="list-none">
-            <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} date={x.data.date} 
-            title={x.data.title} description={x.data.description} url={x.slug}/>
-          </li>)}
+          <If when={!x.data.hidden}>
+            <li>
+            <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
+              date={x.data.date} title={x.data.title} description={x.data.description} url={x.slug}/>
+            </li>
+          </If>
+        )}
       </For>
     </ul>
   </main>

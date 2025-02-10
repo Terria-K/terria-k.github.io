@@ -3,78 +3,66 @@ import '@fontsource/fira-sans';
 import '@fontsource-variable/roboto-slab';
 import '@fontsource/lexend-deca';
 import '@fontsource/lexend-deca/700.css';
+import '../tailwind.css';
 ---
 
 <style is:global>
-  @import "./tailwind.css";
 
-  :root {
-    --col-midnight: #1f222b;
-    --col-midnight-light: #33324b;
-    --col-midnight-lighter: #4a526e;
-    --col-midnight-blue: #201d36;
-  }
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, "Roboto Slab Variable", "Fira Sans", 'Open Sans', 'Helvetica Neue', sans-serif;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
 
-  html {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, "Roboto Slab Variable", "Fira Sans", 'Open Sans', 'Helvetica Neue', sans-serif;
-    scroll-behavior: smooth;
-    color-scheme: dark;
-  }
+body {
+  background: linear-gradient(176deg, #12181b 50%, #202737 100%);
+  min-height: 100vh;
+  background-attachment: fixed;
+}
 
-  body {
-    background-color: var(--col-midnight);
-    background: linear-gradient(176deg, #12181b 50%, #202737 100%);
-    min-height: 100vh;
-    background-attachment: fixed;
-  }
+code {
+  font-family:
+    Menlo,
+    Monaco,
+    Lucida Console,
+    Liberation Mono,
+    DejaVu Sans Mono,
+    Bitstream Vera Sans Mono,
+    Courier New,
+    monospace;
+}
 
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-  li {
-    list-style: inside;
-  }
+/* Firefox */
+input[type=number] {
+  appearance: textfield;
+}
 
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-  /* Firefox */
-  input[type=number] {
-    appearance: textfield;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-midnight);
+}
 
-  /* width */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: var(--col-midnight);
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: var(--col-midnight-light);
-    border-radius: 5px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--col-midnight-lighter);
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-midnight-light);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-midnight-lighter);
+}
 </style>

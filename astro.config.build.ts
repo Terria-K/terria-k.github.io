@@ -1,3 +1,4 @@
+import tailwind from "@tailwindcss/vite";
 import { defineConfig, sharpImageService } from 'astro/config';
 import { teuriaIntegrations } from './astro.config.all';
 import cloudflare from '@astrojs/cloudflare';
@@ -9,6 +10,9 @@ export default defineConfig({
         service: sharpImageService()
     },
     vite: {
+        plugins: [
+            tailwind()
+        ],
         ssr: {
             external: ["assert", "buffer", "crypto", "child_process", "dns", "fs", "http", "https", "path", "tls", "net", "events", "util", "stream", "os", "zlib"]
         },

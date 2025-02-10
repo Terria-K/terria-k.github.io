@@ -10,7 +10,7 @@ interface Props {
 const { src, year, artworkName, loadType} = Astro.props;
 ---
 
-<a class="relative [&_p]:hover:opacity-100 duration-300" href={`/arts/${year}/${artworkName}`}>
+<a class="relative hover:[&_p]:opacity-100 duration-300" href={`/arts/${year}/${artworkName}`}>
   <div class="relative inset-0 z-[-1]">
     <Image
     class="object-cover"

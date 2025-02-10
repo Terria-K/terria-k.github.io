@@ -6,35 +6,27 @@ import { Icon } from 'astro-icon/components';
   <button id="btn-open" class="flex justify-center items-center cursor-pointer">
     <Icon class="w-10 h-10" name="ph:list-bold"/>
   </button>
-  <div id="slot" class="absolute left-0 mt-12 w-full duration-300 -translate-y-80 select-none">
+  <div id="slot" class="absolute left-0 mt-12 w-full duration-300 -translate-y-80 select-none 
+    data-[opened]:translate-y-0
+    data-[opened]:bg-black/80
+    data-[opened]:select-auto"
+  >
     <slot/>
   </div>
 </div>
 
-<script>
-  const btn = document.getElementById("btn-open")!;
-  const slot = document.getElementById("slot")!;
+<script is:inline lang="js">
+  const btn = document.getElementById("btn-open");
+  const slot = document.getElementById("slot");
   btn.addEventListener("click", () => {
-    const navigation = document.getElementById("navigation")!;
-    if (slot.classList.contains("opened")) {
-      slot.classList.remove("opened");
-      navigation.classList.remove("opened");
+    const navigation = document.getElementById("navigation");
+    if (slot.getAttribute("data-opened") != null) {
+      navigation.removeAttribute("data-opened");
+      slot.removeAttribute("data-opened");
     }
     else {
-      slot.classList.add("opened");
-      navigation.classList.add("opened");
+      navigation.setAttribute("data-opened", "");
+      slot.setAttribute("data-opened", "");
     }
   });
 </script>
-
-
-<style>
-  .opened {
-    --col-midnight-transparent: #1f222b88;
-    --col-midnight-light-transparent: #33324b88;
-    background-color: rgba(0, 0, 0, 0.8);
-    transition: 300ms;
-    transform: translateY(0px);
-    user-select: auto;
-  }
-</style>
