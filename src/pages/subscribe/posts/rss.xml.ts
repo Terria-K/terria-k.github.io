@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ }) => {
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
-      link: `/posts/${post.id}/`,
+      link: `/posts/${post.id}/`.replaceAll(".mdx", ""),
     })),
   });
 }
