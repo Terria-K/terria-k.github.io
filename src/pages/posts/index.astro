@@ -1,12 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import BlogPost from "../../components/Blog/BlogPost.astro";
-import { getCollection } from "astro:content";
 import For from "../../components/ControlFlow/For.astro";
-import If from "../../components/ControlFlow/If.astro";
+import { getPosts } from "../../utils/posts";
 
-const posts = await getCollection("posts")
-  .then(x => x.reverse().sort((x, y) => new Date(y.data.date).valueOf() - new Date(x.data.date).valueOf()));
+const posts = await getPosts();
 ---
 
 <Layout>
@@ -14,12 +12,10 @@ const posts = await getCollection("posts")
     <ul class="text-white bg-gray-800 px-4 py-8 max-w-[80rem] mx-auto space-y-12 list-none">
       <For of={posts}>
         {(x, i) => 
-          <If when={!x.data.hidden}>
-            <li>
+          <li>
             <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
               date={x.data.date} title={x.data.title} description={x.data.description} url={x.slug}/>
-            </li>
-          </If>
+          </li>
         }
       </For>
     </ul>

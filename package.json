@@ -13,18 +13,18 @@
     "@astrojs/check": "0.9.4",
     "@astrojs/cloudflare": "12.2.1",
     "@astrojs/mdx": "4.0.8",
+    "@astrojs/rss": "^4.0.11",
     "@fontsource-variable/roboto-slab": "^5.1.1",
     "@fontsource/fira-sans": "^5.1.1",
     "@fontsource/lexend-deca": "^5.1.1",
     "astro": "5.2.5",
     "astro-icon": "^1.1.5",
+    "node-html-parser": "^6.1.13",
     "sharp": "^0.33.5",
     "typescript": "^5.7.3",
     "ulid": "^2.3.0",
-    "node-html-parser": "^6.1.13",
     "ulid-workers": "^2.1.0"
   },
-  
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250204.0",
     "@iconify-json/ph": "^1.2.2",

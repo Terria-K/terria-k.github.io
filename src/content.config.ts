@@ -17,7 +17,7 @@ const posts = defineCollection({
     date: z.date(),
     tags: z.array(z.string().refine(x => x === x.toLowerCase(), "Tag must be lowercase.")).optional(),
     image: image(),
-    hidden: z.boolean().optional()
+    draft: z.boolean().optional()
   })
 });
 

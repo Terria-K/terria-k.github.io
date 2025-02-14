@@ -8,6 +8,7 @@ export default defineConfig({
     image: {
         service: passthroughImageService()
     },
+    site: "https://teuria.com",
     vite: {
         plugins: [
             tailwind()

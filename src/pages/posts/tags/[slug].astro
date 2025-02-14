@@ -4,12 +4,12 @@ export const prerender = true;
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/Blog/BlogPost.astro";
 import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
 import For from "../../../components/ControlFlow/For.astro";
 import If from "../../../components/ControlFlow/If.astro";
+import { getPosts } from "../../../utils/posts";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("posts");
+  const allPosts = await getPosts();
 
   const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).filter(x => x).flat())];
 
@@ -44,12 +44,10 @@ const { posts } = Astro.props;
       </div>
       <For of={posts}>
         {(x, i) => (
-          <If when={!x.data.hidden}>
-            <li>
-            <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
-              date={x.data.date} title={x.data.title} description={x.data.description} url={x.slug}/>
-            </li>
-          </If>
+          <li>
+          <BlogPost tags={x.data.tags} shouldLazy={i > 1} image={x.data.image} 
+            date={x.data.date} title={x.data.title} description={x.data.description} url={x.slug}/>
+          </li>
         )}
       </For>
     </ul>

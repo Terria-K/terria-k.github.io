@@ -15,11 +15,12 @@ import Accordion from '../components/Accordion/Accordion.astro';
 import CardPage from "../components/CardPage/CardPage.astro";
 import Filesystem from "../components/Filesystem/Filesystem.astro";
 import For from "../components/ControlFlow/For.astro";
+import { getPosts } from "../utils/posts";
 
 export const components = { a: Link, h1: Header, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion }
 const Content = rendered.Content;
 
-const blogs = await getCollection("posts");
+const blogs = await getPosts();
 
 const slugs = blogs.map(x => x.slug);
 const uniqueTags = [...new Set(blogs.map((post) => post.data.tags).filter(x => x).flat())];
