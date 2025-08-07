@@ -1,8 +1,8 @@
 ---
 import Footer from '../components/Footer/Footer.astro';
 import MetaImage from '../components/MetaImage.astro';
-import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
+import NavLayout from './NavLayout.astro';
 
 interface Props {
   description: string,
@@ -28,7 +28,7 @@ const props = Astro.props;
   </head>
 
   <body class="text-white h-full">
-    <Navbar/>
+    <NavLayout/>
       <slot/>
     <Footer/>
   </body>

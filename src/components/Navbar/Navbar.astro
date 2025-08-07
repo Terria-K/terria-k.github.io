@@ -1,8 +1,20 @@
 ---
-import NavButton from "./NavButton.astro";
+import For from "../ControlFlow/For.astro";
 import TeIcon from "../Svg/TeIcon.astro";
+import NavbarButton from "./NavbarButton.astro";
 import NavBurger from "./NavBurger.astro";
 import NavBurgerItem from "./NavBurgerItem.astro";
+
+type NavItem = {
+  name: string
+  url: string
+}
+
+interface Props {
+  items: NavItem[]
+}
+
+const props = Astro.props;
 ---
 
 <nav id="navigation" class="w-full text-white fixed top-0 z-20 px-2 bg-transparent duration-300 data-[opened]:bg-black/80 data-[scrolled]:bg-black/80">
@@ -11,18 +23,18 @@ import NavBurgerItem from "./NavBurgerItem.astro";
       <TeIcon class="te-icon w-12 h-12 p-1"/>
       <span class="te-title translate-x-[-16px] skew-x-[-12deg]">TEURIA</span>
     </a>
+
     <div class="md:flex hidden">
-      <NavButton link="/commission">Commission</NavButton>
-      <NavButton link="/posts">Blogs</NavButton>
-      <NavButton link="/arts">Arts</NavButton>
-      <NavButton link="/games">Games</NavButton>
+      <For of={props.items}>
+        {(x) => <NavbarButton link={x.url}>{x.name}</NavbarButton>}
+      </For>
     </div >
+
     <div class="flex md:hidden">
       <NavBurger>
-        <NavBurgerItem link="/commission">Commission</NavBurgerItem>
-        <NavBurgerItem link="/posts">Blogs</NavBurgerItem>
-        <NavBurgerItem link="/arts">Arts</NavBurgerItem>
-        <NavBurgerItem link="/games">Games</NavBurgerItem>
+        <For of={props.items}>
+          {(x) => <NavBurgerItem link={x.url}>{x.name}</NavBurgerItem>}
+        </For>
       </NavBurger>
     </div>
   </div>

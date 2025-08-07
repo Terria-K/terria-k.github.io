@@ -1,7 +1,7 @@
 ---
 import Footer from '../components/Footer/Footer.astro';
-import Navbar from '../components/Navbar/Navbar.astro';
 import GlobalStyleLayout from './GlobalStyleLayout.astro';
+import NavLayout from './NavLayout.astro';
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ import GlobalStyleLayout from './GlobalStyleLayout.astro';
   </head>
   <GlobalStyleLayout/>
   <body>
-    <Navbar/>
+    <NavLayout/>
     <div class="min-h-screen">
       <slot />
     </div>

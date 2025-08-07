@@ -5,21 +5,24 @@ interface Props {
   ["class"]?: string,
   href?: string,
   theme: "primary" | "secondary" | "line" | "transparent",
+  color?: string,
   disabled?: boolean
 }
 
-const { href, theme, disabled, class: c } = Astro.props;
+const { href, theme, disabled, color, class: c } = Astro.props;
+
+const buttonClass = "cursor-pointer shadow-lg text-center font-bold rounded-lg px-3 py-3 text-md lg:text-lg xl:text-xl duration-300"
 ---
 
 <If when={href && !disabled}>
   <a href={href}>
-    <button class={`${theme} ${c} cursor-pointer shadow-lg text-center font-bold rounded-lg px-3 py-2 text-md lg:text-lg xl:text-xl duration-300`}>
+    <button class={`${theme} ${c} ${buttonClass} ${color}`}>
       <slot/>
     </button>
   </a>
 </If>
 <If when={!href || disabled}>
-  <button {disabled} class={`${theme} ${c} cursor-pointer shadow-lg font-bold rounded-lg px-3 py-2 text-md lg:text-lg xl:text-xl duration-300`}>
+  <button {disabled} class={`${theme} ${c} ${buttonClass} ${color}`}>
     <slot/>
   </button>
 </If>
@@ -51,8 +54,8 @@ const { href, theme, disabled, class: c } = Astro.props;
   }
 
   .line {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
     border: 3px solid var(--ria-button-outline-color);
   }
 

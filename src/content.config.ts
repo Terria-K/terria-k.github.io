@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const games = defineCollection({
+const projects = defineCollection({
   type: "content",
   schema: ({image}) => z.object({
     title: z.string(),
@@ -34,5 +34,5 @@ const fourOFour = defineCollection({
 });
 
 export const collections = {
-  games, posts, artworks, ["404"]: fourOFour
+  projects, posts, artworks, ["404"]: fourOFour
 };

@@ -3,6 +3,7 @@ import Footer from "../components/Footer/Footer.astro";
 import Navbar from "../components/Navbar/Navbar.astro";
 import GlobalStyleLayout from "./GlobalStyleLayout.astro";
 import MetaImage from "../components/MetaImage.astro";
+import NavLayout from "./NavLayout.astro";
 
 interface Props {
   title: string;
@@ -36,7 +37,7 @@ const prop = Astro.props;
     <meta name="twitter:description" content={prop.content} />
     <MetaImage src={prop.imageSrc} source="twitter"/>
     <meta name="twitter:card" content="summary_large_image" />
-    <Navbar />
+    <NavLayout/>
 
     <!-- <div class="bg-midnight-blue py-4">
       <a
