@@ -11,8 +11,7 @@ export default defineConfig({
     site: "https://teuria.com",
     vite: {
         plugins: [
-            // @ts-expect-error
-            tailwind()
+            tailwind() as any
         ],
         define: {
             "process.env.NODE_ENV": `'${process.env.NODE_ENV}'`,

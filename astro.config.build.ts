@@ -12,8 +12,7 @@ export default defineConfig({
     site: "https://teuria.com",
     vite: {
         plugins: [
-            // @ts-expect-error
-            tailwind()
+            tailwind() as any
         ],
         ssr: {
             external: ["assert", "buffer", "crypto", "child_process", "dns", "fs", "http", "https", "path", "tls", "net", "events", "util", "stream", "os", "zlib"]
