@@ -11,6 +11,7 @@ export default defineConfig({
     site: "https://teuria.com",
     vite: {
         plugins: [
+            // @ts-expect-error
             tailwind()
         ],
         define: {
