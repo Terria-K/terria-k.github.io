@@ -102,15 +102,15 @@ artYears.forEach(x => {
       </Filesystem>
 
     </CardPage>
-    <CardPage title="Games" icon="ph:game-controller-fill" url="/games" hasDerivedPages>
+    <CardPage title="Projects" icon="ph:game-controller-fill" url="/projects" hasDerivedPages>
       <Fragment slot="description">
         Games that are developed by Teuria.
       </Fragment>
 
-      <Filesystem title="games">
-        <Link href="/games">index</Link>
+      <Filesystem title="projects">
+        <Link href="/projects">index</Link>
         <For of={gameSlugs}>
-          {x => <Link href={"/games/" + x}>{x}</Link>}
+          {x => <Link href={"/projects/" + x}>{x}</Link>}
         </For>
       </Filesystem>
     </CardPage>
