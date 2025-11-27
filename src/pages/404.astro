@@ -25,9 +25,9 @@ const blogs = await getPosts();
 const slugs = blogs.map(x => x.slug);
 const uniqueTags = [...new Set(blogs.map((post) => post.data.tags).filter(x => x).flat())];
 
-const games = await getCollection("games");
+const projects = await getCollection("projects");
 
-const gameSlugs = games.map(x => x.slug);
+const gameSlugs = projects.map(x => x.slug);
 type ArtMeta = {
   name: string
 };
@@ -52,7 +52,7 @@ artYears.forEach(x => {
 ---
 
 <Layout>
-  <header class="mx-auto max-w-[40rem] px-5 lg:px-10 space-y-4 pb-4">
+  <header class="mx-auto max-w-160 px-5 lg:px-10 space-y-4 pb-4">
     <h2 class="text-4xl text-center font-bold py-8 font-deca">404 PAGE NOT FOUND!</h2>
     <Content {components}/>
     <h2 class="text-4xl text-center font-bold py-8 font-deca">This is the only pages that exists in this website.</h2>

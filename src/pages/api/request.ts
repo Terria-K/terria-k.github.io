@@ -34,7 +34,9 @@ export const POST: APIRoute = async ({ locals, request }) => {
       }
     });
 
-    const outcome = await result.json();
+    const outcome = await result.json() satisfies {
+      success: boolean
+    };
     if (!outcome.success) {
       return exit("Captcha token is not valid!", false);
     }
