@@ -1,6 +1,84 @@
 ---
 title: FortRise
-description: A Mod Loader and API utility developed for TowerFall game modding.
-image: /src/assets/games/archie.png
+description: A Mod Loader and Mod API for TowerFall Ascension
+image: /src/assets/games/fortrise.webp
 date: 2023-04-26
 ---
+
+FortRise is a main successor to [Bartizan](https://github.com/Kha/Bartizan) a modding framework exists for modding 
+[TowerFall Ascension](http://www.towerfall-game.com/).
+FortRise did more than just a modding framework, it is a mod loader and an API utility developed with a help of TowerFall community and uses of
+[MonoMod](https://github.com/MonoMod/MonoMod) patcher.
+
+## FortRise Features:
++ Mods are loaded inside of a single folder named `Mods`, it can be either a folder or a zip file as long as `meta.json` is present on its root.
++ It does not write anything into the base TowerFall directory, it should only write into its own folder as it should.
++ Uses XML-based limited content scripting and C# with a **latest .NET 10 feature** for advanced scripting.
++ Contains most of a the features of TowerFall that you can create and load directly with a mod such 
+as **Levels, Archers, Arrows, etc..** This makes it easy to add new features to the game. 
++ Filesystem API for mods to interact with their own files. 
++ + Mods should not write or read anything outside of its context, but this cannot be enforced directly.
++ File logging across all mods and game logs to help figure out any specific issues to the mods installed.
++ Mods has a containerized* save files, prevents breaking your main save files.
++ Uses [Harmony](https://harmony.pardeike.net/) which is a stable and powerful patching utility suitable for modding.
+> \*While FortRise tried not to touch the main game files and does not exposed direct API to the main save data, mods still has an ability to modify it
+by making their own API to touch the save data. Currently, no mods have been reported are touching the vanilla save file yet.
+
+# Installation
+
+If you are on **Windows**
+1. Download the latest version of FortRise in [Gamebanana](https://gamebanana.com/tools/13617) or in [Github](https://github.com/FortRise/FortRise/releases/latest).
+2. Extract the `.zip` file inside of your TowerFall directory.
++ Steam: `"C:\Program Files (x86)\Steam\steamapps\common\TowerFall"`
++ Itch or GOG: `"C:\Users\<User>\Documents\TowerFall"`
++ + FortRise will check if TowerFall executable is present above its directory. 
+This will ensure that FortRise will be able to patch the game necessary for FortRise to be able to launch TowerFall with mods.
+3. Open the FortRise directory.
+4. Launch `FortRise.exe` and it should be good to go.
+> FortRise required at least Windows 10+ to run.
+
+If you are on **Linux**
+1. Download the latest version of FortRise in [Gamebanana](https://gamebanana.com/tools/13617) or in [Github](https://github.com/FortRise/FortRise/releases/latest).
+2. Extract the `.zip` file inside of the `"TowerFall"` directory.
++ Steam (System): `"/home/<USER>/.local/share/Steam/steamapps/common/TowerFall"`
++ Steam (Flatpak): `"/var/app/com.valvesoftware.Steam/data/Steam/steamapps/common/TowerFall"`
++ Itch or GOG: `"/home/<USER>/Documents/TowerFall"`
++ + FortRise will check if TowerFall executable is present above its directory. This will ensure that FortRise will be able to patch the game necessary for FortRise to be able to launch TowerFall with mods.
+3. Open the FortRise directory.
+4. Launch `FortRise` and it should be good to go.
+
+If you are on **MacOS**
+1. Download the latest version of FortRise in [Gamebanana](https://gamebanana.com/tools/13617) or in [Github](https://github.com/FortRise/FortRise/releases/latest).
+2. Extract the `.zip` file inside of the `TowerFall` directory.
++ Steam: `"~/Library/Application Support/Steam/steamapps/common/TowerFall/TowerFall.app/Contents/Resources"`
++ + FortRise will check if TowerFall executable is present above its directory. This will ensure that FortRise will be able to patch the game necessary for FortRise to be able to launch TowerFall with mods.
+3. Open the FortRise directory.
+4. Launch `FortRise` and it should be good to go. 
+
+For Steam users, you may put FortRise as a Non-Steam game to ensure that Steam will launch the FortRise executable.
+
+# Installing Mods
+For installing mods, you may want to go to [Gamebanana](https://gamebanana.com/games/18654) to find some mods. If you have found one:
+1. Download the mod, make sure that it is in `.zip` format.
+2. Locate the FortRise directory where you put it in.
+3. Locate `Mods` folder inside of the directory and open it.
+4. Copy and Paste the `.zip` file of the mod inside of the `Mods` folder.
++ If the mod author does not properly package their mod, extract the `.zip` file.
+5. Launch FortRise and check if the mod is registered in the mod list.
+
+
+# Updating Mods
+FortRise provides a one-pressed update for mods. Modders has to configure this one, but if its successfully configured, the user will has to:
+1. Go to the mod menu.
+2. Find the mod to update, if the update is available, it usually has a red icon next to its name.
+3. Press the mod to enter to settings.
+4. Press update and wait for it to download the update.
+5. Restart FortRise to apply the update. The downloaded update is located to `ModUpdater` in case if you want to know about that.
+
+If you could not able to update it like this, just re-install the mod with the new version.
+
+## Need help from a real person?
+### Join the official TowerFall Community Discord Server! we can help you here! This project will not be made without the community!
+<a href="https://discord.gg/m25mWsSv8P">
+ <img alt="TowerFall" src="https://discordapp.com/api/guilds/248961953656078337/embed.png?style=banner2" />
+</a>

@@ -9,7 +9,7 @@ const projects = await getCollection("projects");
 ---
 
 <Layout>
-  <div class="mx-auto max-w-[80rem] text-white py-12 space-y-4">
+  <div class="mx-auto max-w-200 text-white py-12 space-y-4">
     <ul class="grid md:gap-4">
       <For of={projects}>
         {x => <GamesPost name={x.data.title} description={x.data.description} image={x.data.image} slug={x.slug}/>}

@@ -13,12 +13,12 @@ const { name, description, slug, image } = Astro.props;
 ---
 
 <li class="list-none">
-  <div class="bg-gray-800 p-4 rounded-sm flex flex-col md:flex-row gap-4">
+  <div class="bg-gray-800 p-4 rounded-sm grid md:flex-row gap-4">
     <a href={`/projects/${slug}`}>
-      <Image class="object-cover h-full" src={image} alt={name} />
+      <Image class="object-cover h-full" src={image} alt={name}/>
     </a>
 
-    <div>
+    <div class="grid gap-2">
       <a href={`/projects/${slug}`} class="font-bold text-3xl">{name}</a>
       <p class="text-gray-300 text-xl">{description}</p>
       <Button href={`/projects/${slug}`} theme="primary" color="!bg-red-500">View</Button>

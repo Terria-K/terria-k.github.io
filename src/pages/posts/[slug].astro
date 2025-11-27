@@ -42,12 +42,12 @@ const { Content } = await entry.render()
     <Image class="object-cover" alt=`blog-post-${entry.data.title}` src={entry.data.image} loading="eager"/>
   </div>
 
-  <div class="md:text-lg relative mx-auto w-[55rem] max-[1000px]:w-full px-4 md:px-10 grid gap-4 py-8 font-sans md:z-10 bg-gray-800">
+  <div class="md:text-lg relative mx-auto w-220 max-[1000px]:w-full px-4 md:px-10 grid gap-4 py-8 font-sans md:z-10 bg-gray-800">
 
-    <h2 class="font-bold text-lg md:text-xl text-gray-400 font-slab text-center">
+    <h2 class="font-bold text-lg md:text-xl text-gray-400 text-center">
       <FormattedDate date={entry.data.date}/>
     </h2>
-    <h1 class="text-3xl md:text-4xl font-slab text-center">{entry.data.title}</h1>
+    <h1 class="text-3xl md:text-4xl text-center">{entry.data.title}</h1>
 
     <If when={entry.data.tags}>
       <div class="flex justify-center">

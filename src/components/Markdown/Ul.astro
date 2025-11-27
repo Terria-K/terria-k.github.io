@@ -1,0 +1,21 @@
+---
+import { parse } from "node-html-parser";
+
+const props = Astro.props;
+
+let slot = await Astro.slots.render('default');
+const document = parse(slot);
+const lines = document.querySelectorAll("li");
+async function *render() {
+  let i = 0;
+
+  for (const l of lines) {
+    yield `<p class="px-4 text-gray-400"> ` + l.innerHTML + "</p>";
+    i++;
+  }
+}
+---
+
+<ul {...props} class="mx-10 list-disc text-gray-200">
+  <slot/>
+</ul>
