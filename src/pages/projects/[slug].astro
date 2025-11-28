@@ -39,12 +39,14 @@ const Content = (await content()).Content;
 ---
 
 <Layout>
-  <div class="md:text-base mx-auto w-280 max-[1000px]:w-full px-4 md:px-10 grid gap-2 bg-gray-800 py-16 font-sans text-sm">
-    <Image src={image} alt={title.toLowerCase()} loading="eager" />
-    <h1 class="font-bold text-4xl text-center my-2">{title}</h1>
-    <h2 class="text-gray-300 text-center">{description}</h2>
-    <hr class="border-gray-500 my-2 lg:my-4"/>
+    <div class="mx-auto w-full flex justify-center mt-20 md:-mb-12 max-w-(--breakpoint-lg)">
+      <Image class="object-cover" src={image} alt={title.toLowerCase()} loading="eager" />
+    </div>
 
-    <Content {components}/>
-  </div>
+    <div class="relative mx-auto w-220 max-[1000px]:w-full px-4 py-4 bg-gray-800 text-sm md:text-base">
+      <h1 class="font-bold text-4xl text-center my-2">{title}</h1>
+      <h2 class="text-gray-300 text-center">{description}</h2>
+      <hr class="border-gray-500 my-2 lg:my-4"/>
+      <Content {components}/>
+    </div>
 </Layout>

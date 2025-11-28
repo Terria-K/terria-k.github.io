@@ -30,7 +30,7 @@ async function *render() {
   }
 </style>
 
-<code class={`${lines.length == 0 ? "inline-block rounded-sm px-1 bg-slate-900" : "bg-midnight flex gap-4"}`} {...props}>
+<code class={`${lines.length == 0 ? "inline-block rounded-sm bg-slate-900" : "bg-midnight flex gap-4"}`} {...props}>
   <If when={lines.length != 0}>
     <div class="w-4 flex flex-col">
       <Repeat times={lines.length}>
