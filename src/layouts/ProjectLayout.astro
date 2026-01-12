@@ -21,9 +21,10 @@ const props = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:title" content={`Teuria's Blog - ${props.title}`} />
+    <MetaImage source="og" src={props.image}/>
+    <meta property="og:title" content={`Teuria's Projects - ${props.title}`} />
     <meta property="og:description" content={props.description} />
-    <title>{`Teuria's Blog - ${props.title}`}</title>
+    <title>{`Teuria's Projects - ${props.title}`}</title>
   </head>
   <GlobalStyleLayout/>
   <body>
@@ -31,6 +32,7 @@ const props = Astro.props;
     <meta name="twitter:title" content={props.title} />
     <meta name="twitter:description" content={props.description} />
     <MetaImage src={props.image} source="twitter"/>
+    <meta name="twitter:card" content="summary_large_image" />
 
     <NavLayout/>
     <div class="min-h-screen">
