@@ -2,7 +2,6 @@
 export const prerender = true;
 
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import Accordion from '../../components/Accordion/Accordion.astro';
 import Header from '../../components/Markdown/Header.astro';
@@ -15,6 +14,8 @@ import Ol from '../../components/Markdown/Ol.astro';
 import Blockquote from '../../components/Markdown/Blockquote.astro';
 import Ul from '../../components/Markdown/Ul.astro';
 import SubSubHeading from '../../components/Markdown/SubSubHeading.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
 
 
 export async function getStaticPaths() {
@@ -27,18 +28,19 @@ export async function getStaticPaths() {
         title: x.data.title,
         description: x.data.description,
         image: x.data.image,
-        content: x.render
+        content: x.render,
+        date: x.data.date
       }
     }
   })
 }
 export const components = { a: Link, h1: Header, h2: SubHeading, h3: SubSubHeading, code: Code, pre: Pre, Tab: Tab, Accordion: Accordion, ol: Ol, blockquote: Blockquote, ul: Ul }
 
-const { title, description, image, content } = Astro.props;
+const { title, description, image, content, date } = Astro.props;
 const Content = (await content()).Content;
 ---
 
-<Layout>
+<ProjectLayout description={description} title={title} image={image}>
     <div class="mx-auto w-full flex justify-center mt-20 md:-mb-12 max-w-(--breakpoint-lg)">
       <Image class="object-cover" src={image} alt={title.toLowerCase()} loading="eager" />
     </div>
@@ -46,7 +48,10 @@ const Content = (await content()).Content;
     <div class="relative mx-auto w-220 max-[1000px]:w-full px-4 py-4 bg-gray-800 text-sm md:text-base">
       <h1 class="font-bold text-4xl text-center my-2">{title}</h1>
       <h2 class="text-gray-300 text-center">{description}</h2>
+      <h2 class="text-gray-400 text-center">
+        <FormattedDate date={date}/>
+      </h2>
       <hr class="border-gray-500 my-2 lg:my-4"/>
       <Content {components}/>
     </div>
-</Layout>
+</ProjectLayout>

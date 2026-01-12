@@ -1,0 +1,44 @@
+---
+import Footer from '../components/Footer/Footer.astro';
+import MetaImage from '../components/MetaImage.astro';
+import GlobalStyleLayout from './GlobalStyleLayout.astro';
+import NavLayout from './NavLayout.astro';
+
+interface Props {
+  description: string,
+  title: string,
+  image: ImageMetadata 
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={props.description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={`Teuria's Blog - ${props.title}`} />
+    <meta property="og:description" content={props.description} />
+    <MetaImage source="og" src={props.image}/>
+    <title>{`Teuria's Blog - ${props.title}`}</title>
+  </head>
+  <GlobalStyleLayout/>
+  <body>
+    <meta name="theme_color" content="#01f1fe" />
+    <meta name="twitter:title" content={props.title} />
+    <meta name="twitter:description" content={props.description} />
+    <MetaImage src={props.image} source="twitter"/>
+
+    <NavLayout/>
+    <div class="min-h-screen">
+      <slot />
+    </div>
+    <Footer/>
+    <slot name="after"/>
+  </body>
+</html>
+

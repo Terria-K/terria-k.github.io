@@ -1,15 +1,17 @@
 ---
 import Image from 'astro/components/Image.astro';
 import Button from '../Button/Button.astro';
+import FormattedDate from '../FormattedDate.astro';
 
 interface Props {
   name: string,
   description: string,
   slug: string,
   image: ImageMetadata,
+  date: Date
 }
 
-const { name, description, slug, image } = Astro.props;
+const { name, description, slug, image, date } = Astro.props;
 ---
 
 <li class="list-none">
@@ -18,9 +20,14 @@ const { name, description, slug, image } = Astro.props;
       <Image class="object-cover h-full" src={image} alt={name}/>
     </a>
 
-    <div class="grid gap-2">
+
+    <div class="grid gap-1">
       <a href={`/projects/${slug}`} class="font-bold text-3xl">{name}</a>
       <p class="text-gray-300 text-xl">{description}</p>
+      <h2 class="text-lg md:text-xl text-gray-400">
+        <FormattedDate date={date}/>
+      </h2>
+      <br/>
       <Button href={`/projects/${slug}`} theme="primary" color="!bg-red-500">View</Button>
     </div>
   </div>
